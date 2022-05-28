@@ -1,0 +1,57 @@
+body {
+    background-color: #f4f1de;
+}
+
+.border {
+    background-color: #f2cc8f;
+    position: relative;
+    border: 30px #f2cc8f solid;
+    border-radius: 10%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logInButton {
+    background-color: lightblue;
+    position: relative;
+    width: 90%;
+    transform: translate(7%, 50%);
+}
+
+.ORtext {
+    transform: translate(35%, 50%);
+}
+.googleButton {
+    background-color: #eeeeee;
+    position: relative;
+    width: 90%;
+    transform: translate(7%, 50%);
+}
+
+.facebookButton {
+    background-color: #eeeeee;
+    position: relative;
+    width: 90%;
+    transform: translate(7%, 50%);
+}
+
+.username {
+    position: relative;
+    font-size: small;
+    width: 90%;
+}
+
+.password {
+    position: relative;
+    font-size: small;
+    width: 90%;
+}
+
+.userInput {
+    background-color: #eeeeee;
+    position: relative;
+    padding: 10%;
+    border-radius: 10%;
+}
