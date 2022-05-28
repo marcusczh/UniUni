@@ -1,0 +1,138 @@
+body {
+  background-color: #f4f1de;
+}
+
+header {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.questionContainer {
+  background-color: #81b29a;
+  box-sizing: border-box;
+  border: 5px #f2cc8f solid;
+  padding: 1%;
+  margin: 3% 1%;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+}
+
+.credentialsContainer label {
+  margin: 1% 0%;
+  font-weight: 600;
+}
+
+.credentialsContainer input {
+  margin: 0.3% 1%;
+  padding: 1%;
+  border-radius: 5px;
+}
+
+.credentialsContainer {
+  background-color: #81b29a;
+  box-sizing: border-box;
+  border: 5px #f2cc8f solid;
+  padding: 1%;
+  margin: 3% 1%;
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  flex: 1;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.5%;
+}
+
+.checkbox {
+  margin-left: 2%;
+  margin-top: 1%;
+  flex-wrap: wrap;
+}
+
+.dropdown {
+  flex: 1;
+  background: white;
+  width: 140px;
+  font-size: 14px;
+  margin: 0% 1%;
+  border: 1px solid #3d405b;
+  border-radius: 5px;
+  height: 25px;
+}
+
+.subHeader {
+  margin-top: 0.1rem;
+  font-size: small;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  position: sticky;
+  flex: 1;
+  margin-left: 1%;
+}
+
+.headerContainer {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  margin-right: 16%;
+  align-items: center;
+}
+
+.welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.welcomePage {
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  margin: 4% 0%;
+}
+
+.avatarContainer {
+  margin: 5% 0%;
+  display: flex;
+  flex: 10;
+  height: 60%;
+}
+
+.avatar {
+  height: 350px;
+}
+
+.button {
+  flex: 1;
+  padding: 1.5% 0%;
+  margin: 0% 7%;
+  background-color: #ffb703;
+  border: #3d405b solid;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
