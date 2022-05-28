@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import styles from "./Welcome.module.css";
 import Logo from "../Global/Logo";
 
@@ -42,8 +42,32 @@ function SignupScreen() {
     }
   }
 
-  function submitSignUp() {
-    return [basicInfo11, basicInfo1, basicInfo2, basicInfo3];
+  function submitSignUp(event) {
+    event.preventDefault();
+    const interests = basicInfo1.concat(basicInfo11);
+    const match = password === passwordCfm;
+    if (username && password && match) {
+      axios
+        .post("http://localhost:4000/api/register", {
+          username: username,
+          password: password,
+          interests: interests,
+          BI2: basicInfo2,
+          BI3: basicInfo3,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === "error") {
+            alert("Username is already in use");
+          } else {
+            window.location.href = "./Login";
+          }
+        });
+    } else if (!match) {
+      alert("Passwords do not match");
+    } else {
+      alert("Invalid input");
+    }
   }
 
   return (
@@ -61,7 +85,6 @@ function SignupScreen() {
         <form
           className={styles.form}
           onSubmit={(e) => {
-            e.preventDefault();
             submitSignUp();
           }}
         >
@@ -165,8 +188,8 @@ function SignupScreen() {
             />
           </div>
           <div className={styles.buttonContainer}>
-            <button className={styles.button}>
-              <Link to="../Login">Submit</Link>
+            <button className={styles.button} onClick={submitSignUp}>
+              Submit
             </button>
           </div>
         </form>

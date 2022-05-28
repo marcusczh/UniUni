@@ -1,14 +1,20 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+
+import { Routes, Route } from "react-router-dom";
+
+import LogIn from "./Components/Welcome/LogInScreen";
+import HomePage from "./Components/HomePage/HomePage";
+import Welcome from "./Components/Welcome/Welcome";
+import SignupScreen from "./Components/Welcome/SingupScreen";
 
 function App() {
   return (
-    <>
-    Pages
-    <nav>
-        <Link to="/HomePage">HomePage</Link> |{" "}
-        <Link to="/LogIn">LogIn</Link>
-    </nav>
-    </>
+    <Routes>
+      <Route path="/" element={<Welcome />} />
+      <Route path="HomePage" element={<HomePage />} />
+      <Route path="Login" element={<LogIn />} />
+      <Route path="Signup" element={<SignupScreen />} />
+    </Routes>
   );
 }
 
