@@ -48,7 +48,7 @@ function SignupScreen() {
     const match = password === passwordCfm;
     if (username && password && match) {
       axios
-        .post("https://testserveruniuni.herokuapp.com/", {
+        .post("http://localhost:4000/api/register", {
           username: username,
           password: password,
           interests: interests,

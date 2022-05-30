@@ -10,7 +10,7 @@ function LogInScreen() {
     event.preventDefault();
 
     axios
-      .post("https://testserveruniuni.herokuapp.com/", {
+      .post("http://localhost:4000/api/login", {
         username: username,
         password: password,
       })
