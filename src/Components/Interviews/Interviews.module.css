@@ -1,0 +1,60 @@
+.recommendedInterview {
+    text-decoration: none;
+}
+
+.interviewHeader {
+    background: #eeeeee;
+    border: 3px #f2cc8f solid;
+    border-radius: 10px 10px 0 0;
+    margin: 2% 0% 0 0;
+}
+
+.interviewContent {
+    background: white;
+    border: 3px #f2cc8f solid;
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+    margin: 0 0% 1% 0;
+}
+
+.line {
+    background-color: #f2cc8f;
+    height: 3px;
+    mix-blend-mode: darken;
+}
+
+.otherInterviews {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.otherInterviewsHeader {
+    background: #eeeeee;
+    border: 3px #f2cc8f solid;
+    border-radius: 10px 10px 0 0;
+    /*margin-right: 3%;*/
+    margin: 2% 1% 0 0;
+}
+
+.otherInterviewsContent {
+    background: white;
+    border: 3px #f2cc8f solid;
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+    /*margin-right: 3%;*/
+    margin: 0 1% 0 0;
+}
+
+.layout {
+    display: flex;
+}
+
+.navigator {
+    background: white;
+    border: 1px black solid;
+    border-radius: 10px;
+    margin-right: 3%;
+    margin-left: 5%;
+    box-shadow: -3px 3px black;
+    width: 50%;
+}
