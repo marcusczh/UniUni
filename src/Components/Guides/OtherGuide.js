@@ -1,22 +1,29 @@
 import styles from "./Guides.module.css";
 
-function otherGuides() {
+function otherGuides({ guide }) {
+  if (guide == null) {
     return (
-        <>
-        <div className={styles.otherGuidesHeader}>
-        Y3 NUS Business Administration 
-        </div>
-        <div className={styles.otherGuidesContent}> 
-        Course Info
-        <br />
-        Question 1 | How would you describe your course to someone who knows nothing about it? 
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        </div>
-    </>
+      <div className={styles.otherGuidesContainer}>
+        <div className={styles.otherGuidesHeader}>No Guides Found</div>
+        <div className={styles.otherGuidesContent}>Try again later.</div>
+      </div>
     );
+  } else {
+    return (
+      <>
+        <div className={styles.otherGuidesContainer}>
+          <div className={styles.otherGuidesHeader}>{guide.title}</div>
+          {guide.body.map((i) => (
+            <div className={styles.otherGuidesContent}>
+              {i.header}
+              <br />
+              {i.text}
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  }
 }
 
 export default otherGuides;

@@ -1,22 +1,14 @@
-import NavBar from "../Global/Navbar";
-import LogOut from "../Global/Logout";
-import styles from "../HomePage/HomePage.module.css";
-import Logo from "../Global/Logo";
 import forumStyles from "./Forum.module.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import TopContent from "../Global/TopContent";
 
 function ForumCreation() {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   return (
     <>
-      <div className={styles.topContent}>
-        <Logo />
-        <NavBar />
-        <LogOut />
-      </div>
+      <TopContent />
       <div>
         <div className={forumStyles.title}>
           <form>
@@ -41,10 +33,9 @@ function ForumCreation() {
             ></input>
             <input type="file" accept="image/*"></input>
           </form>
-        <button className={forumStyles.buttonCreation}>Cancel</button>
-        <button className={forumStyles.buttonCreation}>Create forum</button>
+          <button className={forumStyles.buttonCreation}>Cancel</button>
+          <button className={forumStyles.buttonCreation}>Create forum</button>
         </div>
-        
       </div>
     </>
   );

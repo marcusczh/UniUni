@@ -1,59 +1,98 @@
-import NavBar from "../Global/Navbar";
-import LogOut from "../Global/Logout";
 import SearchBar from "../Global/Searchbar";
-import styles from "../HomePage/HomePage.module.css";
-import Logo from "../Global/Logo";
 import interviewStyles from "./Interviews.module.css";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import TopContent from "../Global/TopContent";
 
-function specificInterview() {
+function SpecificInterview() {
+  const { title } = useParams();
+  const [interview, setInterview] = useState([
+    {
+      title: "No Interview",
+      date: "",
+      tags: "",
+      body: [{ header: "", text: "" }],
+    },
+  ]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/information", {
+        params: {
+          type: "Interview",
+          title: title,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setInterview(res.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []); //eslint-
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+  if (interview.length === 0) {
     return (
-        <>
-        <div className={styles.topContent}>
-            <Logo />
-            <NavBar />
-            <LogOut />
-        </div>
+      <>
+        <TopContent />
         <div>
-            <SearchBar />
+          <SearchBar />
         </div>
         <div className={interviewStyles.layout}>
-            <div>
-                <div className={interviewStyles.interviewHeader}>
-                    date | tags
-                </div>
-                <div className={interviewStyles.interviewContent}> 
-                    Course Info
-                    Question 1 | How would you describe your course to someone who knows nothing about it? 
-
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-
-                    Question 2 | What are some interesting modules you have taken or want to take?
-
-                    Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident … Read more
-                </div>
+          <div>
+            <div className={interviewStyles.interviewHeader}>No interview.</div>
+            <div className={interviewStyles.interviewContent}>
+              Please try again later.
             </div>
-            <div className={interviewStyles.navigator}>
-                Course Info
-                <nav className={interviewStyles.navBar}>
-                    <ul className={interviewStyles.list}>
-                    <li className={interviewStyles.list}>
-                        Decision Making
-                    </li>
-                    <li className={interviewStyles.list}>
-                        Curriculum
-                    </li>
-                    <li className={interviewStyles.list}>
-                        Personal Experiences
-                    </li>
-                    <li className={interviewStyles.list}>Career Prospects</li>
-                    <li className={interviewStyles.list}>Student Life</li>
-                    <li className={interviewStyles.list}>Others</li>
-                    </ul>
-                </nav>
-            </div>
+          </div>
         </div>
-    </>
+      </>
     );
+  } else {
+    return (
+      <>
+        <TopContent />
+        <div>
+          <SearchBar />
+        </div>
+        <div className={interviewStyles.layout}>
+          <div>
+            <div className={interviewStyles.interviewHeader}>
+              {interview[0].title}
+              <br />
+              {interview[0].date} | {interview[0].tags}
+            </div>
+            <div className={interviewStyles.interviewContent}>
+              {interview[0].body.map((i, counter) => (
+                <>
+                  <div id={counter}>{i.header}</div>
+                  <br />
+                  <div>{i.text}</div>
+                </>
+              ))}
+            </div>
+          </div>
+          <div className={interviewStyles.navigator}>
+            Course Info
+            <nav className={interviewStyles.navBar}>
+              <ul className={interviewStyles.list}>
+                <li className={interviewStyles.list}>Decision Making</li>
+                <li className={interviewStyles.list}>Curriculum</li>
+                <li className={interviewStyles.list}>Personal Experiences</li>
+                <li className={interviewStyles.list}>Career Prospects</li>
+                <li className={interviewStyles.list}>Student Life</li>
+                <li className={interviewStyles.list}>Others</li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </>
+    );
+  }
 }
 
-export default specificInterview;
+export default SpecificInterview;

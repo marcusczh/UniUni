@@ -1,12 +1,30 @@
 import styles from "./Articles.module.css";
 
-function recommendedArticle(props) {
-  return (
-    <>
-      <div className={styles.articleHeader}>{props.article.title}</div>
-      <div className={styles.articleContent}>{props.article.body}</div>
-    </>
-  );
+function recommendedArticle({ article }) {
+  if (article == null) {
+    return (
+      <>
+        <div className={styles.articleHeader}>No Articles Found</div>
+        <div className={styles.articleContent}>Try again later</div>
+      </>
+    );
+  } else {
+    console.log(article);
+    return (
+      <>
+        <div className={styles.articleHeader}>{article.title}</div>
+        <div className={styles.articleContent}>
+          {article.body.map((i) => (
+            <div>
+              {i.header}
+              <br />
+              {i.text}
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  }
 }
 
 export default recommendedArticle;

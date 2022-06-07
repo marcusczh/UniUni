@@ -1,18 +1,11 @@
-import NavBar from "../Global/Navbar";
-import LogOut from "../Global/Logout";
 import SearchBar from "../Global/Searchbar";
-import styles from "../HomePage/HomePage.module.css";
-import Logo from "../Global/Logo";
 import guideStyles from "./Guides.module.css";
+import TopContent from "../Global/TopContent";
 
 function specificGuide() {
   return (
     <>
-      <div className={styles.topContent}>
-        <Logo />
-        <NavBar />
-        <LogOut />
-      </div>
+      <TopContent />
       <div>
         <SearchBar />
       </div>

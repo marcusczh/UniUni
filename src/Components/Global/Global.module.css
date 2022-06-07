@@ -76,3 +76,10 @@ body {
   padding: 1%;
   border: 1px black solid;
 }
+
+.topContent {
+  /*display: inline;
+    flex-basis: auto;*/
+  display: flex;
+  justify-content: center;
+}

@@ -1,42 +1,27 @@
 import styles from "./Articles.module.css";
 
-function otherArticles() {
-  axios
-    .get("http://localhost:4000/api/information", {
-      params: {
-        type: "Article",
-        title: "*",
-        date: "*",
-        tags: "*",
-        body: "*",
-      },
-    })
-    .then((res) => {
-      if (res.data.length === 0) {
-        updatePost("No post.");
-      } else {
-        console.log(res);
-        res.data[0];
-      }
-    });
-
-  return (
-    <>
-      <div className={styles.otherArticlesHeader}>
-        Y3 NUS Business Administration
+function otherArticles({ article }) {
+  if (article == null) {
+    return (
+      <div className={styles.otherArticlesContainer}>
+        <div className={styles.otherArticlesHeader}>No Articles Found</div>
+        <div className={styles.otherArticlesContent}>Try again later.</div>
       </div>
-      <div className={styles.otherArticlesContent}>
-        Course Info
-        <br />
-        Question 1 | How would you describe your course to someone who knows
-        nothing about it?
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco
+    );
+  } else {
+    return (
+      <div className={styles.otherArticlesContainer}>
+        <div className={styles.otherArticlesHeader}>{article.title}</div>
+        {article.body.map((i) => (
+          <div className={styles.otherArticlesContent}>
+            {i.header}
+            <br />
+            {i.text}
+          </div>
+        ))}
       </div>
-    </>
-  );
+    );
+  }
 }
 
 export default otherArticles;

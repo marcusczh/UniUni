@@ -4,58 +4,151 @@ import SearchBar from "../Global/Searchbar";
 import styles from "../HomePage/HomePage.module.css";
 import Logo from "../Global/Logo";
 import articleStyles from "./Articles.module.css";
+import { useLocation, useParams, Link } from "react-router-dom";
+import { React, useState, useEffect, useRef } from "react";
+import axios from "axios";
 
-function specificArticle() {
+function SpecificArticle() {
+  const { title } = useParams();
+  const { location } = useLocation();
+  const [article, setArticle] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/information", {
+        params: {
+          type: "Article",
+          title: title,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setArticle(res.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  //   useEffect(() => {
+  //     const links = document.querySelectorAll(".link-con .navi-link");
+
+  //     links.forEach((link, i) => {
+  //       link.addEventListener("click", () => {
+  //         const targetId = link.getAttribute("name");
+  //         window.scrollTo(
+  //           0,
+  //           document.querySelector("#" + targetId).getBoundingClientRect().top
+  //         );
+  //       });
+  //     });
+  //   }, []);
+
+  /* const references = useRef(
+    new Array(article.length === 0 ? 0 : article[0].body.length)
+  );
+  for (let index = 0; index < references.length; index++) {
+    references[index] = React.createRef(null);
+  } */
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  if (article.length === 0) {
     return (
-        <>
+      <>
         <div className={styles.topContent}>
-            <Logo />
-            <NavBar />
-            <LogOut />
+          <Logo />
+          <NavBar />
+          <LogOut />
         </div>
         <div>
-            <SearchBar />
+          <SearchBar />
         </div>
         <div className={articleStyles.layout}>
-            <div>
-                <div className={articleStyles.articleHeader}>
-                    Topic e.g. Y3 NUS Business Administration
-                    <br/>
-                    date | tags e.g. NUS, Business, NOC (depends on what is mentioned in the interview)
-                </div>
-                <div className={articleStyles.articleContent}> 
-                    Course Info
-                    Question 1 | How would you describe your course to someone who knows nothing about it? 
-
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-
-                    Question 2 | What are some interesting modules you have taken or want to take?
-
-                    Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident … Read more
-                </div>
+          <div>
+            <div className={articleStyles.articleHeader}>No articles.</div>
+            <div className={articleStyles.articleContent}>
+              Please try again later.
             </div>
-            <div className={articleStyles.navigator}>
-                Course Info
-                <nav className={articleStyles.navBar}>
-                    <ul className={articleStyles.list}>
-                    <li className={articleStyles.list}>
-                        Decision Making
-                    </li>
-                    <li className={articleStyles.list}>
-                        Curriculum
-                    </li>
-                    <li className={articleStyles.list}>
-                        Personal Experiences
-                    </li>
-                    <li className={articleStyles.list}>Career Prospects</li>
-                    <li className={articleStyles.list}>Student Life</li>
-                    <li className={articleStyles.list}>Others</li>
-                    </ul>
-                </nav>
-            </div>
+          </div>
         </div>
-    </>
+      </>
     );
+  } else {
+    return (
+      <>
+        <div className={styles.topContent}>
+          <Logo />
+          <NavBar />
+          <LogOut />
+        </div>
+        <div>
+          <SearchBar />
+        </div>
+        <div className={articleStyles.layout}>
+          <div>
+            <div className={articleStyles.articleHeader}>
+              {article[0].title}
+              <br />
+              {article[0].date} | {article[0].tags}
+            </div>
+            <div className={articleStyles.articleContent}>
+              {article[0].body.map((i, counter) => (
+                <>
+                  <section id={counter}>
+                    <b>
+                      <u>{i.header}</u>
+                    </b>
+                  </section>
+                  <br />
+                  <div>{i.text}</div>
+                  <br />
+                </>
+              ))}
+            </div>
+          </div>
+
+          <nav className={articleStyles.navBar}>
+            <div className={articleStyles.navigator}>
+              <nav>
+                <div className="link-con">
+                  {article[0].body.map((i, counter) => (
+                    <>
+                      <Link
+                        to="./"
+                        className={articleStyles.list}
+                        name={i.header}
+                      >
+                        {i.header}
+                      </Link>
+                    </>
+                  ))}
+                </div>
+              </nav>
+              {/* <ul className={articleStyles.list}>
+                {article[0].body.map((i, counter) => (
+                  <li
+                    className={articleStyles.list}
+                    /* onClick={
+                       references.current[counter]
+                        ? window.scrollTo({
+                            top: references.current[counter].offsetTop,
+                            bahavior: "smooth",
+                          })
+                        : null/
+                  >
+                    {i.header}
+                  </li>
+                ))}
+              </ul> */}
+            </div>
+          </nav>
+        </div>
+      </>
+    );
+  }
 }
 
-export default specificArticle;
+export default SpecificArticle;

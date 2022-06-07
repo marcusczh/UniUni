@@ -4,7 +4,7 @@ const Section = require("./section.model.js");
 const Information = new mongoose.Schema(
   {
     type: { type: String, required: true },
-    title: { type: String, required: true },
+    title: { type: String, required: true, unique: true },
     date: { type: Date, required: true },
     tags: { type: String },
     body: [Section.schema],

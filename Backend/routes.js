@@ -35,17 +35,7 @@ router.post("/register", async (req, res) => {
 //Fetching information (Articles/Interviews/Guides)
 router.get("/information", async (req, res) => {
   console.log(req.query);
-  await Information.find({
-    $search: {
-      wildcard: {
-        type: req.query.type,
-        title: req.query.title,
-        date: req.query.date,
-        tags: req.query.tags,
-        body: req.query.body,
-      },
-    },
-  })
+  await Information.find(req.query)
     .sort({ views: -1 })
     .then((data) => {
       res.json(data);

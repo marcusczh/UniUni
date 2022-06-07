@@ -1,85 +1,97 @@
 .recommendedArticle {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .articleHeader {
-    background: #eeeeee;
-    border: 3px #f2cc8f solid;
-    margin: 2% 0% 0 0;
-    border-radius: 10px 10px 0 0;
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  margin: 2% 0% 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 .articleContent {
-    background: white;
-    border: 3px #f2cc8f solid;
-    border-top: 0;
-    border-radius: 0 0 10px 10px;
-    margin: 0 0% 1% 0;
+  background: white;
+  border: 3px #f2cc8f solid;
+  font-size: larger;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  margin: 0 0% 1% 0;
+  word-wrap: break-word;
 }
 
 .line {
-    background-color: #f2cc8f;
-    height: 3px;
-    mix-blend-mode: darken;
+  background-color: #f2cc8f;
+  height: 3px;
+  mix-blend-mode: darken;
 }
 
 .otherArticles {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  flex-basis: max-content;
+  justify-content: space-around;
 }
 
 .otherArticlesHeader {
-    background: #eeeeee;
-    border: 3px #f2cc8f solid;
-    border-radius: 10px 10px 0 0;
-    margin: 2% 1% 0 0;
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  border-radius: 10px 10px 0 0;
+  margin: 2% 1% 0 0;
+}
+
+.otherArticlesContainer {
+  flex-grow: 1;
+  width: calc(40vh - 1px);
+  margin-top: 10%;
 }
 
 .otherArticlesContent {
-    background: white;
-    border: 3px #f2cc8f solid;
-    border-top: 0;
-    border-radius: 0 0 10px 10px;
-    margin: 0 1% 0 0;
+  background: white;
+  border: 3px #f2cc8f solid;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  margin: 0 1% 0 0;
+  height: calc(30vh - 1px);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .layout {
-    display: flex;
+  display: flex;
 }
 
 .navigator {
-    background: white;
-    border: 1px black solid;
-    border-radius: 10px;
-    margin-right: 3%;
-    margin-left: 5%;
-    box-shadow: -3px 3px black;
-    width: 50%;
+  background: white;
+  border: 1px black solid;
+  border-radius: 10px;
+  margin-right: 3%;
+  margin-left: 5%;
+  box-shadow: -3px 3px black;
+  width: 50%;
 }
 
 .title {
-    background: #eeeeee;
-    border: 3px #f2cc8f solid;
-    margin: 2% 0% 0 0;
-    border-radius: 10px 10px 0 0;
-    padding: 1%;
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  margin: 2% 0% 0 0;
+  border-radius: 10px 10px 0 0;
+  padding: 1%;
 }
 
 .content {
-    background: #eeeeee;
-    border: 3px #f2cc8f solid;
-    border-top: 0;
-    margin: 0% 2% 0 0;
-    border-radius: 0 0 10px 10px;
-    padding: 1%;
-    padding-bottom: 5%;
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  border-top: 0;
+  margin: 0% 2% 0 0;
+  border-radius: 0 0 10px 10px;
+  padding: 1%;
+  padding-bottom: 5%;
 }
 
 .contentInput {
-    height: 10rem;
+  height: 10rem;
 }
 
 .button {
-    float: right;
-    background-color: #ffb703;
+  float: right;
+  background-color: #ffb703;
 }

@@ -1,22 +1,27 @@
 import styles from "./Interviews.module.css";
 
-function otherInterviews() {
+function otherInterviews({ interview }) {
+  if (interview == null) {
     return (
-        <>
-        <div className={styles.otherInterviewsHeader}>
-        Y3 NUS Business Administration 
-        </div>
-        <div className={styles.otherInterviewsContent}> 
-        Course Info
-        <br />
-        Question 1 | How would you describe your course to someone who knows nothing about it? 
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        </div>
-    </>
+      <div className={styles.otherInterviewsContainer}>
+        <div className={styles.otherInterviewsHeader}>No Interviews Found</div>
+        <div className={styles.otherInterviewsContent}>Try again later</div>
+      </div>
     );
+  } else {
+    return (
+      <div className={styles.otherInterviewsContainer}>
+        <div className={styles.otherInterviewsHeader}>{interview.title}</div>
+        {interview.body.map((i) => (
+          <div className={styles.otherInterviewsContent}>
+            {i.header}
+            <br />
+            {i.text}
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default otherInterviews;

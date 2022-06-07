@@ -1,21 +1,27 @@
 import styles from "./Interviews.module.css";
 
-function recommendedInterview() {
+function recommendedInterview({ interview }) {
+  if (interview == null) {
     return (
-        <>
-        <div className={styles.interviewHeader}>
-        Y3 NUS Business Administration 
-        </div>
-        <div className={styles.interviewContent}> 
-        Course Info
-        Question 1 | How would you describe your course to someone who knows nothing about it? 
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        </div>
-    </>
+      <>
+        <div className={styles.interviewHeader}>No Interview Found</div>
+        <div className={styles.interviewContent}>Try again later</div>
+      </>
     );
+  } else {
+    return (
+      <>
+        <div className={styles.interviewHeader}>{interview.title}</div>
+        {interview.body.map((i) => (
+          <div className={styles.interviewContent}>
+            {i.header}
+            <br />
+            {i.text}
+          </div>
+        ))}
+      </>
+    );
+  }
 }
 
 export default recommendedInterview;

@@ -1,21 +1,27 @@
 import styles from "./Guides.module.css";
 
-function recommendedGuide() {
+function recommendedGuide({ guide }) {
+  if (guide == null) {
     return (
-        <>
-        <div className={styles.guideHeader}>
-        Y3 NUS Business Administration 
-        </div>
-        <div className={styles.guideContent}> 
-        Course Info
-        Question 1 | How would you describe your course to someone who knows nothing about it? 
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        </div>
-    </>
+      <>
+        <div className={styles.guideHeader}>No Guides found</div>
+        <div className={styles.guideContent}>Try again later</div>
+      </>
     );
+  } else {
+    return (
+      <>
+        <div className={styles.guideHeader}>{guide.title}</div>
+        {guide.body.map((i) => (
+          <div className={styles.guideContent}>
+            {i.header}
+            <br />
+            {i.text}
+          </div>
+        ))}
+      </>
+    );
+  }
 }
 
 export default recommendedGuide;
