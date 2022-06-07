@@ -1,16 +1,13 @@
-import NavBar from "../Global/Navbar";
-import LogOut from "../Global/Logout";
 import SearchBar from "../Global/Searchbar";
-import styles from "../HomePage/HomePage.module.css";
-import Logo from "../Global/Logo";
 import articleStyles from "./Articles.module.css";
 import { useLocation, useParams, Link } from "react-router-dom";
 import { React, useState, useEffect, useRef } from "react";
 import axios from "axios";
+import TopContent from "../Global/TopContent";
 
 function SpecificArticle() {
   const { title } = useParams();
-  const { location } = useLocation();
+  // const { location } = useLocation();
   const [article, setArticle] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -58,11 +55,7 @@ function SpecificArticle() {
   if (article.length === 0) {
     return (
       <>
-        <div className={styles.topContent}>
-          <Logo />
-          <NavBar />
-          <LogOut />
-        </div>
+        <TopContent />
         <div>
           <SearchBar />
         </div>
@@ -79,11 +72,7 @@ function SpecificArticle() {
   } else {
     return (
       <>
-        <div className={styles.topContent}>
-          <Logo />
-          <NavBar />
-          <LogOut />
-        </div>
+        <TopContent />
         <div>
           <SearchBar />
         </div>
