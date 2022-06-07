@@ -1,50 +1,105 @@
 import SearchBar from "../Global/Searchbar";
 import guideStyles from "./Guides.module.css";
 import TopContent from "../Global/TopContent";
+import { useLocation, useParams, Link } from "react-router-dom";
+import { React, useState, useEffect, useRef } from "react";
+import axios from "axios";
 
-function specificGuide() {
-  return (
-    <>
-      <TopContent />
-      <div>
-        <SearchBar />
-      </div>
-      <div className={guideStyles.layout}>
+function SpecificGuide() {
+  const { title } = useParams();
+  const [guide, setGuide] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/information", {
+        params: {
+          type: "Guide",
+          title: title,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setGuide(res.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  if (guide.length === 0) {
+    return (
+      <>
+        <TopContent />
         <div>
-          <div className={guideStyles.guideHeader}>
-            Topic e.g. Y3 NUS Business Administration
-            <br />
-            date | tags e.g. NUS, Business, NOC (depends on what is mentioned in
-            the interview)
-          </div>
-          <div className={guideStyles.guideContent}>
-            Course Info Question 1 | How would you describe your course to
-            someone who knows nothing about it? Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco Question 2 | What are some interesting modules
-            you have taken or want to take? Laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident … Read more
+          <SearchBar />
+        </div>
+        <div className={guideStyles.layout}>
+          <div>
+            <div className={guideStyles.articleHeader}>No guides.</div>
+            <div className={guideStyles.articleContent}>
+              Please try again later.
+            </div>
           </div>
         </div>
-        <div className={guideStyles.navigator}>
-          Course Info
+      </>
+    );
+  } else {
+    return (
+      <>
+        <TopContent />
+        <div>
+          <SearchBar />
+        </div>
+        <div className={guideStyles.layout}>
+          <div>
+            <div className={guideStyles.guideHeader}>
+              {guide[0].title}
+              <br />
+              {guide[0].date} | {guide[0].tags}
+            </div>
+            <div className={guideStyles.guideContent}>
+              {guide[0].body.map((i, counter) => (
+                <>
+                  <section id={counter}>
+                    <b>
+                      <u>{i.header}</u>
+                    </b>
+                  </section>
+                  <br />
+                  <div>{i.text}</div>
+                  <br />
+                </>
+              ))}
+            </div>
+          </div>
+
           <nav className={guideStyles.navBar}>
-            <ul className={guideStyles.list}>
-              <li className={guideStyles.list}>Decision Making</li>
-              <li className={guideStyles.list}>Curriculum</li>
-              <li className={guideStyles.list}>Personal Experiences</li>
-              <li className={guideStyles.list}>Career Prospects</li>
-              <li className={guideStyles.list}>Student Life</li>
-              <li className={guideStyles.list}>Others</li>
-            </ul>
+            <div className={guideStyles.navigator}>
+              <nav>
+                <div className="link-con">
+                  {guide[0].body.map((i, counter) => (
+                    <>
+                      <Link
+                        to="./"
+                        className={guideStyles.list}
+                        name={i.header}
+                      >
+                        {i.header}
+                      </Link>
+                    </>
+                  ))}
+                </div>
+              </nav>
+            </div>
           </nav>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
 
-export default specificGuide;
+export default SpecificGuide;

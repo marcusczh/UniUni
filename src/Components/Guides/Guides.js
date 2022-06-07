@@ -14,36 +14,63 @@ function Guides() {
       .get(`http://localhost:4000/api/information?type=Guide`)
       .then((res) => {
         setGuides(res.data);
+        console.log(res.data);
       });
   }, []);
 
-  if (!guides) return null;
-
-  return (
-    <>
-      <TopContent />
-      <div>
-        <SearchBar />
-      </div>
-      <Link
-        to={`/Guides/${guides[0].title}`}
-        className={stylesGuide.recommendedGuide}
-      >
-        <RecommendedGuide guide={guides[0]} />
-      </Link>
-      <div className={stylesGuide.otherGuides}>
+  //Note: Unfinished error handling
+  if (guides === null || guides.length < 4) {
+    return (
+      <>
+        <TopContent />
         <div>
-          <OtherGuides guide={guides[1] || null} />
+          <SearchBar />
         </div>
+        No guides found.
+      </>
+    );
+  } else {
+    return (
+      <>
+        <TopContent />
         <div>
-          <OtherGuides guide={guides[2] || null} />
+          <SearchBar />
         </div>
-        <div>
-          <OtherGuides guide={guides[3] || null} />
+        <Link
+          to={`/Guides/${guides[0].title}`}
+          className={stylesGuide.recommendedGuide}
+        >
+          <RecommendedGuide guide={guides[0]} />
+        </Link>
+        <div className={stylesGuide.otherGuides}>
+          <div>
+            <Link
+              to={`/Articles/${guides[1].title}`}
+              className={stylesGuide.otherGuides}
+            >
+              <OtherGuides guide={guides[1] || null} />
+            </Link>
+          </div>
+          <div>
+            <Link
+              to={`/Articles/${guides[2].title}`}
+              className={stylesGuide.otherGuides}
+            >
+              <OtherGuides guide={guides[2] || null} />
+            </Link>
+          </div>
+          <div>
+            <Link
+              to={`/Articles/${guides[3].title}`}
+              className={stylesGuide.otherGuides}
+            >
+              <OtherGuides guide={guides[3] || null} />
+            </Link>
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
 
 export default Guides;
