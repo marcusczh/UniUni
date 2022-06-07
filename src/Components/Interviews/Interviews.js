@@ -34,13 +34,28 @@ function Interviews() {
       </Link>
       <div className={stylesInterview.otherInterviews}>
         <div>
-          <OtherInterviews interview={interviews[1] || null} />
+          <Link
+              to={`/Interviews/${interviews[1].title}`}
+              className={stylesInterview.otherInterviews}
+          >
+            <OtherInterviews interview={interviews[1] || null} />
+          </Link>
         </div>
         <div>
-          <OtherInterviews interview={interviews[2] || null} />
+          <Link
+                to={`/Interviews/${interviews[2].title}`}
+                className={stylesInterview.otherInterviews}
+            >
+              <OtherInterviews interview={interviews[2] || null} />
+          </Link>
         </div>
         <div>
-          <OtherInterviews interview={interviews[3] || null} />
+          <Link
+              to={`/Interviews/${interviews[3].title}`}
+              className={stylesInterview.otherInterviews}
+          >
+            <OtherInterviews interview={interviews[3] || null} />
+          </Link>
         </div>
       </div>
     </>
