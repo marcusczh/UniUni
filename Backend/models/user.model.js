@@ -8,5 +8,5 @@ const User = new mongoose.Schema(
   { collection: "user-data" }
 );
 
-const model = mongoose.model("UserData", User);
+const model = mongoose.model("user-data", User);
 module.exports = model;
