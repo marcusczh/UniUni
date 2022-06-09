@@ -19,6 +19,7 @@ function PostManagement() {
 
   const reloadPosts = () => {
     axios.get(`http://localhost:4000/api/forum?user=${user}`).then((res) => {
+      console.log("reloaded!");
       setPosts(res.data);
     });
   };
@@ -51,6 +52,7 @@ function PostManagement() {
         {posts.slice(0, Math.min(numPosts, posts.length)).map((post) => (
           <Posts post={post}>
             <DeletePost
+              posts={posts}
               reloadPosts={reloadPosts}
               postTitle={post.title}
               postId={post._id}

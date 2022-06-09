@@ -20,11 +20,12 @@ function DeletePost({ postTitle, postId, reloadPosts }) {
       .then((res) => {
         if (res.data.status === "ok") {
           alert("Successfully deleted");
+          reloadPosts();
         } else {
           alert(res.data.error);
+          reloadPosts();
         }
       });
-    reloadPosts();
   };
 
   return (
@@ -57,6 +58,7 @@ function DeletePost({ postTitle, postId, reloadPosts }) {
           <div className={styles.confirmationPopup}>
             Are you sure you want to delete the following post?
             <p className={styles.postWarning}>"{postTitle}"</p>
+            <p className={styles.postWarning}>This action cannot be undone!</p>
             <div className={styles.buttonContainer}>
               <button className={styles.yes} onClick={deletePost}>
                 Yes
