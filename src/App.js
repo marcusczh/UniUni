@@ -16,6 +16,7 @@ import ArticleCreation from "./Components/Articles/ArticleCreation";
 import Forum from "./Components/Forum/Forum";
 import SpecificForum from "./Components/Forum/SpecificForum";
 import ForumCreation from "./Components/Forum/ForumCreation";
+import PostManagement from "./Components/Forum/PostManagement";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <Route path="Forum" element={<Forum />} />
       <Route path="Forum/TestForum" element={<SpecificForum />} />
       <Route path="Forum/Create" element={<ForumCreation />} />
+      <Route path="Forum/MyPosts" element={<PostManagement />} />
     </Routes>
   );
 }

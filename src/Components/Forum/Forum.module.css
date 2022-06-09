@@ -1,70 +1,144 @@
-.posts {
-    background: white;
-    border: 1px black solid;
-    border-radius: 5px;
-    margin-top: 2%;
-    margin-right: 3%;
-    box-shadow: -3px 3px black;
+.postContainer {
+  background: white;
+  border: 1px black solid;
+  border-radius: 5px;
+  margin-top: 3%;
+  margin-right: 3%;
+  box-shadow: -3px 3px black;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*DeletePost stuff*/
+.confirmationPopup {
+  position: fixed;
+  width: 50vw;
+  height: 30vh;
+  top: 25%;
+  left: 25%;
+  background: whitesmoke;
+  border: 1px black solid;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  align-items: center;
+  padding-top: 10%;
+  font-size: 1.3rem;
+}
+
+.buttonContainer {
+  display: flex;
+  flex: 1;
+  width: 90%;
+  padding: 2%;
+}
+.buttonContainer button {
+  flex: 1;
+  height: 100%;
+  margin: 0% 1%;
+  border-radius: 3%;
+  border: 0;
+  background-color: #f2cc8f;
+  box-shadow: -3px 3px #ba9869;
+}
+.buttonContainer .yes {
+  background-color: rgba(180, 60, 60);
+  color: #eeeeee;
+}
+
+.postWarning {
+  color: crimson;
+  flex: 2;
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(36, 36, 36, 0.7);
+}
+
+.toggle {
+  font-weight: 600;
+}
+
+.postSmall {
+  padding: 1%;
+}
+/*DeletePost stuff END*/
+
+.popup {
+  display: flex;
+  align-self: flex-start;
+  border: 1px #ffb703 solid;
+  box-shadow: -1px 1px #ffb703;
+  border-radius: 1px;
+  margin-right: 0.6%;
+  margin-top: 0.3%;
+  padding: 0.2%;
 }
 
 .button {
-    float: right;
-    background-color: #ffb703;
+  float: right;
+  background-color: #ffb703;
 }
 
 .forumHeader {
-    background: #eeeeee;
-    border: 3px #f2cc8f solid;
-    border-radius: 10px 10px 0 0;
-    margin: 2% 0% 0 0;
-    display:flex;
-    justify-content: space-between;
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  border-radius: 10px 10px 0 0;
+  margin: 2% 0% 0 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .forumContent {
-    background: white;
-    border: 3px #f2cc8f solid;
-    border-top: 0;
-    border-radius: 0 0 10px 10px;
-    margin: 0 0% 1% 0;
+  background: white;
+  border: 3px #f2cc8f solid;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  margin: 0 0% 1% 0;
 }
 
 .comments {
-    background: white;
-    border: 3px #f2cc8f solid;
-    border-radius: 5px;
-    margin-bottom: 1%;
+  background: white;
+  border: 3px #f2cc8f solid;
+  border-radius: 5px;
+  margin-bottom: 1%;
 }
 
 .title {
-    background: #eeeeee;
-    border: 3px #f2cc8f solid;
-    margin: 2% 0% 0 0;
-    border-radius: 10px 10px 0 0;
-    padding: 1%;
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  margin: 2% 0% 0 0;
+  border-radius: 10px 10px 0 0;
+  padding: 1%;
 }
 
 .content {
-    background: #eeeeee;
-    border: 3px #f2cc8f solid;
-    border-top: 0;
-    margin: 0% 2% 0 0;
-    border-radius: 0 0 10px 10px;
-    padding: 1%;
-    padding-bottom: 5%;
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  border-top: 0;
+  margin: 0% 2% 0 0;
+  border-radius: 0 0 10px 10px;
+  padding: 1%;
+  padding-bottom: 5%;
 }
 
 .contentInput {
-    height: 10rem;
+  height: 10rem;
 }
 
 .buttonCreation {
-    float: right;
-    background-color: #ffb703;
+  float: right;
+  background-color: #ffb703;
 }
 
 .moreOptions {
-    border-radius: 10px;
+  border-radius: 10px;
 }
-
-
