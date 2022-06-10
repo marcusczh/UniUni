@@ -10,9 +10,8 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
 .postTop {
-  display: flex;
+  flex: 1;
 }
 .postTitle {
   float: left;
