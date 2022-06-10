@@ -10,15 +10,16 @@ function Posts({ post, children }) {
   } else {
     return (
       <div className={styles.postContainer}>
-        <div className={styles.postSmall}>
+        <div className={styles.postTitle}>
           <Link to={`/Forum/${post.title}`}>{post.title}</Link>
-          <br />
-          {"By: " + post.user}
+        </div>
+        <div className={styles.details}>
+          <div className={styles.postUser}>{"By: " + post.user}</div>
           <div className={styles.stats}>
-                {"likes: " + post.likes + "  ||  "}
-                {"dislikes: " + post.dislikes + "  ||  "}
-                {"comments: " + post.comments.length}
-            </div>
+            {"likes: " + post.likes + "  ||  "}
+            {"dislikes: " + post.dislikes + "  ||  "}
+            {"comments: " + post.comments.length}
+          </div>
         </div>
         {children && <div className={styles.popup}>{children}</div>}
       </div>
