@@ -56,7 +56,6 @@ function SignupScreen() {
           BI3: basicInfo3,
         })
         .then((res) => {
-          console.log(res);
           if (res.data.status === "error") {
             alert("Username is already in use");
           } else {
