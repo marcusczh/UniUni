@@ -16,6 +16,10 @@ function Forum() {
     });
   }, []);
 
+  const viewMore = () => {
+    setNumPosts(numPosts + 1);
+  };
+
   if (!posts) return null;
 
   return (
@@ -23,7 +27,7 @@ function Forum() {
       <TopContent />
       <div>
         <SearchBar />
-        <PostActions />
+        <PostActions numPosts={numPosts} viewMore={viewMore} />
       </div>
       <div className="postContainer">
         {posts.slice(0, Math.min(numPosts, posts.length)).map((post) => (
