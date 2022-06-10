@@ -10,7 +10,6 @@ function Forum() {
   const [numPosts, setNumPosts] = useState(4);
   useEffect(() => {
     axios.get(`http://localhost:4000/api/forum`).then((res) => {
-      console.log(res.data);
       setPosts(res.data);
     });
   }, []);
