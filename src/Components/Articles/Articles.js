@@ -24,6 +24,9 @@ function Articles() {
       <TopContent />
       <div>
         <SearchBar />
+        <Link to={`/Articles/Create`}>
+          <button className={stylesArticle.button}>Create Article</button>
+        </Link>
       </div>
       <Link
         to={`/Articles/${articles[0].title}`}
