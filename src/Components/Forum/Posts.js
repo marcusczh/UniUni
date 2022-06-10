@@ -1,6 +1,6 @@
 import styles from "./Forum.module.css";
 import { Link } from "react-router-dom";
-function posts({ post, children }) {
+function Posts({ post, children }) {
   if (post == null) {
     return (
       <>
@@ -8,14 +8,17 @@ function posts({ post, children }) {
       </>
     );
   } else {
-    console.log(post);
     return (
       <div className={styles.postContainer}>
         <div className={styles.postSmall}>
           <Link to={`/Forum/${post.title}`}>{post.title}</Link>
           <br />
-          By: {post.author}
-          Likes: {post.likes} Dislikes: {post.dislikes}
+          {"By: " + post.user}
+          <div className={styles.stats}>
+                {"likes: " + post.likes + "  ||  "}
+                {"dislikes: " + post.dislikes + "  ||  "}
+                {"comments: " + post.comments.length}
+            </div>
         </div>
         {children && <div className={styles.popup}>{children}</div>}
       </div>
@@ -23,4 +26,4 @@ function posts({ post, children }) {
   }
 }
 
-export default posts;
+export default Posts;

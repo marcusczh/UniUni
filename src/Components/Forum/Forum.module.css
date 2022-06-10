@@ -142,3 +142,8 @@
 .moreOptions {
   border-radius: 10px;
 }
+
+.stats {
+    float: right;
+}
+

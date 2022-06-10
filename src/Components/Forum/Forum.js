@@ -22,6 +22,7 @@ function Forum() {
 
   if (!posts) return null;
 
+
   return (
     <>
       <TopContent />

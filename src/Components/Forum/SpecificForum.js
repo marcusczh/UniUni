@@ -3,40 +3,87 @@ import forumStyles from "./Forum.module.css";
 import PostActions from "./PostActions";
 import Comments from "./Comments";
 import TopContent from "../Global/TopContent";
+import { useParams } from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-function specificForum() {
-  return (
-    <>
-      <TopContent />
-      <div>
-        <SearchBar />
-        <PostActions />
-      </div>
-      <div>
-        <div className={forumStyles.forumHeader}>
-          Topic e.g. Y3 NUS Business Administration
-          <br />
-          date | tags e.g. NUS, Business, NOC (depends on what is mentioned in
-          the interview)
-          <button className={forumStyles.moreOptions}>Delete post</button>
+function SpecificForum() {
+  const { title } = useParams();
+  const [forum, setForum] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/forum", {
+        params: {
+          title: title
+        }
+      })
+      .then((res) => {
+        console.log(res.data);
+        setForum(res.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+  console.log(forum.length);
+  if (forum.length === 0) {
+    return (
+      <>
+        <TopContent />
+        <div>
+          <SearchBar />
+          <PostActions />
         </div>
-        <div className={forumStyles.forumContent}>
-          Course Info Question 1 | How would you describe your course to someone
-          who knows nothing about it? Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco Question 2 | What are some interesting modules you have taken
-          or want to take? Laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident … Read more
+        <div>
+          <div className={forumStyles.forumHeader}>
+            No posts found
+          </div>
+          <div className={forumStyles.forumContent}>
+            <br/>
+          </div>
         </div>
-      </div>
-      <Comments />
-      <Comments />
-      <Comments />
-    </>
-  );
+      </>
+    );
+  } else {
+    return (
+      <>
+        <TopContent />
+        <div>
+          <SearchBar />
+          <PostActions />
+        </div>
+        <div>
+          <div className={forumStyles.forumHeader}>
+            {forum[0].title}
+            <br />
+            {"By: " + forum[0].user} 
+            <br />
+            {forum[0].date} | 
+            {forum[0].tags} | 
+            {"Likes: " + forum[0].likes} | 
+            {"Dislikes: " + forum[0].dislikes} | 
+            {"Comments: " + forum[0].comments.length}
+            <button className={forumStyles.moreOptions}>Delete post</button>
+          </div>
+          <div className={forumStyles.forumContent}>{forum[0].body}</div>
+        </div>
+        {forum[0].comments.sort((a, b) => a.score - b.score).map((i) => (
+          <Comments comment={i || null}/>
+        ))}
+        <Link to={`./CreateComment?title=${forum[0].title}&user=${"user3"}`}>
+          <button>
+            Create Comment
+          </button>
+        </Link>
+      </>
+    );
+  }
 }
 
-export default specificForum;
+export default SpecificForum;
