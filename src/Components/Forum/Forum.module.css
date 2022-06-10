@@ -2,11 +2,30 @@
   background: white;
   border: 1px black solid;
   border-radius: 5px;
+  padding: 1%;
   margin-top: 3%;
   margin-right: 3%;
   box-shadow: -3px 3px black;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.postTitle {
+  display: flex;
+}
+
+.postSmall.details {
+  flex: 1;
+  display: flex;
+}
+.stats {
+  float: right;
+  margin-right: 1%;
+}
+
+.postUser {
+  float: left;
 }
 
 /*DeletePost stuff*/
@@ -65,10 +84,6 @@
 
 .toggle {
   font-weight: 600;
-}
-
-.postSmall {
-  padding: 1%;
 }
 /*DeletePost stuff END*/
 
@@ -142,8 +157,3 @@
 .moreOptions {
   border-radius: 10px;
 }
-
-.stats {
-    float: right;
-}
-

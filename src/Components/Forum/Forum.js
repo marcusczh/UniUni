@@ -2,7 +2,6 @@ import SearchBar from "../Global/Searchbar";
 import Posts from "./Posts";
 import PostActions from "./PostActions";
 import TopContent from "../Global/TopContent";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -21,7 +20,6 @@ function Forum() {
   };
 
   if (!posts) return null;
-
 
   return (
     <>

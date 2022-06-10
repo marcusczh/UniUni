@@ -51,7 +51,7 @@ router.get("/information", async (req, res) => {
 router.get("/forum", async (req, res) => {
   console.log(req.query);
   await Forum.find(req.query)
-    .sort({ score : -1 })
+    .sort({ score: -1 })
     .then((data) => {
       res.json(data);
     })
@@ -93,12 +93,12 @@ module.exports = router;
 router.post("/create", async (req, res) => {
   try {
     await Information.create({
-        type: req.body.type,
-        title: req.body.title,
-        date: req.body.date,
-        tags: req.body.tags,
-        body: req.body.body,
-        views: req.body.views
+      type: req.body.type,
+      title: req.body.title,
+      date: req.body.date,
+      tags: req.body.tags,
+      body: req.body.body,
+      views: req.body.views,
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -110,15 +110,23 @@ router.post("/create", async (req, res) => {
 //Creating a comment: Posting
 router.post("/createcomment/:title", async (req, res) => {
   try {
-    await Forum.collection.findOneAndUpdate({
-      title: req.params.title}, 
-      {$push:{comments: {
-        body: req.body.body,
-        date: req.body.date,
-        user: req.body.user,
-        likes: req.body.likes,
-        dislikes: req.body.dislikes,
-        score: req.body.score}}})
+    await Forum.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+      },
+      {
+        $push: {
+          comments: {
+            body: req.body.body,
+            date: req.body.date,
+            user: req.body.user,
+            likes: req.body.likes,
+            dislikes: req.body.dislikes,
+            score: req.body.score,
+          },
+        },
+      }
+    );
     return res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
