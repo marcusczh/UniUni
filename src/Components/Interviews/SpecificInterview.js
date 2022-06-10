@@ -25,7 +25,6 @@ function SpecificInterview() {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setInterview(res.data);
         setLoading(false);
       })
