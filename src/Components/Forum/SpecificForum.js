@@ -21,7 +21,6 @@ function SpecificForum() {
         }
       })
       .then((res) => {
-        console.log(res.data);
         setForum(res.data);
         setLoading(false);
       })
