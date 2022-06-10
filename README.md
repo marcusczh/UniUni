@@ -2,6 +2,10 @@
 
 This project was created as part of the Orbital module
 
+## Setup
+
+### `npm install` to install the necessary modules
+
 ## Available Scripts
 
 In the project directory, you can run:
