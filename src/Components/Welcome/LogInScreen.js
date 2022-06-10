@@ -15,7 +15,6 @@ function LogInScreen() {
         password: password,
       })
       .then((res) => {
-        console.log("ada");
         if (res.data.user) {
           alert("Login successful");
           window.location.href = "/HomePage";
