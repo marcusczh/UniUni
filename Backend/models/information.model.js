@@ -3,6 +3,7 @@ const Section = require("./section.model.js");
 
 const Information = new mongoose.Schema(
   {
+    //author: { type: String, required: true, default: "Anonymous" },
     type: { type: String, required: true },
     title: { type: String, required: true, unique: true },
     date: { type: Date, required: true },
@@ -12,5 +13,5 @@ const Information = new mongoose.Schema(
   { collection: "information" }
 );
 
-const model = mongoose.model("Information", Information);
+const model = mongoose.model("information", Information);
 module.exports = model;

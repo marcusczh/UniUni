@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("./models/user.model");
 const Information = require("./models/information.model");
+const Forum = require("./models/forum.model");
 const router = express.Router();
 const Forum = require("./models/forum.model");
 
@@ -47,7 +48,7 @@ router.get("/information", async (req, res) => {
     });
 });
 
-//Fetching Forum
+//Fetching Forum Posts
 router.get("/forum", async (req, res) => {
   console.log(req.query);
   await Forum.find(req.query)
@@ -57,8 +58,34 @@ router.get("/forum", async (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      return res.json({ status: "error", error: "Something bad happened." });
+      return res.json({
+        status: "error",
+        error: "Could not retrieve Forum Posts",
+      });
     });
+});
+
+//Deleting forum posts
+router.delete("/forum/:title/:_id", async (req, res) => {
+  try {
+    const result = await Forum.findOneAndDelete({
+      title: req.params.title,
+      _id: req.params._id,
+    });
+    if (!result) {
+      res.json({
+        status: "error",
+        error: "Could not delete post",
+      });
+    } else {
+      console.log("Post deleted");
+      res.json({
+        status: "ok",
+      });
+    }
+  } catch (e) {
+    res.send(e);
+  }
 });
 
 module.exports = router;

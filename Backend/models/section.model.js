@@ -8,5 +8,6 @@ const Section = new mongoose.Schema(
   { collection: "section" }
 );
 
-const model = mongoose.model("Section", Section);
+const model = mongoose.model("section", Section);
 module.exports = model;
+
