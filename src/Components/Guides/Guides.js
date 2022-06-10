@@ -14,7 +14,6 @@ function Guides() {
       .get(`http://localhost:4000/api/information?type=Guide`)
       .then((res) => {
         setGuides(res.data);
-        console.log(res.data);
       });
   }, []);
 
