@@ -9,7 +9,6 @@ function recommendedArticle({ article }) {
       </>
     );
   } else {
-    console.log(article);
     return (
       <>
         <div className={styles.articleHeader}>{article.title}</div>
