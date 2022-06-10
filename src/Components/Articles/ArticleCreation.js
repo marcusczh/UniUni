@@ -1,11 +1,8 @@
-import NavBar from "../Global/Navbar";
-import LogOut from "../Global/Logout";
-import styles from "../HomePage/HomePage.module.css";
-import Logo from "../Global/Logo";
 import articleStyles from "./Articles.module.css";
 /*import { Link } from "react-router-dom";*/
 import { useState } from "react";
 import axios from "axios";
+import TopContent from "../Global/TopContent";
 
 function ArticlesCreation() {
   const [title, setTitle] = useState("");
@@ -38,11 +35,7 @@ function ArticlesCreation() {
 
   return (
     <>
-      <div className={styles.topContent}>
-        <Logo />
-        <NavBar />
-        <LogOut />
-      </div>
+      <TopContent />
       <div>
         <form
           onSubmit={(e) => {
