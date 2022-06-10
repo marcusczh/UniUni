@@ -3,7 +3,6 @@ const User = require("./models/user.model");
 const Information = require("./models/information.model");
 const Forum = require("./models/forum.model");
 const router = express.Router();
-const Forum = require("./models/forum.model");
 
 //Logging in: Posting a username & password
 router.post("/login", async (req, res) => {
