@@ -19,7 +19,6 @@ function SpecificGuide() {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setGuide(res.data);
         setLoading(false);
       })
