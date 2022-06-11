@@ -49,7 +49,6 @@ router.get("/information", async (req, res) => {
 
 //Fetching Forum Posts
 router.get("/forum", async (req, res) => {
-  console.log(req.query);
   await Forum.find(req.query)
     .sort({ score: -1 })
     .then((data) => {
@@ -133,3 +132,77 @@ router.post("/createcomment/:title", async (req, res) => {
     return res.json({ status: "error", error: "Something bad happened." });
   }
 });
+
+//Liking/Disliking a post: Posting
+router.post("/like/:title", async (req, res) => {
+  try {
+    await Forum.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+      },
+      {
+        $inc: {
+          likes: req.body.likes,
+          dislikes: req.body.dislikes,
+          score: req.body.likes - req.body.dislikes,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Liking/Disliking a comment: Posting
+//TODO: add in user filter
+router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
+  try {
+    Forum.collection.updateOne(
+      { 
+        title: req.params.title, 
+        "comments.body": req.params.body },
+      {
+        $inc: {
+          "comments.$.likes": req.body.likes,
+          "comments.$.dislikes": req.body.dislikes,
+          "comments.$.score": req.body.likes - req.body.dislikes,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Creating a forum post: Posting
+router.post("/createforum", async (req, res) => {
+  var image = req.body.image;
+  var encode = image.toString("base64");
+  var final = {
+    contentType: String,
+    image: Buffer.from(encode, "base64"),
+  };
+  try {
+    await Forum.create({
+      user: req.body.user,
+      title: req.body.title,
+      date: req.body.date,
+      body: req.body.body,
+      likes: req.body.likes,
+      dislikes: req.body.dislikes,
+      score: req.body.score,
+      tags: req.body.tags,
+      comments: req.body.comments,
+      image: encode,
+    });
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+

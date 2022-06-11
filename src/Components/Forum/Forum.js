@@ -28,9 +28,12 @@ function Forum() {
         <PostActions numPosts={numPosts} viewMore={viewMore} />
       </div>
       <div className="postContainer">
-        {posts.slice(0, Math.min(numPosts, posts.length)).map((post) => (
-          <Posts post={post} />
-        ))}
+        {posts
+          .slice(0, Math.min(numPosts, posts.length))
+          .sort((a, b) => b.score - a.score)
+          .map((post) => (
+            <Posts post={post} />
+          ))}
       </div>
     </>
   );

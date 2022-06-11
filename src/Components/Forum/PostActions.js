@@ -7,7 +7,9 @@ function posts({ viewMore }) {
       <button className={styles.button} onClick={viewMore}>
         View More Posts
       </button>
-      <button className={styles.button}>Create Post</button>
+      <button className={styles.button}>
+        <Link to="/Forum/Create">Create Post</Link>
+      </button>
       <button className={styles.button}>
         <Link to="/Forum/MyPosts">View My Posts</Link>
       </button>

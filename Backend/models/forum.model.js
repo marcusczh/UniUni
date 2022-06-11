@@ -11,6 +11,7 @@ const Forum = new mongoose.Schema(
     dislikes: { type: Number },
     score: { type: Number },
     tags: { type: String },
+    image: { type: Buffer },
     comments: [comments.schema],
   },
   { collection: "forum" }

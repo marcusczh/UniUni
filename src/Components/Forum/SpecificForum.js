@@ -17,8 +17,8 @@ function SpecificForum() {
     axios
       .get("http://localhost:4000/api/forum", {
         params: {
-          title: title
-        }
+          title: title,
+        },
       })
       .then((res) => {
         setForum(res.data);
@@ -26,6 +26,22 @@ function SpecificForum() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  function increment(event, likes, dislikes) {
+    event.preventDefault();
+    axios
+      .post("http://localhost:4000/api/like/" + title, {
+        likes: likes,
+        dislikes: dislikes,
+      })
+      .then(() =>
+        axios
+          .get(`http://localhost:4000/api/forum?title=${title}`)
+          .then((res) => {
+            setForum(res.data);
+          })
+      );
+  }
 
   if (loading) {
     return <div>loading...</div>;
@@ -40,11 +56,9 @@ function SpecificForum() {
           <PostActions />
         </div>
         <div>
-          <div className={forumStyles.forumHeader}>
-            No posts found
-          </div>
+          <div className={forumStyles.forumHeader}>No posts found</div>
           <div className={forumStyles.forumContent}>
-            <br/>
+            <br />
           </div>
         </div>
       </>
@@ -61,24 +75,48 @@ function SpecificForum() {
           <div className={forumStyles.forumHeader}>
             {forum[0].title}
             <br />
-            {"By: " + forum[0].user} 
+            {"By: " + forum[0].user}
             <br />
-            {forum[0].date} | 
-            {forum[0].tags} | 
-            {"Likes: " + forum[0].likes} | 
-            {"Dislikes: " + forum[0].dislikes} | 
+            {forum[0].date} |{forum[0].tags} |{"Likes: " + forum[0].likes} |
+            {"Dislikes: " + forum[0].dislikes} |
             {"Comments: " + forum[0].comments.length}
-            <button className={forumStyles.moreOptions}>Delete post</button>
+            <div>
+              <button
+                className={forumStyles.moreOptions}
+                onClick={(event) => increment(event, 1, 0)}
+              >
+                like
+              </button>
+              <button
+                className={forumStyles.moreOptions}
+                onClick={(event) => increment(event, 0, 1)}
+              >
+                dislike
+              </button>
+            </div>
           </div>
-          <div className={forumStyles.forumContent}>{forum[0].body}</div>
+          <div className={forumStyles.forumContent}>
+            {forum[0].image != null ? (
+              <img
+                src={"image/jpeg"+forum[0].image}
+                //alt="User submitted"
+              ></img>
+            ) : null}
+            {forum[0].body}
+          </div>
         </div>
-        {forum[0].comments.sort((a, b) => a.score - b.score).map((i) => (
-          <Comments comment={i || null}/>
-        ))}
+        {forum[0].comments
+          .sort((a, b) => b.score - a.score)
+          .map((i, counter) => (
+            <Comments
+              comment={i || null}
+              title={forum[0].title || null}
+              index={counter}
+              setForum={setForum}
+            />
+          ))}
         <Link to={`./CreateComment?title=${forum[0].title}&user=${"user3"}`}>
-          <button>
-            Create Comment
-          </button>
+          <button>Create Comment</button>
         </Link>
       </>
     );

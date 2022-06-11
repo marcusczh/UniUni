@@ -1,5 +1,6 @@
 import styles from "./Forum.module.css";
 import { Link } from "react-router-dom";
+
 function Posts({ post, children }) {
   if (post == null) {
     return (
