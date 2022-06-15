@@ -3,13 +3,13 @@ import LogOut from "./Logout";
 import Logo from "./Logo";
 import styles from "./Global.module.css";
 
-function TopContent() {
+function TopContent({ user, setUser }) {
   return (
     <>
       <div className={styles.topContent}>
         <Logo />
         <NavBar />
-        <LogOut />
+        <LogOut user={user} setUser={setUser} />
       </div>
     </>
   );

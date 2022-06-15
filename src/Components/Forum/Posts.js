@@ -11,9 +11,13 @@ function Posts({ post, children }) {
   } else {
     return (
       <div className={styles.postContainer}>
-        <div className={styles.postTitle}>
-          <Link to={`/Forum/${post.title}`}>{post.title}</Link>
+        <div className={styles.postTop}>
+          <Link to={`/Forum/${post.title}`} className={styles.postTitle}>
+            {post.title}
+          </Link>
+          {children && <div className={styles.popup}>{children}</div>}
         </div>
+
         <div className={styles.details}>
           <div className={styles.postUser}>{"By: " + post.user}</div>
           <div className={styles.stats}>
@@ -22,7 +26,6 @@ function Posts({ post, children }) {
             {"comments: " + post.comments.length}
           </div>
         </div>
-        {children && <div className={styles.popup}>{children}</div>}
       </div>
     );
   }
