@@ -10,7 +10,7 @@ router.post("/login", async (req, res) => {
 
   const user = await User.findOne({ username: username, password: password });
   if (user) {
-    return res.json({ status: "ok", user: true });
+    return res.json({ status: "ok", user: user });
   } else {
     return res.json({ status: "error", user: false });
   }

@@ -1,8 +1,12 @@
 import SearchBar from "../Global/Searchbar";
 import Feed from "./Feed";
 import TopContent from "../Global/TopContent";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 
-function homePage() {
+function HomePage() {
+  const user = useSelector(selectUser);
+
   return (
     <>
       <TopContent />
@@ -14,4 +18,4 @@ function homePage() {
   );
 }
 
-export default homePage;
+export default HomePage;
