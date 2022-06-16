@@ -21,7 +21,7 @@ function PostActions({ viewMore }) {
         {user ? (
           <Link to="/Forum/MyPosts">View My Posts</Link>
         ) : (
-          <span>Create Post</span>
+          <span>View My Posts</span>
         )}
       </button>
     </>
