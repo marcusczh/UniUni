@@ -16,7 +16,7 @@ function Comments({ comment, title, index, setForum }) {
         axios
           .get(`http://localhost:4000/api/forum?title=${title}`)
           .then((res) => {
-            setForum(res.data)
+            setForum(res.data);
           })
       );
   }

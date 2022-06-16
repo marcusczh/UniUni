@@ -3,15 +3,18 @@ import articleStyles from "./Articles.module.css";
 import { useState } from "react";
 import axios from "axios";
 import TopContent from "../Global/TopContent";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 
 function ArticlesCreation() {
   const [title, setTitle] = useState("");
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
+  const user = useSelector(selectUser);
 
   function submitArticle(event) {
     event.preventDefault();
-    let obj = new Object();
+    let obj = {};
     obj.header = header;
     obj.text = content;
     axios
@@ -21,7 +24,8 @@ function ArticlesCreation() {
         date: Date(),
         tags: "",
         body: [obj],
-        views: 0
+        views: 0,
+        author: user.username,
       })
       .then((res) => {
         if (res.data.status === "error") {

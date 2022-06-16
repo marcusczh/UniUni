@@ -1,6 +1,17 @@
+import axios from "axios";
+import { useState } from "react";
 import styles from "./Global.module.css";
 
-function searchBar() {
+function SearchBar() {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    axios
+      .get(`http://localhost:4000/api/information?type=Article`)
+      .then((res) => {});
+  };
+
   return (
     <>
       <div className={styles.searchBar}>
@@ -8,10 +19,15 @@ function searchBar() {
           <label className={styles.searchLabel}>Search:</label>
           <input
             type="text"
-            placeholder=""
+            placeholder="Search for something ..."
             className={styles.searchInput}
-          ></input>
-          <button className={styles.searchButton}>Search</button>
+            onChange={(e) => setSearchInput(e.target.value)}
+          >
+            {searchInput}
+          </input>
+          <button className={styles.searchButton} onClick={handleSearch}>
+            Search
+          </button>
           <br></br>
           <label className={styles.searchLabel}>Filters:</label>
           <label className={styles.filters}>
@@ -32,4 +48,4 @@ function searchBar() {
   );
 }
 
-export default searchBar;
+export default SearchBar;

@@ -4,6 +4,7 @@ const Information = require("./models/information.model");
 const Forum = require("./models/forum.model");
 const router = express.Router();
 
+//REGISTRATION & LOGIN
 //Logging in: Posting a username & password
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -33,6 +34,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//ARTICLES, GUIDES, INTERVIEWS
 //Fetching information (Articles/Interviews/Guides)
 router.get("/information", async (req, res) => {
   console.log(req.query);
@@ -47,6 +49,43 @@ router.get("/information", async (req, res) => {
     });
 });
 
+//Creating an article: Posting
+router.post("/create", async (req, res) => {
+  try {
+    await Information.create({
+      type: req.body.type,
+      title: req.body.title,
+      date: req.body.date,
+      tags: req.body.tags,
+      body: req.body.body,
+      views: req.body.views,
+    });
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Searching for an article/interview/guide
+router.get("/search", async (req, res) => {
+  try {
+    await Information.find({
+      $search: {
+        index: "default",
+        text: {
+          query: req.body.title,
+          path: "title",
+        },
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//FORUM
 //Fetching Forum Posts
 router.get("/forum", async (req, res) => {
   await Forum.find(req.query)
@@ -87,24 +126,6 @@ router.delete("/forum/:title/:_id", async (req, res) => {
 });
 
 module.exports = router;
-
-//Creating an article: Posting
-router.post("/create", async (req, res) => {
-  try {
-    await Information.create({
-      type: req.body.type,
-      title: req.body.title,
-      date: req.body.date,
-      tags: req.body.tags,
-      body: req.body.body,
-      views: req.body.views,
-    });
-    return res.json({ status: "ok" });
-  } catch (err) {
-    console.log(err);
-    return res.json({ status: "error", error: "Something bad happened." });
-  }
-});
 
 //Creating a comment: Posting
 router.post("/createcomment/:title", async (req, res) => {
@@ -160,9 +181,10 @@ router.post("/like/:title", async (req, res) => {
 router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
   try {
     Forum.collection.updateOne(
-      { 
-        title: req.params.title, 
-        "comments.body": req.params.body },
+      {
+        title: req.params.title,
+        "comments.body": req.params.body,
+      },
       {
         $inc: {
           "comments.$.likes": req.body.likes,
@@ -205,4 +227,3 @@ router.post("/createforum", async (req, res) => {
     return res.json({ status: "error", error: "Something bad happened." });
   }
 });
-

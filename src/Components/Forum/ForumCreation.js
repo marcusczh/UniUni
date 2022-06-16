@@ -2,17 +2,20 @@ import forumStyles from "./Forum.module.css";
 import { useState } from "react";
 import TopContent from "../Global/TopContent";
 import axios from "axios";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 
 function ForumCreation() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const user = useSelector(selectUser);
 
   function submitForum(event) {
     event.preventDefault();
     axios
       .post("http://localhost:4000/api/createforum", {
-        user: "user",
+        user: user.username,
         title: title,
         date: Date(),
         body: content,
@@ -21,7 +24,7 @@ function ForumCreation() {
         score: 0,
         tags: "",
         comments: [],
-        image: image
+        image: image,
       })
       .then((res) => {
         if (res.data.status === "error") {
@@ -52,8 +55,8 @@ function ForumCreation() {
       <TopContent />
       <div>
         <form
-        action="/uploadimage"
-        encType="multipart/form-data"
+          action="/uploadimage"
+          encType="multipart/form-data"
           onSubmit={(e) => {
             submitForum();
           }}

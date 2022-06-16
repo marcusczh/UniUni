@@ -7,11 +7,14 @@ import { useParams } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 
 function SpecificForum() {
   const { title } = useParams();
   const [forum, setForum] = useState([]);
   const [loading, setLoading] = useState(true);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     axios
@@ -98,7 +101,7 @@ function SpecificForum() {
           <div className={forumStyles.forumContent}>
             {forum[0].image != null ? (
               <img
-                src={"image/jpeg"+forum[0].image}
+                src={"image/jpeg" + forum[0].image}
                 //alt="User submitted"
               ></img>
             ) : null}
@@ -115,9 +118,16 @@ function SpecificForum() {
               setForum={setForum}
             />
           ))}
-        <Link to={`./CreateComment?title=${forum[0].title}&user=${"user3"}`}>
+        {user ? (
+          <Link
+            to={`./CreateComment?title=${forum[0].title}&user=${user.username}`}
+          >
+            <button>Create Comment</button>
+          </Link>
+        ) : (
+          //DUD button if no user, maybe send a pop-up to ask user to create an account first
           <button>Create Comment</button>
-        </Link>
+        )}
       </>
     );
   }
