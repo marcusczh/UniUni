@@ -3,13 +3,11 @@ import { useState } from "react";
 import styles from "./Global.module.css";
 
 function SearchBar() {
-  const [searchInput, setSearchInput] = useState("");
+  const [input, setInput] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
-    axios
-      .get(`http://localhost:4000/api/information?type=Article`)
-      .then((res) => {});
+    // axios.get().then((res) => {});
   };
 
   return (
@@ -21,10 +19,9 @@ function SearchBar() {
             type="text"
             placeholder="Search for something ..."
             className={styles.searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          >
-            {searchInput}
-          </input>
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          ></input>
           <button className={styles.searchButton} onClick={handleSearch}>
             Search
           </button>
