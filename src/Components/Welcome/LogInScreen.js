@@ -34,7 +34,6 @@ function LogInScreen() {
 
   return (
     <>
-      {JSON.stringify(user)}
       <div className={styles.border}>
         <div className={styles.userInput}>
           <label>Username:</label>

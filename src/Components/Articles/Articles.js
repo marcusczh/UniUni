@@ -6,9 +6,13 @@ import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 import TopContent from "../Global/TopContent";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 
 function Articles() {
   const [articles, setArticles] = React.useState(null);
+  const user = useSelector(selectUser);
+
   React.useEffect(() => {
     axios
       .get(`http://localhost:4000/api/information?type=Article`)
@@ -24,9 +28,13 @@ function Articles() {
       <TopContent />
       <div>
         <SearchBar />
-        <Link to={`/Articles/Create`}>
+        {user ? (
+          <Link to={`/Articles/Create`}>
+            <button className={stylesArticle.button}>Create Article</button>
+          </Link>
+        ) : (
           <button className={stylesArticle.button}>Create Article</button>
-        </Link>
+        )}
       </div>
       <Link
         to={`/Articles/${articles[0].title}`}
