@@ -68,17 +68,60 @@ router.post("/create", async (req, res) => {
 });
 
 //Searching for an article/interview/guide
+
 router.get("/search", async (req, res) => {
   try {
-    await Information.find({
-      $search: {
-        index: "default",
-        text: {
-          query: req.body.title,
-          path: "title",
+    console.log(req.query.title);
+    if (req.query.title.length !== 0) {
+      await Information.aggregate([
+        {
+          $search: {
+            index: "default",
+            compound: {
+              filter: [
+                {
+                  text: {
+                    query: req.query.title,
+                    path: "title",
+                    fuzzy: {
+                      maxEdits: 2,
+                    },
+                  },
+                },
+                {
+                  text: {
+                    query: req.query.types,
+                    path: "type",
+                  },
+                },
+              ],
+            },
+          },
         },
-      },
-    });
+      ]).then((data) => {
+        res.json(data);
+      });
+    } else {
+      await Information.aggregate([
+        {
+          $search: {
+            index: "default",
+            compound: {
+              filter: [
+                {
+                  text: {
+                    query: req.query.types,
+                    path: "type",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ]).then((data) => {
+        res.json(data);
+      });
+    }
   } catch (err) {
     console.log(err);
     return res.json({ status: "error", error: "Something bad happened." });

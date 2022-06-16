@@ -4,10 +4,42 @@ import styles from "./Global.module.css";
 
 function SearchBar() {
   const [input, setInput] = useState("");
+  const [results, setResults] = useState([]);
+  const OPTIONS = ["Interview", "Guide", "Article", "Forum"];
+  const [types, setTypes] = useState({
+    checkboxes: OPTIONS.reduce(
+      (options, option) => ({
+        ...options,
+        [option]: false,
+      }),
+      {}
+    ),
+  });
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // axios.get().then((res) => {});
+    let categories = [];
+    OPTIONS.map((i) => {
+      categories = types.checkboxes[i] ? [...categories, i] : categories;
+    });
+    axios
+      .get(
+        `http://localhost:4000/api/search?title=${input}&types=${categories}`
+      )
+      .then((res) => {
+        setResults(res.data);
+        console.log(results);
+      });
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name } = e.target;
+    setTypes((prevTypes) => ({
+      checkboxes: {
+        ...prevTypes.checkboxes,
+        [name]: !prevTypes.checkboxes[name],
+      },
+    }));
   };
 
   return (
@@ -28,16 +60,36 @@ function SearchBar() {
           <br></br>
           <label className={styles.searchLabel}>Filters:</label>
           <label className={styles.filters}>
-            <input type="checkbox"></input>Interviews
+            <input
+              type="checkbox"
+              name="Interview"
+              onChange={(e) => handleCheckboxChange(e)}
+            ></input>
+            Interviews
           </label>
           <label className={styles.filters}>
-            <input type="checkbox"></input>Guides
+            <input
+              type="checkbox"
+              name="Guide"
+              onChange={handleCheckboxChange}
+            ></input>
+            Guides
           </label>
           <label className={styles.filters}>
-            <input type="checkbox"></input>Articles
+            <input
+              type="checkbox"
+              name="Article"
+              onChange={handleCheckboxChange}
+            ></input>
+            Articles
           </label>
           <label className={styles.filters}>
-            <input type="checkbox"></input>Forums
+            <input
+              type="checkbox"
+              name="Forum"
+              onChange={handleCheckboxChange}
+            ></input>
+            Forums
           </label>
         </div>
       </div>
