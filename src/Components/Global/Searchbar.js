@@ -1,8 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Global.module.css";
 
 function SearchBar() {
+  /**
+   * input - of type String: Keeps track of input into search bar
+   * results - of type Array: Keeps track of results returned by handleSearch
+   * types - of type Array: Stores checked boxes/filters
+   *
+   */
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
   const OPTIONS = ["Interview", "Guide", "Article", "Forum"];
@@ -15,23 +21,41 @@ function SearchBar() {
       {}
     ),
   });
+  const [forumResults, setForumResults] = useState([]);
+  const [infoResults, setInfoResults] = useState([]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    handleSearch();
+    handleForumSearch();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleSearch = async () => {
     let categories = [];
     OPTIONS.map((i) => {
       categories = types.checkboxes[i] ? [...categories, i] : categories;
     });
-    axios
+    console.log(categories);
+    //Queries articles/guides/interviews with the search input
+    await axios
       .get(
         `http://localhost:4000/api/search?title=${input}&types=${categories}`
       )
       .then((res) => {
-        setResults(res.data);
-        console.log(results);
+        setInfoResults(res.data);
       });
   };
 
+  // If forum is selected: queries, concatenates forum with existing results and
+  // sorts the results as a whole
+  const handleForumSearch = async () => {
+    axios
+      .get(`http://localhost:4000/api/searchForum?title=${input}`)
+      .then((res) => {
+        setForumResults(res.data);
+      });
+  };
+
+  //Manages checkbox tracking in state "types"
   const handleCheckboxChange = (e) => {
     const { name } = e.target;
     setTypes((prevTypes) => ({
@@ -54,7 +78,17 @@ function SearchBar() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           ></input>
-          <button className={styles.searchButton} onClick={handleSearch}>
+          <button
+            className={styles.searchButton}
+            onClick={(e) => {
+              e.preventDefault();
+              handleSearch();
+              handleForumSearch();
+              types.checkboxes["Forum"]
+                ? setResults([...forumResults, ...infoResults])
+                : setResults(infoResults);
+            }}
+          >
             Search
           </button>
           <br></br>
@@ -63,7 +97,7 @@ function SearchBar() {
             <input
               type="checkbox"
               name="Interview"
-              onChange={(e) => handleCheckboxChange(e)}
+              onChange={handleCheckboxChange}
             ></input>
             Interviews
           </label>
@@ -92,6 +126,7 @@ function SearchBar() {
             Forums
           </label>
         </div>
+        <div>{results[0] ? results[0].title : null}</div>
       </div>
     </>
   );
