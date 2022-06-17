@@ -68,59 +68,126 @@ router.post("/create", async (req, res) => {
 });
 
 //Searching for an article/interview/guide
+//Checks (1): Are there tags selected? Yes: continue. No: return a search for all
+//Checks (2): Is there text provided? Yes: search for text and tags. No: return search for all
 
 router.get("/search", async (req, res) => {
   try {
     console.log(req.query.title);
     if (req.query.title.length !== 0) {
-      await Information.aggregate([
-        {
-          $search: {
-            index: "default",
-            compound: {
-              filter: [
-                {
-                  text: {
-                    query: req.query.title,
-                    path: "title",
-                    fuzzy: {
-                      maxEdits: 2,
+      if (req.query.types.length === 0) {
+        await Information.aggregate([
+          {
+            $search: {
+              index: "default",
+              compound: {
+                filter: [
+                  {
+                    text: {
+                      query: req.query.title,
+                      path: "title",
+                      fuzzy: {
+                        maxEdits: 2,
+                      },
                     },
                   },
-                },
-                {
-                  text: {
-                    query: req.query.types,
-                    path: "type",
-                  },
-                },
-              ],
+                ],
+              },
             },
           },
-        },
-      ]).then((data) => {
-        res.json(data);
-      });
+          {
+            $limit: 20,
+          },
+          {
+            $project: {
+              type: 1,
+              title: 1,
+              date: 1,
+              tags: 1,
+              body: 1,
+              view: 1,
+              score: {
+                $meta: "searchScore",
+              },
+            },
+          },
+        ]).then((data) => {
+          res.json(data);
+        });
+      } else {
+        await Information.aggregate([
+          {
+            $search: {
+              index: "default",
+              compound: {
+                filter: [
+                  {
+                    text: {
+                      query: req.query.title,
+                      path: "title",
+                      fuzzy: {
+                        maxEdits: 2,
+                      },
+                    },
+                  },
+                  {
+                    text: {
+                      query: req.query.types,
+                      path: "type",
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ]).then((data) => {
+          res.json(data);
+        });
+      }
     } else {
-      await Information.aggregate([
-        {
-          $search: {
-            index: "default",
-            compound: {
-              filter: [
-                {
-                  text: {
-                    query: req.query.types,
-                    path: "type",
+      if (req.query.types.length === 0) {
+        await Information.find({})
+          .limit(20)
+          .then((data) => {
+            res.json(data);
+          });
+      } else {
+        await Information.aggregate([
+          {
+            $search: {
+              index: "default",
+              compound: {
+                filter: [
+                  {
+                    text: {
+                      query: req.query.types,
+                      path: "type",
+                    },
                   },
-                },
-              ],
+                ],
+              },
             },
           },
-        },
-      ]).then((data) => {
-        res.json(data);
-      });
+          {
+            $limit: 20,
+          },
+          {
+            $project: {
+              type: 1,
+              title: 1,
+              date: 1,
+              tags: 1,
+              body: 1,
+              view: 1,
+              score: {
+                $meta: "searchScore",
+              },
+            },
+          },
+        ]).then((data) => {
+          res.json(data);
+        });
+      }
     }
   } catch (err) {
     console.log(err);
@@ -143,6 +210,68 @@ router.get("/forum", async (req, res) => {
         error: "Could not retrieve Forum Posts",
       });
     });
+});
+
+//Searching for a forum
+
+router.get("/searchForum", async (req, res) => {
+  try {
+    console.log(req.query.title);
+    if (req.query.title.length !== 0) {
+      await Forum.aggregate([
+        {
+          $search: {
+            index: "default",
+            compound: {
+              filter: [
+                {
+                  text: {
+                    query: req.query.title,
+                    path: "title",
+                    fuzzy: {
+                      maxEdits: 2,
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+        {
+          $limit: 20,
+        },
+        {
+          $project: {
+            type: "Forum",
+            user: 1,
+            title: 1,
+            date: 1,
+            tags: 1,
+            body: 1,
+            view: 1,
+            comments: 1,
+            score: {
+              $meta: "searchScore",
+            },
+          },
+        },
+      ]).then((data) => {
+        res.json(data);
+      });
+    } else {
+      await Forum.find({})
+        .sort({ score: -1 })
+        .then((data) => {
+          res.json(data);
+        });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.json({
+      status: "error",
+      error: "Could not retrieve Forum Posts",
+    });
+  }
 });
 
 //Deleting forum posts
