@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -20,6 +20,8 @@ import PostManagement from "./Components/Forum/PostManagement";
 import CommentCreation from "./Components/Forum/CommentCreation";
 import { Provider } from "react-redux";
 import Store from "./Store.js";
+import SearchPage from "./Components/Global/SearchPage";
+import AddingTags from "./Components/Global/AddingTags";
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
           path="Forum/:title/CreateComment"
           element={<CommentCreation />}
         />
+        <Route path="SearchResults" element={<SearchPage />} />
+        <Route path="/Tags" element={<AddingTags />} />
       </Routes>
     </Provider>
   );

@@ -61,8 +61,7 @@ body {
 }
 
 .searchButton {
-  padding: 1%;
-  margin-left: 5%;
+  float: right;
   width: 15%;
   background-color: #ffb703;
   border: #3d405b solid;
@@ -75,6 +74,7 @@ body {
   margin: 2%;
   padding: 1%;
   border: 1px black solid;
+  cursor: pointer;
 }
 
 .topContent {
@@ -83,3 +83,127 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.resultContainer {
+  background: white;
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 0.3%;
+  margin-top: 3%;
+  margin-right: 3%;
+  box-shadow: -3px 3px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.resultTop {
+  flex: 1;
+}
+.resultTitle {
+  float: left;
+}
+.resultSmall.details {
+  flex: 1;
+  display: flex;
+}
+.stats {
+  float: right;
+  margin-right: 1%;
+}
+.resultUser {
+  float: left;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+.articleType {
+  margin-left: 5%;
+  padding: 0.2%;
+  background-color: lightcyan;
+  border: #3d405b solid;
+  border-radius: 5px;
+  float: right;
+}
+
+.guideType {
+  margin-left: 5%;
+  padding: 0.2%;
+  background-color: rgb(230, 184, 175);
+  border: #3d405b solid;
+  border-radius: 5px;
+  float: right;
+}
+
+.interviewType {
+  margin-left: 5%;
+  padding: 0.2%;
+  background-color: rgb(213, 166, 189);
+  border: #3d405b solid;
+  border-radius: 5px;
+  float: right;
+}
+
+.tagsTable {
+  background-color: white;
+  border: 3px #f2cc8f solid;
+  margin-top: 2%;
+  border-radius: 10px;
+}
+
+.tagsList {
+  margin-bottom: 1%;
+}
+
+.checkbox {
+  cursor: pointer;
+}
+
+.tagsLabel {
+  background-color: #eeeeee;
+  border-radius: 5px;
+  border: 1px black solid;
+  margin-right: 1%;
+  cursor: pointer;
+}
+
+.tagsLabel:hover {
+  background-color: lightcoral;
+}
+
+input[type=checkbox]:checked + .tagsLabel {
+  background-color: lightcoral;
+}
+
+.accordion {
+  background-color: white;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.5s;
+  border: 2px #f2cc8f solid;
+  padding: 0.5%;
+  border-radius: 10px;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.active,
+.accordion:hover {
+  background-color: antiquewhite;
+}
+
+.accordionContent {
+  display: none;
+  overflow: hidden;
+}
+
+.checkbox[type=checkbox] {
+  visibility: hidden;
+} 
+
+.tags input:checked {
+  background-color: red;
+}
+

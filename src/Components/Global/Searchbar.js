@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "./Global.module.css";
+import { useNavigate } from "react-router-dom";
+import SearchResults from "./SearchResults";
 
 function SearchBar() {
   /**
@@ -9,6 +11,7 @@ function SearchBar() {
    * types - of type Array: Stores checked boxes/filters
    *
    */
+  let navigate = useNavigate();
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
   const OPTIONS = ["Interview", "Guide", "Article", "Forum"];
@@ -34,7 +37,7 @@ function SearchBar() {
     OPTIONS.map((i) => {
       categories = types.checkboxes[i] ? [...categories, i] : categories;
     });
-    console.log(categories);
+    //console.log(categories);
     //Queries articles/guides/interviews with the search input
     await axios
       .get(
@@ -87,6 +90,7 @@ function SearchBar() {
               types.checkboxes["Forum"]
                 ? setResults([...forumResults, ...infoResults])
                 : setResults(infoResults);
+              navigate(`/SearchResults/`, { replace: true });
             }}
           >
             Search
@@ -125,9 +129,21 @@ function SearchBar() {
             ></input>
             Forums
           </label>
+          <button
+            className={styles.searchButton}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/Tags`, { replace: true });
+            }}
+          >
+            Tags
+          </button>
         </div>
-        <div>{results[0] ? results[0].title : null}</div>
       </div>
+      {results.length ? results.length + " results found" : null}
+      {results.map((i) => (
+        <SearchResults result={i} />
+      ))}
     </>
   );
 }

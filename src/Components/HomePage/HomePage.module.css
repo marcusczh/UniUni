@@ -80,7 +80,5 @@ body {
   background-color: white;
   border: 3px #f2cc8f solid;
   margin-top: 2%;
-  transform: translate(13%, 0%);
-  width: 80%;
   border-radius: 10px;
 }
