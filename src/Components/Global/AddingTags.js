@@ -1,6 +1,4 @@
-import React from "react";
-import SearchBar from "./Searchbar";
-import TopContent from "./TopContent";
+import React, { useState } from "react";
 import styles from "./Global.module.css";
 
 function AddingTags() {
@@ -18,23 +16,28 @@ function AddingTags() {
       }
     });
   } */
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
   let courses = [];
   let occupations = [];
 
   function addCourse(cour) {
     if (courses.includes(cour)) {
-      courses.splice(courses.indexOf(cour), 1)
+      courses.splice(courses.indexOf(cour), 1);
     } else {
-      courses.push(cour)
+      courses.push(cour);
     }
     console.log(courses);
   }
 
   function addOccupation(occ) {
     if (occupations.includes(occ)) {
-      occupations.splice(occupations.indexOf(occ), 1)
+      occupations.splice(occupations.indexOf(occ), 1);
     } else {
-      occupations.push(occ)
+      occupations.push(occ);
     }
     console.log(occupations);
   }
@@ -43,37 +46,57 @@ function AddingTags() {
   const Occupations = ["Junior College", "Polytechnic", "Served NS", "Working"];
   return (
     <>
-      <TopContent />
-      <div>
-        <SearchBar />
-      </div>
-      <div className={styles.tagsTable}>
-        <button className={styles.accordion}>Courses:</button>
+      {!modal && (
+        <button onClick={toggleModal} className={styles.searchButton}>
+          Tags
+        </button>
+      )}
 
-        <div className={styles.tagsList}>
-          {Courses.map((i) => (
-            <>
-            <input type="checkbox" className={styles.checkbox} id={i} onChange={() => addCourse(i)}/>
-            <label className={styles.tagsLabel} for={i}>
-              {i}
-            </label>
-          </>
-          ))}
-        </div>
-        <button className={styles.accordion}>Occupation:</button>
+      {modal && (
+        <>
+          <div onClick={toggleModal} className={styles.overlay}></div>
+          <div className={styles.tagsTable}>
+            <button className={styles.accordion}>Courses:</button>
 
-        <div className={styles.tagsList}>
-          {Occupations.map((i) => (
-            <>
-              <input type="checkbox" className={styles.checkbox} id={i} onClick={() => addOccupation(i)}/>
-              <label className={styles.tagsLabel} for={i}>
-                {i}
-              </label>
-            </>
-          ))}
-        </div>
-      </div>
-      <br />
+            <div className={styles.tagsList}>
+              {Courses.map((i) => (
+                <>
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox}
+                    id={i}
+                    onChange={() => addCourse(i)}
+                  />
+                  <label className={styles.tagsLabel} htmlFor={i}>
+                    {i}
+                  </label>
+                </>
+              ))}
+            </div>
+            <button className={styles.accordion}>Occupation:</button>
+
+            <div className={styles.tagsList}>
+              {Occupations.map((i) => (
+                <>
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox}
+                    id={i}
+                    onClick={() => addOccupation(i)}
+                  />
+                  <label className={styles.tagsLabel} htmlFor={i}>
+                    {i}
+                  </label>
+                </>
+              ))}
+            </div>
+            <button className={styles.searchButton} onClick={toggleModal}>
+              Confirm tags
+            </button>
+          </div>
+          <br />
+        </>
+      )}
     </>
   );
 }

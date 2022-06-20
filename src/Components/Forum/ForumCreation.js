@@ -4,11 +4,13 @@ import TopContent from "../Global/TopContent";
 import axios from "axios";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function ForumCreation() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const navigate = useNavigate();
   const user = useSelector(selectUser);
 
   function submitForum(event) {
@@ -30,7 +32,7 @@ function ForumCreation() {
         if (res.data.status === "error") {
           alert("Error: Duplicate title");
         } else {
-          window.location.href = "./";
+          navigate("../Forum");
         }
       })
       .catch((err) => console.log(err));
