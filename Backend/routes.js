@@ -34,8 +34,8 @@ router.post("/register", async (req, res) => {
   }
 });
 
-//ARTICLES, GUIDES, INTERVIEWS
-//Fetching information (Articles/Interviews/Guides)
+//ARTICLES, GUIDES, INTERVIEWS, FORUM
+//Fetching information (Articles/Interviews/Guides/Forum)
 router.get("/information", async (req, res) => {
   console.log(req.query);
   await Information.find(req.query)
@@ -53,12 +53,17 @@ router.get("/information", async (req, res) => {
 router.post("/create", async (req, res) => {
   try {
     await Information.create({
+      author: req.body.author,
       type: req.body.type,
       title: req.body.title,
       date: req.body.date,
       tags: req.body.tags,
       body: req.body.body,
       views: req.body.views,
+      likes: req.body.likes,
+      dislikes: req.body.dislikes,
+      score: req.body.score,
+      image: req.body.image
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -197,7 +202,7 @@ router.get("/search", async (req, res) => {
 
 //FORUM
 //Fetching Forum Posts
-router.get("/forum", async (req, res) => {
+/* router.get("/forum", async (req, res) => {
   await Forum.find(req.query)
     .sort({ score: -1 })
     .then((data) => {
@@ -210,74 +215,75 @@ router.get("/forum", async (req, res) => {
         error: "Could not retrieve Forum Posts",
       });
     });
-});
+}); */
 
 //Searching for a forum
 
-router.get("/searchForum", async (req, res) => {
-  try {
-    console.log(req.query.title);
-    if (req.query.title.length !== 0) {
-      await Forum.aggregate([
-        {
-          $search: {
-            index: "default",
-            compound: {
-              filter: [
-                {
-                  text: {
-                    query: req.query.title,
-                    path: "title",
-                    fuzzy: {
-                      maxEdits: 2,
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        },
-        {
-          $limit: 20,
-        },
-        {
-          $project: {
-            type: "Forum",
-            user: 1,
-            title: 1,
-            date: 1,
-            tags: 1,
-            body: 1,
-            view: 1,
-            comments: 1,
-            score: {
-              $meta: "searchScore",
-            },
-          },
-        },
-      ]).then((data) => {
-        res.json(data);
-      });
-    } else {
-      await Forum.find({})
-        .sort({ score: -1 })
-        .then((data) => {
-          res.json(data);
-        });
-    }
-  } catch (err) {
-    console.log(err);
-    return res.json({
-      status: "error",
-      error: "Could not retrieve Forum Posts",
-    });
-  }
-});
+// router.get("/searchForum", async (req, res) => {
+//   try {
+//     console.log(req.query.title);
+//     if (req.query.title.length !== 0) {
+//       await Forum.aggregate([
+//         {
+//           $search: {
+//             index: "default",
+//             compound: {
+//               filter: [
+//                 {
+//                   text: {
+//                     query: req.query.title,
+//                     path: "title",
+//                     fuzzy: {
+//                       maxEdits: 2,
+//                     },
+//                   },
+//                 },
+//               ],
+//             },
+//           },
+//         },
+//         {
+//           $limit: 20,
+//         },
+//         {
+//           $project: {
+//             type: "Forum",
+//             user: 1,
+//             title: 1,
+//             date: 1,
+//             tags: 1,
+//             body: 1,
+//             view: 1,
+//             comments: 1,
+//             score: {
+//               $meta: "searchScore",
+//             },
+//           },
+//         },
+//       ]).then((data) => {
+//         res.json(data);
+//       });
+//     } else {
+//       await Forum.find({})
+//         .sort({ score: -1 })
+//         .then((data) => {
+//           res.json(data);
+//         });
+//     }
+//   } catch (err) {
+//     console.log(err);
+//     return res.json({
+//       status: "error",
+//       error: "Could not retrieve Forum Posts",
+//     });
+//   }
+// });
 
 //Deleting forum posts
 router.delete("/forum/:title/:_id", async (req, res) => {
   try {
-    const result = await Forum.findOneAndDelete({
+    const result = await Information.findOneAndDelete({
+      type: "Forum",
       title: req.params.title,
       _id: req.params._id,
     });
@@ -302,8 +308,9 @@ module.exports = router;
 //Creating a comment: Posting
 router.post("/createcomment/:title", async (req, res) => {
   try {
-    await Forum.collection.findOneAndUpdate(
+    await Information.collection.findOneAndUpdate(
       {
+        type: "Forum",
         title: req.params.title,
       },
       {
@@ -326,12 +333,13 @@ router.post("/createcomment/:title", async (req, res) => {
   }
 });
 
-//Liking/Disliking a post: Posting
+//Liking/Disliking a POST: Post req
 router.post("/like/:title", async (req, res) => {
   try {
-    await Forum.collection.findOneAndUpdate(
+    await Information.collection.findOneAndUpdate(
       {
         title: req.params.title,
+        type: "Forum",
       },
       {
         $inc: {
@@ -348,14 +356,14 @@ router.post("/like/:title", async (req, res) => {
   }
 });
 
-//Liking/Disliking a comment: Posting
-//TODO: add in user filter
+//Liking/Disliking a COMMENT: Post req
 router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
   try {
-    Forum.collection.updateOne(
+    Information.collection.updateOne(
       {
         title: req.params.title,
         "comments.body": req.params.body,
+        "comments.user": req.params.user
       },
       {
         $inc: {
@@ -373,7 +381,7 @@ router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
 });
 
 //Creating a forum post: Posting
-router.post("/createforum", async (req, res) => {
+/* router.post("/createforum", async (req, res) => {
   var image = req.body.image;
   var encode = image.toString("base64");
   var final = {
@@ -398,4 +406,4 @@ router.post("/createforum", async (req, res) => {
     console.log(err);
     return res.json({ status: "error", error: "Something bad happened." });
   }
-});
+}); */

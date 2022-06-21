@@ -13,17 +13,21 @@ function ForumCreation() {
 
   function submitForum(event) {
     event.preventDefault();
+    let obj = {};
+    obj.header = null;
+    obj.text = content;
     axios
-      .post("http://localhost:4000/api/createforum", {
-        user: user.username,
+      .post("http://localhost:4000/api/create", {
+        type: "Forum",
         title: title,
         date: Date(),
-        body: content,
+        tags: "",
+        body: [obj],
+        views: 0,
+        author: user.username,
         likes: 0,
         dislikes: 0,
         score: 0,
-        tags: "",
-        comments: [],
         image: image,
       })
       .then((res) => {
@@ -65,6 +69,7 @@ function ForumCreation() {
             <input
               type="text"
               placeholder="Title of forum"
+              className={forumStyles.titleInput}
               value={title}
               id="formInput"
               onChange={(e) => setTitle(e.target.value)}

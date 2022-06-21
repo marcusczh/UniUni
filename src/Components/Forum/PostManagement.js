@@ -15,7 +15,7 @@ function PostManagement() {
   const user = useSelector(selectUser);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/forum?user=${user.username}`)
+      .get(`http://localhost:4000/api/information/?type=Forum&?author=${user.username}`)
       .then((res) => {
         setPosts(res.data);
       });
@@ -23,7 +23,7 @@ function PostManagement() {
 
   const reloadPosts = () => {
     axios
-      .get(`http://localhost:4000/api/forum?user=${user.username}`)
+      .get(`http://localhost:4000/api/information/?type=Forum&?author=${user.username}`)
       .then((res) => {
         console.log("reloaded!");
         setPosts(res.data);

@@ -39,12 +39,28 @@ body {
 }
 
 .searchBar {
+  display: flex;
+  flex-direction: column;
   transform: translate(50%, 0%);
   width: 50%;
   background-color: #f2cc8f;
   border-radius: 10px;
   height: 4em;
   padding: 1%;
+}
+
+.searchBarSection {
+  flex-direction: row;
+  flex: 1;
+  margin-bottom: 1%;
+}
+.tagsContainer {
+  position: relative;
+  top: -50%;
+}
+
+.filterContainer {
+  width: 90%;
 }
 
 .searchLabel {
@@ -147,10 +163,15 @@ body {
 }
 
 .tagsTable {
+  position: absolute;
   background-color: white;
   border: 3px #f2cc8f solid;
+  width: 50vw;
+  height: 30vh;
   margin-top: 2%;
   border-radius: 10px;
+  padding: 1%;
+  z-index: 100;
 }
 
 .tagsList {
@@ -173,7 +194,7 @@ body {
   background-color: lightcoral;
 }
 
-input[type=checkbox]:checked + .tagsLabel {
+input[type="checkbox"]:checked + .tagsLabel {
   background-color: lightcoral;
 }
 
@@ -199,11 +220,21 @@ input[type=checkbox]:checked + .tagsLabel {
   overflow: hidden;
 }
 
-.checkbox[type=checkbox] {
+.checkbox[type="checkbox"] {
   visibility: hidden;
-} 
+}
 
 .tags input:checked {
   background-color: red;
 }
 
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: -105%;
+  left: -51.2%;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(36, 36, 36, 0.7);
+}

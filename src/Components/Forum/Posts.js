@@ -19,7 +19,7 @@ function Posts({ post, children }) {
         </div>
 
         <div className={styles.details}>
-          <div className={styles.postUser}>{"By: " + post.user}</div>
+          <div className={styles.postUser}>{"By: " + post.author}</div>
           <div className={styles.stats}>
             {"likes: " + post.likes + "  ||  "}
             {"dislikes: " + post.dislikes + "  ||  "}

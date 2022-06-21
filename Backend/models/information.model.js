@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Section = require("./section.model.js");
+const comments = require("./comments.model.js");
 
 const Information = new mongoose.Schema(
   {
@@ -9,6 +10,11 @@ const Information = new mongoose.Schema(
     date: { type: Date, required: true },
     tags: { type: String },
     body: [Section.schema],
+    likes: { type: Number },
+    dislikes: { type: Number },
+    score: { type: Number },
+    image: { type: String },
+    comments: [comments.schema],
   },
   { collection: "information" }
 );

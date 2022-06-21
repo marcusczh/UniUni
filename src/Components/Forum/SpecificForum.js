@@ -18,8 +18,9 @@ function SpecificForum() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/forum", {
+      .get("http://localhost:4000/api/information", {
         params: {
+          type: forum,
           title: title,
         },
       })
@@ -39,7 +40,7 @@ function SpecificForum() {
       })
       .then(() =>
         axios
-          .get(`http://localhost:4000/api/forum?title=${title}`)
+          .get(`http://localhost:4000/api/information?title=${title}&type=Forum`)
           .then((res) => {
             setForum(res.data);
           })
@@ -105,7 +106,7 @@ function SpecificForum() {
                 //alt="User submitted"
               ></img>
             ) : null}
-            {forum[0].body}
+            {forum[0].body[0].text}
           </div>
         </div>
         {forum[0].comments
