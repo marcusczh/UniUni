@@ -18,6 +18,7 @@ function SearchBar() {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
   const [toggleSearch, setToggleSearch] = useState(false);
+
   const OPTIONS = ["Interview", "Guide", "Article", "Forum"];
   const [types, setTypes] = useState({
     checkboxes: OPTIONS.reduce(
@@ -33,6 +34,7 @@ function SearchBar() {
     setToggleSearch(false);
     handleSearch()}
   , [])
+
 
   async function handleSearch() {
     let categories = [];

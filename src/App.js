@@ -21,7 +21,6 @@ import CommentCreation from "./Components/Forum/CommentCreation";
 import { Provider } from "react-redux";
 import Store from "./Store.js";
 import SearchPage from "./Components/Global/SearchPage";
-import AddingTags from "./Components/Global/AddingTags";
 
 function App() {
   return (
@@ -47,7 +46,6 @@ function App() {
           element={<CommentCreation />}
         />
         <Route path="SearchResults" element={<SearchPage />} />
-        <Route path="/Tags" element={<AddingTags />} />
       </Routes>
     </Provider>
   );
