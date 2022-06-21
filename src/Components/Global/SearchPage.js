@@ -18,6 +18,7 @@ function SearchPage() {
       {results.length > 0 ? results.map((i) => (
         <SearchResults result={i} />
       )): null}
+
     </>
   );
 }
