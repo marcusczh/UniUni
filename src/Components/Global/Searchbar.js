@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Global.module.css";
 import { useNavigate } from "react-router-dom";
-import SearchResults from "./SearchResults";
 import AddingTags from "./AddingTags";
 
 function SearchBar() {
+
+  const [tags, setTags] = useState([]);
+  console.log(tags);
   /**
    * input - of type String: Keeps track of input into search bar
    * results - of type Array: Keeps track of results returned by handleSearch
@@ -15,7 +17,8 @@ function SearchBar() {
   let navigate = useNavigate();
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
-  const [loaded, setLoaded] = useState(false);
+  const [toggleSearch, setToggleSearch] = useState(false);
+
   const OPTIONS = ["Interview", "Guide", "Article", "Forum"];
   const [types, setTypes] = useState({
     checkboxes: OPTIONS.reduce(
@@ -27,7 +30,13 @@ function SearchBar() {
     ),
   });
 
-  const handleSearch = async () => {
+  useEffect(() => {
+    setToggleSearch(false);
+    handleSearch()}
+  , [])
+
+
+  async function handleSearch() {
     let categories = [];
     OPTIONS.map((i) => {
       categories = types.checkboxes[i] ? [...categories, i] : categories;
@@ -36,17 +45,20 @@ function SearchBar() {
     //Queries articles/guides/interviews with the search input
     await axios
       .get(
-        `http://localhost:4000/api/search?title=${input}&types=${categories}`
+        `http://localhost:4000/api/search?title=${input}&types=${categories}&tags=${tags}`
       )
       .then((res) => {
+        console.log(res.data);
         setResults(res.data);
-        setLoaded &&
+        console.log(results);
+        if(toggleSearch){
           navigate(`/SearchResults/`, {
             replace: true,
             state: {
               results: results,
             },
-          });
+          })
+        }
       });
   };
 
@@ -77,6 +89,7 @@ function SearchBar() {
             className={styles.searchButton}
             onClick={(e) => {
               e.preventDefault();
+              setToggleSearch(true);
               handleSearch();
             }}
           >
@@ -120,7 +133,7 @@ function SearchBar() {
             </label>
           </div>
           <div className={styles.tagsContainer}>
-            <AddingTags />
+            <AddingTags setTags={setTags} tags={tags}/>
           </div>
         </div>
       </div>

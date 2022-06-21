@@ -128,14 +128,19 @@
   background: #eeeeee;
   border: 3px #f2cc8f solid;
   border-top: 0;
-  margin: 0% 2% 0 0;
+  margin: 0% 0% 0 0;
   border-radius: 0 0 10px 10px;
   padding: 1%;
   padding-bottom: 5%;
 }
 
+.titleInput {
+  width: 100%;
+}
+
 .contentInput {
   height: 10rem;
+  width: 100%;
 }
 
 .buttonCreation {

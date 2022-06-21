@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Global.module.css";
 
-function AddingTags() {
+function AddingTags({ setTags }) {
   /* let headers = document.getElementsByClassName("accordion");
   console.log(headers);
   for (let i = 0; i < headers.length; i++) {
@@ -19,28 +19,29 @@ function AddingTags() {
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
+    setTags(tags);
   };
 
-  let courses = [];
-  let occupations = [];
+  let tags = [];
 
-  function addCourse(cour) {
-    if (courses.includes(cour)) {
-      courses.splice(courses.indexOf(cour), 1);
+  function addTags(elem) {
+    if (tags.includes(elem)) {
+      tags.splice(tags.indexOf(elem), 1);
     } else {
-      courses.push(cour);
+      tags.push(elem);
+
     }
-    console.log(courses);
+    //console.log(tags);
   }
 
-  function addOccupation(occ) {
+  /* function addOccupation(occ) {
     if (occupations.includes(occ)) {
       occupations.splice(occupations.indexOf(occ), 1);
     } else {
       occupations.push(occ);
     }
-    console.log(occupations);
-  }
+    //console.log(occupations);
+  } */
 
   const Courses = ["Healthcare", "Engineering", "Business", "Computing"];
   const Occupations = ["Junior College", "Polytechnic", "Served NS", "Working"];
@@ -65,7 +66,8 @@ function AddingTags() {
                     type="checkbox"
                     className={styles.checkbox}
                     id={i}
-                    onChange={() => addCourse(i)}
+                    onChange={() => addTags(i)}
+
                   />
                   <label className={styles.tagsLabel} htmlFor={i}>
                     {i}
@@ -82,7 +84,8 @@ function AddingTags() {
                     type="checkbox"
                     className={styles.checkbox}
                     id={i}
-                    onClick={() => addOccupation(i)}
+                    onClick={() => addTags(i)}
+
                   />
                   <label className={styles.tagsLabel} htmlFor={i}>
                     {i}
