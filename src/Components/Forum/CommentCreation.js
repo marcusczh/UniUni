@@ -45,7 +45,7 @@ function CommentCreation() {
           </form>
           <button
             className={forumStyles.buttonCreation}
-            onClick={(event) => (window.location.href = "./")}
+            onClick={(event) => (navigate(-1))}
           >
             Cancel
           </button>
