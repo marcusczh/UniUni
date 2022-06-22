@@ -25,4 +25,4 @@ You may also see any lint errors in the console.
 
 ### Run `npm run dev`
 
-Runs the backend server and establishes connection with MongoDB Atlas databse.
+Runs the backend server and establishes connection with MongoDB Atlas database.
