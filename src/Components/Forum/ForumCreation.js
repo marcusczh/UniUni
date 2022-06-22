@@ -61,8 +61,6 @@ function ForumCreation() {
       <TopContent />
       <div>
         <form
-          action="/uploadimage"
-          encType="multipart/form-data"
           onSubmit={(e) => {
             submitForum();
           }}
@@ -91,7 +89,12 @@ function ForumCreation() {
               accept="image/*"
               onChange={(e) => setImage(e.target.value)}
             ></input>
-            <button className={forumStyles.buttonCreation}>Cancel</button>
+            <button
+              className={forumStyles.buttonCreation}
+              onClick={(event) => navigate("/Forum", { replace: true })}
+            >
+              Cancel
+            </button>
             <button
               className={forumStyles.buttonCreation}
               onClick={submitForum}

@@ -1,5 +1,5 @@
 import articleStyles from "./Articles.module.css";
-/*import { Link } from "react-router-dom";*/
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import TopContent from "../Global/TopContent";
@@ -11,6 +11,7 @@ function ArticlesCreation() {
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
   const user = useSelector(selectUser);
+  let navigate = useNavigate();
 
   function submitArticle(event) {
     event.preventDefault();
@@ -31,7 +32,8 @@ function ArticlesCreation() {
         if (res.data.status === "error") {
           alert("error");
         } else {
-          window.location.href = "./";
+          navigate("/Articles",{replace: true});
+          //window.location.href = "./";
         }
       })
       .catch((err) => console.log(err));
@@ -73,7 +75,7 @@ function ArticlesCreation() {
               id="formInput"
               onChange={(e) => setContent(e.target.value)}
             ></input>
-            <button className={articleStyles.button}>Cancel</button>
+            <button className={articleStyles.button} onClick={(event) => (navigate("/Articles",{replace: true}))}>Cancel</button>
             <button className={articleStyles.button} onClick={submitArticle}>
               Create Article
             </button>
