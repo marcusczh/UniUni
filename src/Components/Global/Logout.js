@@ -15,9 +15,10 @@ function LogOut() {
   return user ? (
     <button onClick={(e) => handleLogout(e)} className={styles.logOut}>
       Welcome, {user ? user.username : null}
-      <>
+      ||
+      <div>
         <Link to="../">Log out</Link>
-      </>
+      </div>
     </button>
   ) : (
     <div>
