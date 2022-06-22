@@ -357,13 +357,13 @@ router.post("/like/:title", async (req, res) => {
 });
 
 //Liking/Disliking a COMMENT: Post req
+//TODO: Add in user filter
 router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
   try {
     Information.collection.updateOne(
       {
         title: req.params.title,
         "comments.body": req.params.body,
-        "comments.user": req.params.user
       },
       {
         $inc: {
