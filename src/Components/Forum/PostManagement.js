@@ -62,6 +62,7 @@ function PostManagement() {
               reloadPosts={reloadPosts}
               postTitle={post.title}
               postId={post._id}
+              author={post.author}
             />
           </Posts>
         ))}
