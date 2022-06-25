@@ -6,17 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 function LogOut() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const HandleLogout = (e) => {
+  function HandleLogout(e) {
     e.preventDefault();
     dispatch(logout());
-    useNavigate("../");
-  };
+    navigate("../");
+  }
 
-  const HandleViewMyProfile = (e) => {
+  function HandleViewMyProfile(e) {
     e.preventDefault();
-    useNavigate("../MyProfile");
-  };
+    navigate("../MyProfile");
+  }
 
   return user ? (
     <div className={styles.buttonContainer}>
