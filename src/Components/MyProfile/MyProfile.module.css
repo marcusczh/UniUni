@@ -1,0 +1,14 @@
+.PagePlaceholder {
+  display: flex;
+  justify-content: center;
+}
+
+.ProfileTabsContainer {
+  width: 60vw;
+  height: 70vh;
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}

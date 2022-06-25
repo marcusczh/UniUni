@@ -50,12 +50,17 @@ body {
 .searchBar {
   display: flex;
   flex-direction: column;
-  transform: translate(50%, 0%);
-  width: 50%;
+  width: 60%;
   background-color: #f2cc8f;
   border-radius: 10px;
   height: 4em;
   padding: 1%;
+  margin-bottom: 1%;
+}
+
+.searchBarContainer {
+  display: flex;
+  justify-content: center;
 }
 
 .searchBarSection {
@@ -204,8 +209,10 @@ body {
   background-color: #eeeeee;
   border-radius: 5px;
   border: 1px black solid;
-  margin-right: 1%;
+  margin-right: 0.2%;
   cursor: pointer;
+  font-size: small;
+  padding: 0.4%;
 }
 
 .tagsLabel:hover {
@@ -214,6 +221,7 @@ body {
 
 input[type="checkbox"]:checked + .tagsLabel {
   background-color: lightcoral;
+  box-shadow: -1.5px 1px darkgoldenrod;
 }
 
 .accordion {
@@ -249,8 +257,8 @@ input[type="checkbox"]:checked + .tagsLabel {
 .overlay {
   width: 100vw;
   height: 100vh;
-  top: -105%;
-  left: -51.2%;
+  top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
   position: fixed;

@@ -9,9 +9,11 @@ function Forum() {
   const [posts, setPosts] = useState(null);
   const [numPosts, setNumPosts] = useState(4);
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/information?type=Forum`).then((res) => {
-      setPosts(res.data);
-    });
+    axios
+      .get(`http://localhost:4000/api/information?type=Forum`)
+      .then((res) => {
+        setPosts(res.data);
+      });
   }, []);
 
   const viewMore = () => {
@@ -27,7 +29,7 @@ function Forum() {
         <SearchBar />
         <PostActions numPosts={numPosts} viewMore={viewMore} />
       </div>
-      <div className="postContainer">
+      <div>
         {posts
           .slice(0, Math.min(numPosts, posts.length))
           .sort((a, b) => b.score - a.score)

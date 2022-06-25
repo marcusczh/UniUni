@@ -39,6 +39,7 @@ function LogInScreen() {
           <label>Username:</label>
           <form
             onSubmit={async (e) => {
+              e.preventDefault();
               await loginUser(e);
             }}
           >
@@ -52,7 +53,12 @@ function LogInScreen() {
             ></input>
           </form>
           <label>Password:</label>
-          <form>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await loginUser(e);
+            }}
+          >
             <input
               type="password"
               placeholder="Your Password"
