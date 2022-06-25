@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Global.module.css";
 import { logout, selectUser } from "../../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,22 +7,23 @@ function LogOut() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  const handleLogout = (e) => {
+  const HandleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    useNavigate("../");
   };
 
   return user ? (
-    <button onClick={(e) => handleLogout(e)} className={styles.logOut}>
+    <div className={styles.buttonContainer}>
       Welcome, {user ? user.username : null}
-      ||
-      <div>
-        <Link to="../">Log out</Link>
-      </div>
-    </button>
+      <button className={styles.logOut}>View my profile</button>
+      <button onClick={(e) => HandleLogout(e)} className={styles.logOut}>
+        Log out
+      </button>
+    </div>
   ) : (
     <div>
-      <button onClick={(e) => handleLogout(e)} className={styles.logOut}>
+      <button onClick={(e) => HandleLogout(e)} className={styles.logOut}>
         <Link to="../Login">Log In</Link>
       </button>
     </div>

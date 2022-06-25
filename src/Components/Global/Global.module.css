@@ -35,7 +35,16 @@ body {
 
 .logOut {
   display: flex;
-  height: 10%;
+  width: 100%;
+}
+
+.logOut:hover {
+  background-color: #f2cc8f;
+  width: 100%;
+}
+
+.buttonContainer {
+  display: inline-table
 }
 
 .searchBar {
