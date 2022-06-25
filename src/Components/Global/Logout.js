@@ -13,18 +13,29 @@ function LogOut() {
   };
 
   return user ? (
-    <button onClick={(e) => handleLogout(e)} className={styles.logOut}>
-      Welcome, {user ? user.username : null}
-      ||
-      <div>
-        <Link to="../">Log out</Link>
+    <div className={styles.logOut}>
+      <div className={styles.logOutWelcome}>
+        Welcome, {user ? user.username : null}
       </div>
-    </button>
-  ) : (
-    <div>
-      <button onClick={(e) => handleLogout(e)} className={styles.logOut}>
-        <Link to="../Login">Log In</Link>
+      <div className={styles.viewMyProfile}>
+        <Link to="../MyProfile">View my profile</Link>
+      </div>
+      <button onClick={(e) => handleLogout(e)} className={styles.logoutButton}>
+        <div>
+          <Link to="../">Log out</Link>
+        </div>
       </button>
+    </div>
+  ) : (
+    <div className={styles.logOutContainer}>
+      <div className={styles.logOut}>
+        <button
+          onClick={(e) => handleLogout(e)}
+          className={styles.logoutButton}
+        >
+          <Link to="../Login">Log In</Link>
+        </button>
+      </div>
     </div>
   );
 }

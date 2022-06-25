@@ -1,0 +1,99 @@
+.OuterTabsContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4% 4% 0px 0px;
+  background: white;
+  z-index: 2;
+}
+
+.BookmarksLabel {
+  box-sizing: content-box;
+  flex: 1;
+  padding: 1%;
+  background: #eeeeeeff;
+  margin: -3px 2% 1% 2%;
+  width: fit-content;
+  border: 3px solid #f2cc8f;
+  border-radius: 0% 0% 20% 20%;
+}
+
+.TabsContainer {
+  flex: 1;
+  align-items: flex-end;
+}
+
+.Tabs {
+  width: 100%;
+  height: 100%;
+  border-radius: 3%;
+  border: 2px solid #053742;
+  overflow: hidden;
+}
+
+.react-tabs {
+  width: 100%;
+}
+
+.react-tabs__tab-list {
+  /* flex: 1; */
+  /* box-sizing: border-box; */
+  width: 80%;
+  margin: 0;
+  display: inline-flex;
+  /* align-items: left;
+  justify-content: space-between; */
+  padding-left: 0px;
+}
+
+.react-tabs__tab {
+  width: fit-content;
+  min-width: 10%;
+  height: 1rem;
+  margin: 0 2%;
+  margin-bottom: -2.5px;
+  overflow: hidden;
+  padding: 0.3%;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  font-size: 90%;
+  background: #f2cc8f;
+  border-radius: 2px 2px 0px 0px;
+  box-shadow: 0px 2px#05374260;
+  transition: border 0.3s;
+}
+
+.react-tabs__tab--selected {
+  border: 3px solid #fb8500;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.react-tabs__tab--disabled {
+  color: gray;
+  cursor: default;
+}
+
+.react-tabs__tab:hover {
+  box-shadow: 0 0 0.5px 2px #fb86009d;
+  transform: translateY(-0.1em);
+}
+
+.react-tabs__tab-panel {
+  display: none;
+}
+
+.react-tabs__tab-panel--selected {
+  display: flex;
+  background: #eeeeeeff;
+  width: 100% +1px;
+  margin: 0 -2px 0 -2px;
+  padding: 1%;
+  height: 90%;
+  border: 2px solid #053742;
+}
+
+.postContainer {
+  width: 100%;
+  margin: 1%;
+}

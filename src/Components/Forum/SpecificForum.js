@@ -40,7 +40,9 @@ function SpecificForum() {
       })
       .then(() =>
         axios
-          .get(`http://localhost:4000/api/information?title=${title}&type=Forum`)
+          .get(
+            `http://localhost:4000/api/information?title=${title}&type=Forum`
+          )
           .then((res) => {
             setForum(res.data);
           })

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import AddingTags from "./AddingTags";
 
 function SearchBar() {
-
   const [tags, setTags] = useState([]);
   console.log(tags);
   /**
@@ -32,9 +31,8 @@ function SearchBar() {
 
   useEffect(() => {
     setToggleSearch(false);
-    handleSearch()}
-  , [])
-
+    handleSearch();
+  }, []);
 
   async function handleSearch() {
     let categories = [];
@@ -51,16 +49,16 @@ function SearchBar() {
         console.log(res.data);
         setResults(res.data);
         console.log(results);
-        if(toggleSearch){
+        if (toggleSearch) {
           navigate(`/SearchResults/`, {
             replace: true,
             state: {
               results: results,
             },
-          })
+          });
         }
       });
-  };
+  }
 
   //Manages checkbox tracking in state "types"
   const handleCheckboxChange = (e) => {
@@ -75,65 +73,67 @@ function SearchBar() {
 
   return (
     <>
-      <div className={styles.searchBar}>
-        <div className={styles.searchBarSection}>
-          <label className={styles.searchLabel}>Search:</label>
-          <input
-            type="text"
-            placeholder="Search for something ..."
-            className={styles.searchInput}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          ></input>
-          <button
-            className={styles.searchButton}
-            onClick={(e) => {
-              e.preventDefault();
-              setToggleSearch(true);
-              handleSearch();
-            }}
-          >
-            Search
-          </button>
-        </div>
-        <div className={styles.searchBarSection}>
-          <div className={styles.filterContainer}>
-            <label className={styles.searchLabel}>Filters:</label>
-            <label className={styles.filters}>
-              <input
-                type="checkbox"
-                name="Interview"
-                onChange={handleCheckboxChange}
-              ></input>
-              Interviews
-            </label>
-            <label className={styles.filters}>
-              <input
-                type="checkbox"
-                name="Guide"
-                onChange={handleCheckboxChange}
-              ></input>
-              Guides
-            </label>
-            <label className={styles.filters}>
-              <input
-                type="checkbox"
-                name="Article"
-                onChange={handleCheckboxChange}
-              ></input>
-              Articles
-            </label>
-            <label className={styles.filters}>
-              <input
-                type="checkbox"
-                name="Forum"
-                onChange={handleCheckboxChange}
-              ></input>
-              Forums
-            </label>
+      <div className={styles.searchBarContainer}>
+        <div className={styles.searchBar}>
+          <div className={styles.searchBarSection}>
+            <label className={styles.searchLabel}>Search:</label>
+            <input
+              type="text"
+              placeholder="Search for something ..."
+              className={styles.searchInput}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            ></input>
+            <button
+              className={styles.searchButton}
+              onClick={(e) => {
+                e.preventDefault();
+                setToggleSearch(true);
+                handleSearch();
+              }}
+            >
+              Search
+            </button>
           </div>
-          <div className={styles.tagsContainer}>
-            <AddingTags setTags={setTags} tags={tags}/>
+          <div className={styles.searchBarSection}>
+            <div className={styles.filterContainer}>
+              <label className={styles.searchLabel}>Filters:</label>
+              <label className={styles.filters}>
+                <input
+                  type="checkbox"
+                  name="Interview"
+                  onChange={handleCheckboxChange}
+                ></input>
+                Interviews
+              </label>
+              <label className={styles.filters}>
+                <input
+                  type="checkbox"
+                  name="Guide"
+                  onChange={handleCheckboxChange}
+                ></input>
+                Guides
+              </label>
+              <label className={styles.filters}>
+                <input
+                  type="checkbox"
+                  name="Article"
+                  onChange={handleCheckboxChange}
+                ></input>
+                Articles
+              </label>
+              <label className={styles.filters}>
+                <input
+                  type="checkbox"
+                  name="Forum"
+                  onChange={handleCheckboxChange}
+                ></input>
+                Forums
+              </label>
+            </div>
+            <div className={styles.tagsContainer}>
+              <AddingTags setTags={setTags} tags={tags} />
+            </div>
           </div>
         </div>
       </div>

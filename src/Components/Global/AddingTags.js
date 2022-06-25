@@ -29,7 +29,6 @@ function AddingTags({ setTags }) {
       tags.splice(tags.indexOf(elem), 1);
     } else {
       tags.push(elem);
-
     }
     //console.log(tags);
   }
@@ -67,7 +66,6 @@ function AddingTags({ setTags }) {
                     className={styles.checkbox}
                     id={i}
                     onChange={() => addTags(i)}
-
                   />
                   <label className={styles.tagsLabel} htmlFor={i}>
                     {i}
@@ -85,7 +83,6 @@ function AddingTags({ setTags }) {
                     className={styles.checkbox}
                     id={i}
                     onClick={() => addTags(i)}
-
                   />
                   <label className={styles.tagsLabel} htmlFor={i}>
                     {i}
