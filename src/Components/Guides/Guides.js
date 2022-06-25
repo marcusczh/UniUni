@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 import TopContent from "../Global/TopContent";
+import List from "./List";
 
 function Guides() {
   const [guides, setGuides] = React.useState(null);
@@ -16,6 +17,11 @@ function Guides() {
         setGuides(res.data);
       });
   }, []);
+
+  const [viewAll, setViewAll] = React.useState(4);
+  const viewMore = () => {
+    setViewAll(guides.length);
+  };
 
   //Note: Unfinished error handling
   if (guides === null || guides.length < 4) {
@@ -34,6 +40,9 @@ function Guides() {
         <TopContent />
         <div>
           <SearchBar />
+          <button className={stylesGuide.button} onClick={viewMore}>
+            View more posts
+          </button>
         </div>
         <Link
           to={`/Guides/${guides[0].title}`}
@@ -44,7 +53,7 @@ function Guides() {
         <div className={stylesGuide.otherGuides}>
           <div>
             <Link
-              to={`/Articles/${guides[1].title}`}
+              to={`/Guides/${guides[1].title}`}
               className={stylesGuide.otherGuides}
             >
               <OtherGuides guide={guides[1] || null} />
@@ -52,7 +61,7 @@ function Guides() {
           </div>
           <div>
             <Link
-              to={`/Articles/${guides[2].title}`}
+              to={`/Guides/${guides[2].title}`}
               className={stylesGuide.otherGuides}
             >
               <OtherGuides guide={guides[2] || null} />
@@ -60,12 +69,20 @@ function Guides() {
           </div>
           <div>
             <Link
-              to={`/Articles/${guides[3].title}`}
+              to={`/Guides/${guides[3].title}`}
               className={stylesGuide.otherGuides}
             >
               <OtherGuides guide={guides[3] || null} />
             </Link>
           </div>
+        </div>
+        <div className="postContainer">
+          {guides
+            .slice(4, Math.min(viewAll, guides.length))
+            .sort((a, b) => b.views - a.views)
+            .map((guide) => (
+              <List post={guide} />
+            ))}
         </div>
       </>
     );

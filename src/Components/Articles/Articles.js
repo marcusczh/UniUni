@@ -8,9 +8,11 @@ import axios from "axios";
 import TopContent from "../Global/TopContent";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
+import List from "./List";
 
 function Articles() {
   const [articles, setArticles] = React.useState(null);
+  const [viewAll, setViewAll] = React.useState(4);
   const user = useSelector(selectUser);
 
   React.useEffect(() => {
@@ -20,6 +22,10 @@ function Articles() {
         setArticles(res.data);
       });
   }, []);
+
+  const viewMore = () => {
+    setViewAll(articles.length);
+  };
 
   if (!articles) return null;
 
@@ -35,6 +41,9 @@ function Articles() {
         ) : (
           <button className={stylesArticle.button}>Create Article</button>
         )}
+        <button className={stylesArticle.button} onClick={viewMore}>
+          View more posts
+        </button>
       </div>
       <Link
         to={`/Articles/${articles[0].title}`}
@@ -68,6 +77,14 @@ function Articles() {
             <OtherArticles article={articles[3] || null} />
           </Link>
         </div>
+      </div>
+      <div className="postContainer">
+        {articles
+          .slice(4, Math.min(viewAll, articles.length))
+          .sort((a, b) => b.views - a.views)
+          .map((article) => (
+            <List post={article} />
+          ))}
       </div>
     </>
   );

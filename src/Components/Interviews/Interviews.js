@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 import TopContent from "../Global/TopContent";
+import List from "./List";
 
 function Interviews() {
   const [interviews, setInterviews] = React.useState(null);
@@ -17,6 +18,11 @@ function Interviews() {
       });
   }, []);
 
+  const [viewAll, setViewAll] = React.useState(4);
+  const viewMore = () => {
+    setViewAll(interviews.length);
+  };
+
   if (!interviews) return null;
 
   return (
@@ -24,6 +30,9 @@ function Interviews() {
       <TopContent />
       <div>
         <SearchBar />
+        <button className={stylesInterview.button} onClick={viewMore}>
+          View more posts
+        </button>
       </div>
 
       <Link
@@ -57,6 +66,14 @@ function Interviews() {
             <OtherInterviews interview={interviews[3] || null} />
           </Link>
         </div>
+      </div>
+      <div className="postContainer">
+        {interviews
+          .slice(4, Math.min(viewAll, interviews.length))
+          .sort((a, b) => b.views - a.views)
+          .map((interview) => (
+            <List post={interview} />
+          ))}
       </div>
     </>
   );
