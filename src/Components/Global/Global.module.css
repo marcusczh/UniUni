@@ -35,28 +35,16 @@ body {
 
 .logOut {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 0.2% 0.5%;
-  height: fit-content;
-  border: 2px #595959 solid;
-  border-radius: 10%;
-  background-color: whitesmoke;
+  width: 100%;
 }
 
-.logOutWelcome {
-  flex: 1;
-  font-size: medium;
+.logOut:hover {
+  background-color: #f2cc8f;
+  width: 100%;
 }
 
-.logoutButton {
-  border: none;
-  font-size: small;
-  padding: 0;
-}
-
-.viewMyProfile {
-  font-size: small;
+.buttonContainer {
+  display: inline-table
 }
 
 .searchBar {

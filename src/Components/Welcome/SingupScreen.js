@@ -51,6 +51,7 @@ function SignupScreen() {
         .post("http://localhost:4000/api/register", {
           username: username,
           password: password,
+          bio: "bio",
           interests: interests,
           BI2: basicInfo2,
           BI3: basicInfo3,

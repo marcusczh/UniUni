@@ -34,7 +34,7 @@ function SpecificForum() {
   function increment(event, likes, dislikes) {
     event.preventDefault();
     axios
-      .post("http://localhost:4000/api/like/" + title, {
+      .post(`http://localhost:4000/api/like/${title}/${forum[0].author}`, {
         likes: likes,
         dislikes: dislikes,
       })
@@ -81,7 +81,7 @@ function SpecificForum() {
           <div className={forumStyles.forumHeader}>
             {forum[0].title}
             <br />
-            {"By: " + forum[0].user}
+            {"By: " + forum[0].author}
             <br />
             {forum[0].date} |{forum[0].tags} |{"Likes: " + forum[0].likes} |
             {"Dislikes: " + forum[0].dislikes} |

@@ -23,9 +23,10 @@ router.post("/register", async (req, res) => {
     await User.create({
       username: req.body.username,
       password: req.body.password,
-      background: req.body.background,
+      score: 0,
+      bio: req.body.bio,
+      status: req.body.BI2,
       interests: req.body.interests,
-      others: req.body.others,
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -37,7 +38,7 @@ router.post("/register", async (req, res) => {
 //ARTICLES, GUIDES, INTERVIEWS, FORUM
 //Fetching information (Articles/Interviews/Guides/Forum)
 router.get("/information", async (req, res) => {
-  console.log(req.query);
+  //console.log(req.query);
   await Information.find(req.query)
     .sort({ views: -1 })
     .then((data) => {
@@ -280,12 +281,26 @@ router.get("/search", async (req, res) => {
 // });
 
 //Deleting forum posts
-router.delete("/forum/:title/:_id", async (req, res) => {
+router.delete("/information/:title/:_id/:user", async (req, res) => {
   try {
+    await Information.collection.findOne({
+      type: "Forum",
+      title: req.params.title,
+    }).then((post) => (
+     User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: -(post.score),
+        },
+      }
+    ) ));
     const result = await Information.findOneAndDelete({
       type: "Forum",
       title: req.params.title,
-      _id: req.params._id,
+      _id: req.params._id
     });
     if (!result) {
       res.json({
@@ -334,9 +349,10 @@ router.post("/createcomment/:title", async (req, res) => {
 });
 
 //Liking/Disliking a POST: Post req
-router.post("/like/:title", async (req, res) => {
+router.post("/like/:title/:user", async (req, res) => {
+  console.log(req.params.user)
   try {
-    await Information.collection.findOneAndUpdate(
+    Information.collection.findOneAndUpdate(
       {
         title: req.params.title,
         type: "Forum",
@@ -349,6 +365,17 @@ router.post("/like/:title", async (req, res) => {
         },
       }
     );
+    User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: req.body.likes - req.body.dislikes,
+        },
+      }
+    );
+    //User.collection.findOne({username: "UserScore"}).then((x) => console.log(x))
     return res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
