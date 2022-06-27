@@ -6,7 +6,7 @@ function Comments({ comment, title, index, setForum }) {
     event.preventDefault();
     axios
       .post(
-        `http://localhost:4000/api/likecomment/${title}/${comment.body}/${comment.user}/${index}`,
+        `http://localhost:4000/api/likecomment/${title}/${comment.body}/${comment.author}/${index}`,
         {
           likes: likes,
           dislikes: dislikes,
@@ -27,7 +27,7 @@ function Comments({ comment, title, index, setForum }) {
         {comment.body}
         <br />
         <br />
-        {"By: " + comment.user} |{"Likes: " + comment.likes} |
+        {"By: " + comment.author} |{"Likes: " + comment.likes} |
         {"Dislikes: " + comment.dislikes}
         <button
           className={styles.moreOptions}

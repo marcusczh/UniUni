@@ -20,7 +20,7 @@ function SpecificForum() {
     axios
       .get("http://localhost:4000/api/information", {
         params: {
-          type: forum,
+          type: "Forum",
           title: title,
         },
       })
@@ -122,9 +122,7 @@ function SpecificForum() {
             />
           ))}
         {user ? (
-          <Link
-            to={`./CreateComment?title=${forum[0].title}&user=${user.username}`}
-          >
+          <Link to={`./CreateComment?title=${forum[0].title}`}>
             <button>Create Comment</button>
           </Link>
         ) : (

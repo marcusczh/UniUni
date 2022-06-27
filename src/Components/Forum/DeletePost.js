@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Forum.module.css";
 import axios from "axios";
 
-function DeletePost({ postTitle, postId, reloadPosts, author }) {
+function DeletePost({ postTitle, postId, reloadPosts, user }) {
   const [modal, setModal] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
 
@@ -16,7 +16,9 @@ function DeletePost({ postTitle, postId, reloadPosts, author }) {
     setConfirmation(false);
     setModal(false);
     axios
-      .delete(`http://localhost:4000/api/information/${postTitle}/${postId}/${author}`)
+      .delete(
+        `http://localhost:4000/api/information/${postTitle}/${postId}/${user}`
+      )
       .then((res) => {
         if (res.data.status === "ok") {
           alert("Successfully deleted");

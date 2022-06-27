@@ -18,7 +18,7 @@ function CommentCreation() {
       .post("http://localhost:4000/api/createcomment/" + title, {
         body: body,
         date: Date(),
-        user: user ? user.username : "anonymous",
+        author: user ? user.username : "anonymous",
         likes: 0,
         dislikes: 0,
         score: 0,
@@ -45,7 +45,7 @@ function CommentCreation() {
           </form>
           <button
             className={forumStyles.buttonCreation}
-            onClick={(event) => (navigate(-1))}
+            onClick={(event) => navigate(-1)}
           >
             Cancel
           </button>

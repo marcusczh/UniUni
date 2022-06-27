@@ -64,7 +64,7 @@ router.post("/create", async (req, res) => {
       likes: req.body.likes,
       dislikes: req.body.dislikes,
       score: req.body.score,
-      image: req.body.image
+      image: req.body.image,
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -283,24 +283,27 @@ router.get("/search", async (req, res) => {
 //Deleting forum posts
 router.delete("/information/:title/:_id/:user", async (req, res) => {
   try {
-    await Information.collection.findOne({
-      type: "Forum",
-      title: req.params.title,
-    }).then((post) => (
-     User.collection.findOneAndUpdate(
-      {
-        username: req.params.user,
-      },
-      {
-        $inc: {
-          score: -(post.score),
-        },
-      }
-    ) ));
+    await Information.collection
+      .findOne({
+        type: "Forum",
+        title: req.params.title,
+      })
+      .then((post) =>
+        User.collection.findOneAndUpdate(
+          {
+            username: req.params.user,
+          },
+          {
+            $inc: {
+              score: -post.score,
+            },
+          }
+        )
+      );
     const result = await Information.findOneAndDelete({
       type: "Forum",
       title: req.params.title,
-      _id: req.params._id
+      _id: req.params._id,
     });
     if (!result) {
       res.json({
@@ -333,7 +336,7 @@ router.post("/createcomment/:title", async (req, res) => {
           comments: {
             body: req.body.body,
             date: req.body.date,
-            user: req.body.user,
+            author: req.body.author,
             likes: req.body.likes,
             dislikes: req.body.dislikes,
             score: req.body.score,
@@ -350,7 +353,7 @@ router.post("/createcomment/:title", async (req, res) => {
 
 //Liking/Disliking a POST: Post req
 router.post("/like/:title/:user", async (req, res) => {
-  console.log(req.params.user)
+  console.log(req.params.user);
   try {
     Information.collection.findOneAndUpdate(
       {
