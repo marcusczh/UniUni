@@ -88,6 +88,12 @@ export default function ProfileTabs({ posts }) {
           </TabList>
         </div>
       </div>
+      <TabPanel>Please log-in first</TabPanel>
+      <TabPanel>Please log-in first</TabPanel>
+      <TabPanel>Please log-in first</TabPanel>
+      <TabPanel>Please log-in first</TabPanel>
+      <TabPanel>Please log-in first</TabPanel>
+      <TabPanel>Please log-in first</TabPanel>
       <div className="react-tabs__tab-panel--selected"> No Posts to Show</div>
     </Tabs>
   );

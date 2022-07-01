@@ -14,8 +14,10 @@ export default function MyProfile() {
   useEffect(() => {
     if (user)
       axios
-        .get(`http://localhost:4000/api/information/?author=${user.username}`)
+        .post(`/information`, { title: { $in: user.bookmarks } })
         .then((res) => {
+          console.log(user.bookmarks);
+          console.log(res.data);
           setPosts(res.data);
         });
   }, []);

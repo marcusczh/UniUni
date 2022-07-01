@@ -4,10 +4,12 @@ const User = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    score: { type: Number, required: true},
+    score: { type: Number, required: true },
     bio: { type: String },
-    status: {type: [String]},
-    interests: {type: [String]}
+    status: { type: [String] },
+    interests: { type: [String] },
+    //bookmarks - An array of strings that keeps track of the titles of bookmarked posts
+    bookmarks: { type: [String] },
   },
   { collection: "user-data" }
 );

@@ -44,7 +44,7 @@ body {
 }
 
 .buttonContainer {
-  display: inline-table
+  display: inline-table;
 }
 
 .searchBar {
@@ -263,4 +263,34 @@ input[type="checkbox"]:checked + .tagsLabel {
   bottom: 0;
   position: fixed;
   background: rgba(36, 36, 36, 0.7);
+}
+
+.BookmarkButton {
+  float: right;
+  margin: 5% 5% 2% 0%;
+  border: rgb(166, 169, 213) solid 1px;
+  background-color: #81b29a;
+  color: white;
+  border-radius: 3%;
+  width: max-content;
+}
+
+.bookmarked {
+  float: right;
+  margin: 5% 5% 2% 0%;
+  border: #81b29a solid 1px;
+  border-radius: 3%;
+  width: max-content;
+  color: #81b29a;
+  background-color: white;
+}
+
+.BookmarkButton:hover {
+  box-shadow: 1px 1px#8ecae6;
+  transform: translate(-1px, 0px);
+}
+
+.bookmarked:hover {
+  box-shadow: -1px 1px#8ecae6;
+  transform: translate(1px, 0px);
 }
