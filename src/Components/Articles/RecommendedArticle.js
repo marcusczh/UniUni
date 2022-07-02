@@ -14,7 +14,7 @@ function recommendedArticle({ article }) {
         <div className={styles.articleHeader}>{article.title}</div>
         <div className={styles.articleContent}>
           {article.body.map((i) => (
-            <div>
+            <div id={i}>
               {i.header}
               <br />
               {i.text}

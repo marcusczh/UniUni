@@ -61,7 +61,7 @@ export default function ProfileTabs({ posts }) {
               .filter((post) => post.type === "Forum")
               .sort((a, b) => b.score - a.score)
 
-              .map((post) => <Posts post={post} />)
+              .map((post) => <Posts post={post} id={post} />)
               .slice(0, Math.min(numPosts, posts.length))}
           </div>
         ) : null}

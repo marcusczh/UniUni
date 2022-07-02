@@ -108,6 +108,7 @@ function SpecificArticle() {
                         to="./"
                         className={articleStyles.list}
                         name={i.header}
+                        id={i}
                       >
                         {i.header}
                       </Link>

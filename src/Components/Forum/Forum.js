@@ -34,7 +34,7 @@ function Forum() {
           .slice(0, Math.min(numPosts, posts.length))
           .sort((a, b) => b.score - a.score)
           .map((post) => (
-            <Posts post={post} />
+            <Posts post={post} id={post} />
           ))}
       </div>
     </>

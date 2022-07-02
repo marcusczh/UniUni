@@ -13,7 +13,7 @@ function recommendedInterview({ interview }) {
       <>
         <div className={styles.interviewHeader}>{interview.title}</div>
         {interview.body.map((i) => (
-          <div className={styles.interviewContent}>
+          <div className={styles.interviewContent} id={i}>
             {i.header}
             <br />
             {i.text}
