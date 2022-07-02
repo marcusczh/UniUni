@@ -1,4 +1,5 @@
 import SearchBar from "../Global/Searchbar";
+import BookmarkButton from "../Global/BookmarkButton";
 import forumStyles from "./Forum.module.css";
 import PostActions from "./PostActions";
 import Comments from "./Comments";
@@ -99,6 +100,7 @@ function SpecificForum() {
               >
                 dislike
               </button>
+              <BookmarkButton user={user} title={forum[0].title} />
             </div>
           </div>
           <div className={forumStyles.forumContent}>

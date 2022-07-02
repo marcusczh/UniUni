@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("./models/user.model");
 const Information = require("./models/information.model");
-const Forum = require("./models/forum.model");
+// const Forum = require("./models/forum.model");
 const router = express.Router();
 
 //REGISTRATION & LOGIN
@@ -27,6 +27,7 @@ router.post("/register", async (req, res) => {
       bio: req.body.bio,
       status: req.body.BI2,
       interests: req.body.interests,
+      bookmarks: [],
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -38,8 +39,21 @@ router.post("/register", async (req, res) => {
 //ARTICLES, GUIDES, INTERVIEWS, FORUM
 //Fetching information (Articles/Interviews/Guides/Forum)
 router.get("/information", async (req, res) => {
-  //console.log(req.query);
+  console.log(req.query);
   await Information.find(req.query)
+    .sort({ views: -1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.json({ status: "error", error: "Something bad happened." });
+    });
+});
+
+router.post("/information", async (req, res) => {
+  console.log(req.body);
+  await Information.find(req.body)
     .sort({ views: -1 })
     .then((data) => {
       res.json(data);
@@ -437,3 +451,60 @@ router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
     return res.json({ status: "error", error: "Something bad happened." });
   }
 }); */
+
+//Implementing bookmarks
+//Fetching user
+router.get("/fetchUser", async (req, res) => {
+  console.log(req.query);
+  const { username } = req.query;
+
+  const user = await User.findOne({ username: username });
+  if (user) {
+    return res.json({ status: "ok", user: user });
+  } else {
+    return res.json({ status: "error", user: false });
+  }
+});
+
+//Adding user bookmarks
+router.put("/bookmark", async (req, res) => {
+  try {
+    User.collection.findOneAndUpdate(
+      {
+        username: req.body.username,
+      },
+      {
+        $push: {
+          bookmarks: req.body.title,
+        },
+      }
+    );
+    console.log("added bookmark");
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Deleting user bookmarks
+router.delete("/bookmark", async (req, res) => {
+  try {
+    User.collection.findOneAndUpdate(
+      {
+        username: req.body.username,
+      },
+      {
+        $pull: {
+          bookmarks: req.body.title,
+        },
+      }
+    );
+    console.log(req.body);
+    console.log("deleted bookmark");
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});

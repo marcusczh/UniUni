@@ -7,6 +7,8 @@
   border: 3px #f2cc8f solid;
   border-radius: 10px 10px 0 0;
   margin: 2% 0% 0 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .interviewContent {

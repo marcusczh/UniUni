@@ -21,16 +21,24 @@ body {
   margin: 1% 1%;
   height: 10%;
   border-radius: 10px;
-  width: 75%;
+  width: 100%;
   border: 5px #f2cc8f solid;
   color: white;
 }
 
 .list {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  display: block;
   text-decoration-color: white;
-  display: inline;
-  padding-inline: 10%;
   list-style-type: none;
+  padding: 10px;
 }
 
 .logOut {
@@ -44,7 +52,7 @@ body {
 }
 
 .buttonContainer {
-  display: inline-table
+  display: inline-table;
 }
 
 .searchBar {
@@ -263,4 +271,34 @@ input[type="checkbox"]:checked + .tagsLabel {
   bottom: 0;
   position: fixed;
   background: rgba(36, 36, 36, 0.7);
+}
+
+.BookmarkButton {
+  float: right;
+  margin: 5% 5% 2% 0%;
+  border: rgb(166, 169, 213) solid 1px;
+  background-color: #81b29a;
+  color: white;
+  border-radius: 3%;
+  width: max-content;
+}
+
+.bookmarked {
+  float: right;
+  margin: 5% 5% 2% 0%;
+  border: #81b29a solid 1px;
+  border-radius: 3%;
+  width: max-content;
+  color: #81b29a;
+  background-color: white;
+}
+
+.BookmarkButton:hover {
+  box-shadow: 1px 1px#8ecae6;
+  transform: translate(-1px, 0px);
+}
+
+.bookmarked:hover {
+  box-shadow: -1px 1px#8ecae6;
+  transform: translate(1px, 0px);
 }
