@@ -21,16 +21,24 @@ body {
   margin: 1% 1%;
   height: 10%;
   border-radius: 10px;
-  width: 75%;
+  width: 100%;
   border: 5px #f2cc8f solid;
   color: white;
 }
 
 .list {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  display: block;
   text-decoration-color: white;
-  display: inline;
-  padding-inline: 10%;
   list-style-type: none;
+  padding: 10px;
 }
 
 .logOut {
