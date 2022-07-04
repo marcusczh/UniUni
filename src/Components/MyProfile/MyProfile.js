@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import ProfileTabs from "./ProfileTabs";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./MyProfile.module.css";
-import TopContent from "../Global/TopContent";
 import UserProfile from "./UserProfile";
 import AboutMe from "./AboutMe";
 import NavBar from "../Global/Navbar";

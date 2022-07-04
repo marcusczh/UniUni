@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "./LogIn.module.css";
 import React, { useState } from "react";
 import axios from "axios";

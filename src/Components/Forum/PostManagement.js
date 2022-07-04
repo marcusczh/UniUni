@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import SearchBar from "../Global/Searchbar";
 import Posts from "./Posts";
 import TopContent from "../Global/TopContent";

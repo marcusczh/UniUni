@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SearchBar from "../Global/Searchbar";
 import interviewStyles from "./Interviews.module.css";
 import BookmarkButton from "../Global/BookmarkButton";
@@ -34,7 +35,7 @@ function SpecificInterview() {
         setLoading(false);
       })
       .catch((error) => console.log(error));
-  }, []); //eslint-
+  }, []);
 
   if (loading) {
     return <div>loading...</div>;
