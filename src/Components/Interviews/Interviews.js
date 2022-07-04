@@ -11,11 +11,9 @@ import List from "./List";
 function Interviews() {
   const [interviews, setInterviews] = React.useState(null);
   React.useEffect(() => {
-    axios
-      .get(`http://localhost:4000/api/information?type=Interview`)
-      .then((res) => {
-        setInterviews(res.data);
-      });
+    axios.get(`/information?type=Interview`).then((res) => {
+      setInterviews(res.data);
+    });
   }, []);
 
   const [viewAll, setViewAll] = React.useState(4);
@@ -44,24 +42,24 @@ function Interviews() {
       <div className={stylesInterview.otherInterviews}>
         <div>
           <Link
-              to={`/Interviews/${interviews[1].title}`}
-              className={stylesInterview.otherInterviews}
+            to={`/Interviews/${interviews[1].title}`}
+            className={stylesInterview.otherInterviews}
           >
             <OtherInterviews interview={interviews[1] || null} />
           </Link>
         </div>
         <div>
           <Link
-                to={`/Interviews/${interviews[2].title}`}
-                className={stylesInterview.otherInterviews}
-            >
-              <OtherInterviews interview={interviews[2] || null} />
+            to={`/Interviews/${interviews[2].title}`}
+            className={stylesInterview.otherInterviews}
+          >
+            <OtherInterviews interview={interviews[2] || null} />
           </Link>
         </div>
         <div>
           <Link
-              to={`/Interviews/${interviews[3].title}`}
-              className={stylesInterview.otherInterviews}
+            to={`/Interviews/${interviews[3].title}`}
+            className={stylesInterview.otherInterviews}
           >
             <OtherInterviews interview={interviews[3] || null} />
           </Link>

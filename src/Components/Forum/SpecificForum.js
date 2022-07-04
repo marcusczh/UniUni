@@ -19,7 +19,7 @@ function SpecificForum() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/information", {
+      .get("/information", {
         params: {
           type: "Forum",
           title: title,
@@ -35,18 +35,14 @@ function SpecificForum() {
   function increment(event, likes, dislikes) {
     event.preventDefault();
     axios
-      .post(`http://localhost:4000/api/like/${title}/${forum[0].author}`, {
+      .post(`/like/${title}/${forum[0].author}`, {
         likes: likes,
         dislikes: dislikes,
       })
       .then(() =>
-        axios
-          .get(
-            `http://localhost:4000/api/information?title=${title}&type=Forum`
-          )
-          .then((res) => {
-            setForum(res.data);
-          })
+        axios.get(`/information?title=${title}&type=Forum`).then((res) => {
+          setForum(res.data);
+        })
       );
   }
 

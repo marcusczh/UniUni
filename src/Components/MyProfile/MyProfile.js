@@ -15,11 +15,9 @@ export default function MyProfile({ userDetails, setUserDetails }) {
   // Fetch profile information
   useEffect(() => {
     if (user)
-      axios
-        .get(`http://localhost:4000/api/profile?username=${user.username}`)
-        .then((res) => {
-          setUserDetails(res.data);
-        });
+      axios.get(`/profile?username=${user.username}`).then((res) => {
+        setUserDetails(res.data);
+      });
   }, []);
 
   useEffect(() => {

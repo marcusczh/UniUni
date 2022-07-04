@@ -11,11 +11,9 @@ import List from "./List";
 function Guides() {
   const [guides, setGuides] = React.useState(null);
   React.useEffect(() => {
-    axios
-      .get(`http://localhost:4000/api/information?type=Guide`)
-      .then((res) => {
-        setGuides(res.data);
-      });
+    axios.get(`/information?type=Guide`).then((res) => {
+      setGuides(res.data);
+    });
   }, []);
 
   const [viewAll, setViewAll] = React.useState(4);

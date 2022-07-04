@@ -48,18 +48,16 @@ function EditProfile({ setUserDetails }) {
   function submitSignUp(event) {
     event.preventDefault();
     axios
-      .post(`http://localhost:4000/api/editprofile?username=${user.username}`, {
+      .post(`/editprofile?username=${user.username}`, {
         bio: bio,
         currentStatus: basicInfo11,
         pastStatus: basicInfo1,
         interests: basicInfo2.concat(basicInfo3),
       })
       .then(() => {
-        axios
-          .get(`http://localhost:4000/api/profile?username=${user.username}`)
-          .then((res) => {
-            setUserDetails(res.data);
-          });
+        axios.get(`/profile?username=${user.username}`).then((res) => {
+          setUserDetails(res.data);
+        });
         navigate("../MyProfile");
       });
   }
