@@ -9,7 +9,7 @@ function Forum() {
   const [posts, setPosts] = useState(null);
   const [numPosts, setNumPosts] = useState(4);
   useEffect(() => {
-    axios.get(`/information?type=Forum`).then((res) => {
+    axios.get(`/api/information?type=Forum`).then((res) => {
       setPosts(res.data);
     });
   }, []);

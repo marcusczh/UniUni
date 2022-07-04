@@ -15,7 +15,7 @@ function CommentCreation() {
   function submitComment(event) {
     event.preventDefault();
     axios
-      .post("/createcomment/" + title, {
+      .post("/api/createcomment/" + title, {
         body: body,
         date: Date(),
         author: user ? user.username : "anonymous",

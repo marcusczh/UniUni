@@ -12,7 +12,7 @@ export default function BookmarkButton({ user, title }) {
   useEffect(() => {
     if (user) {
       axios
-        .get("/fetchUser/", { params: { username: user.username } })
+        .get("/api/fetchUser/", { params: { username: user.username } })
         .then((res) => {
           dispatch(login(res.data.user));
           for (let i = 0; i < res.data.user.bookmarks.length; i++) {
@@ -29,13 +29,13 @@ export default function BookmarkButton({ user, title }) {
   async function handleBookmark() {
     if (bookmarked) {
       await axios
-        .delete(`/bookmark/`, {
+        .delete(`/api/bookmark/`, {
           data: { username: user.username, title: title },
         })
         .then(setBookmarked(false));
     } else {
       await axios
-        .put(`/bookmark/`, { username: user.username, title: title })
+        .put(`/api/bookmark/`, { username: user.username, title: title })
         .then(setBookmarked(true));
     }
   }

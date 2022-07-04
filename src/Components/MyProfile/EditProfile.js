@@ -48,14 +48,14 @@ function EditProfile({ setUserDetails }) {
   function submitSignUp(event) {
     event.preventDefault();
     axios
-      .post(`/editprofile?username=${user.username}`, {
+      .post(`/api/editprofile?username=${user.username}`, {
         bio: bio,
         currentStatus: basicInfo11,
         pastStatus: basicInfo1,
         interests: basicInfo2.concat(basicInfo3),
       })
       .then(() => {
-        axios.get(`/profile?username=${user.username}`).then((res) => {
+        axios.get(`/api/profile?username=${user.username}`).then((res) => {
           setUserDetails(res.data);
         });
         navigate("../MyProfile");

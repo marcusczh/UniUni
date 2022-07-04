@@ -23,7 +23,7 @@ function SpecificInterview() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("/information", {
+      .get("/api/information", {
         params: {
           type: "Interview",
           title: title,

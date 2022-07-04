@@ -17,7 +17,7 @@ function SpecificArticle() {
 
   useEffect(() => {
     axios
-      .get("/information", {
+      .get("/api/information", {
         params: {
           type: "Article",
           title: title,

@@ -48,7 +48,7 @@ function SignupScreen() {
     const match = password === passwordCfm;
     if (username && password && match) {
       axios
-        .post("/register", {
+        .post("/api/register", {
           username: username,
           password: password,
           bio: bio,

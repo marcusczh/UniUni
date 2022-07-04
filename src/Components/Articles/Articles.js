@@ -16,7 +16,7 @@ function Articles() {
   const user = useSelector(selectUser);
 
   React.useEffect(() => {
-    axios.get(`/information?type=Article`).then((res) => {
+    axios.get(`/api/information?type=Article`).then((res) => {
       setArticles(res.data);
     });
   }, []);

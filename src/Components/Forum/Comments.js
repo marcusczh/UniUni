@@ -6,14 +6,14 @@ function Comments({ comment, title, index, setForum }) {
     event.preventDefault();
     axios
       .post(
-        `/likecomment/${title}/${comment.body}/${comment.author}/${index}`,
+        `/api/likecomment/${title}/${comment.body}/${comment.author}/${index}`,
         {
           likes: likes,
           dislikes: dislikes,
         }
       )
       .then(() =>
-        axios.get(`/Information?title=${title}`).then((res) => {
+        axios.get(`/api/Information?title=${title}`).then((res) => {
           setForum(res.data);
         })
       );

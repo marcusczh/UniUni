@@ -11,7 +11,7 @@ import List from "./List";
 function Interviews() {
   const [interviews, setInterviews] = React.useState(null);
   React.useEffect(() => {
-    axios.get(`/information?type=Interview`).then((res) => {
+    axios.get(`/api/information?type=Interview`).then((res) => {
       setInterviews(res.data);
     });
   }, []);

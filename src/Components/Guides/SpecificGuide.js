@@ -12,7 +12,7 @@ function SpecificGuide() {
 
   useEffect(() => {
     axios
-      .get("/information", {
+      .get("/api/information", {
         params: {
           type: "Guide",
           title: title,
