@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import SearchBar from "./Searchbar";
 import TopContent from "./TopContent";
 import SearchResults from "./SearchResults";
-import {useState} from "react"
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function SearchPage() {
@@ -14,11 +15,12 @@ function SearchPage() {
       <div>
         <SearchBar />
       </div>
-      {results.length > 0 ? results.length + " results found" : "No results found, please try something broader"}
-      {results.length > 0 ? results.map((i) => (
-        <SearchResults result={i} />
-      )): null}
-
+      {results.length > 0
+        ? results.length + " results found"
+        : "No results found, please try something broader"}
+      {results.length > 0
+        ? results.map((i) => <SearchResults result={i} />)
+        : null}
     </>
   );
 }
