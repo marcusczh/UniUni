@@ -16,9 +16,7 @@ function DeletePost({ postTitle, postId, reloadPosts, user }) {
     setConfirmation(false);
     setModal(false);
     axios
-      .delete(
-        `http://localhost:4000/api/information/${postTitle}/${postId}/${user}`
-      )
+      .delete(`/api/information/${postTitle}/${postId}/${user}`)
       .then((res) => {
         if (res.data.status === "ok") {
           alert("Successfully deleted");

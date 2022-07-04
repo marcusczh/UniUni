@@ -16,11 +16,9 @@ function Articles() {
   const user = useSelector(selectUser);
 
   React.useEffect(() => {
-    axios
-      .get(`http://localhost:4000/api/information?type=Article`)
-      .then((res) => {
-        setArticles(res.data);
-      });
+    axios.get(`/api/information?type=Article`).then((res) => {
+      setArticles(res.data);
+    });
   }, []);
 
   const viewMore = () => {

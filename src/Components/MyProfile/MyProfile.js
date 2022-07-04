@@ -15,17 +15,15 @@ export default function MyProfile({ userDetails, setUserDetails }) {
   // Fetch profile information
   useEffect(() => {
     if (user)
-      axios
-        .get(`http://localhost:4000/api/profile?username=${user.username}`)
-        .then((res) => {
-          setUserDetails(res.data);
-        });
+      axios.get(`/api/profile?username=${user.username}`).then((res) => {
+        setUserDetails(res.data);
+      });
   }, []);
 
   useEffect(() => {
     if (user)
       axios
-        .post(`/information`, { title: { $in: user.bookmarks } })
+        .post(`/api/information`, { title: { $in: user.bookmarks } })
         .then((res) => {
           console.log(user.bookmarks);
           console.log(res.data);

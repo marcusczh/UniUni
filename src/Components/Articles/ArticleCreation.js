@@ -19,7 +19,7 @@ function ArticlesCreation() {
     obj.header = header;
     obj.text = content;
     axios
-      .post("http://localhost:4000/api/create", {
+      .post("/api/create", {
         type: "Article",
         title: title,
         date: Date(),
@@ -32,7 +32,7 @@ function ArticlesCreation() {
         if (res.data.status === "error") {
           alert("error");
         } else {
-          navigate("/Articles",{replace: true});
+          navigate("/Articles", { replace: true });
           //window.location.href = "./";
         }
       })
@@ -75,7 +75,12 @@ function ArticlesCreation() {
               id="formInput"
               onChange={(e) => setContent(e.target.value)}
             ></input>
-            <button className={articleStyles.button} onClick={(event) => (navigate("/Articles",{replace: true}))}>Cancel</button>
+            <button
+              className={articleStyles.button}
+              onClick={(event) => navigate("/Articles", { replace: true })}
+            >
+              Cancel
+            </button>
             <button className={articleStyles.button} onClick={submitArticle}>
               Create Article
             </button>

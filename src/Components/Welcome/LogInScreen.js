@@ -16,7 +16,7 @@ function LogInScreen() {
     event.preventDefault();
 
     axios
-      .post("http://localhost:4000/api/login", {
+      .post("/api/login", {
         username: username,
         password: password,
       })

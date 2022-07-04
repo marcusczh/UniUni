@@ -19,7 +19,7 @@ function ForumCreation() {
     obj.header = null;
     obj.text = content;
     axios
-      .post("http://localhost:4000/api/create", {
+      .post("/api/create", {
         type: "Forum",
         title: title,
         date: Date(),
@@ -42,7 +42,7 @@ function ForumCreation() {
       .catch((err) => console.log(err));
     /* 
     axios
-      .post("http://localhost:4000/api/uploadimage/" + title, {
+      .post("/api/uploadimage/" + title, {
         image: image
       })
       .then((res) => {
