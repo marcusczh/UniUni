@@ -22,7 +22,6 @@ export default function MyProfile({ userDetails, setUserDetails }) {
         });
   }, []);
 
-  //To be changed to query information based on bookmarked posts
   useEffect(() => {
     if (user)
       axios
@@ -47,7 +46,7 @@ export default function MyProfile({ userDetails, setUserDetails }) {
               <NavBar />
             </div>
             <div className={styles.Credibility}>
-              Credibility Score: {user.score} ⭐
+              Credibility Score: {userDetails.score} ⭐
             </div>
           </div>
 
