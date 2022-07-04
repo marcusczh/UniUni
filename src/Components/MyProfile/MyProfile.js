@@ -22,7 +22,6 @@ export default function MyProfile({ userDetails, setUserDetails }) {
         });
   }, []);
 
-  //To be changed to query information based on bookmarked posts
   useEffect(() => {
     if (user)
       axios
