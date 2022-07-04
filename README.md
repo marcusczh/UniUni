@@ -1,6 +1,7 @@
 # Welcome to UniUni
 
 This project was created as part of the Orbital module
+The web application is hosted at https://uni-uni-app.netlify.app/ (Updated as of 4/7/2022)
 
 ## Setup
 
