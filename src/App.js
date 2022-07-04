@@ -22,8 +22,11 @@ import { Provider } from "react-redux";
 import Store from "./Store.js";
 import SearchPage from "./Components/Global/SearchPage";
 import MyProfile from "./Components/MyProfile/MyProfile";
+import EditProfile from "./Components/MyProfile/EditProfile";
 
 function App() {
+  const [userDetails, setUserDetails] = React.useState([]);
+
   return (
     <Provider store={Store}>
       <Routes>
@@ -47,7 +50,19 @@ function App() {
           element={<CommentCreation />}
         />
         <Route path="SearchResults" element={<SearchPage />} />
-        <Route path="MyProfile" element={<MyProfile />} />
+        <Route
+          path="MyProfile"
+          element={
+            <MyProfile
+              userDetails={userDetails}
+              setUserDetails={setUserDetails}
+            />
+          }
+        />
+        <Route
+          path="EditProfile"
+          element={<EditProfile setUserDetails={setUserDetails} />}
+        />
       </Routes>
     </Provider>
   );

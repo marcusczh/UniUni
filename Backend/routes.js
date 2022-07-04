@@ -19,13 +19,15 @@ router.post("/login", async (req, res) => {
 
 //Registering an account: Posting
 router.post("/register", async (req, res) => {
+  //console.log(req.body);
   try {
     await User.create({
       username: req.body.username,
       password: req.body.password,
       score: 0,
       bio: req.body.bio,
-      status: req.body.BI2,
+      currentStatus: req.body.currentStatus,
+      pastStatus: req.body.pastStatus,
       interests: req.body.interests,
     });
     return res.json({ status: "ok" });
@@ -33,6 +35,39 @@ router.post("/register", async (req, res) => {
     console.log(err);
     return res.json({ status: "error", error: "Duplicate account" });
   }
+});
+
+// Fetch profile information
+router.get("/profile", async (req, res) => {
+  //console.log(req.query);
+  await User.findOne(req.query)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.json({ status: "error", error: "Something bad happened." });
+    });
+});
+
+// Edit profile information
+router.post("/editprofile", async (req, res) => {
+  //console.log(req.query);
+  await User.findOneAndUpdate(req.query, {
+    $set: {
+      bio: req.body.bio,
+      currentStatus: req.body.currentStatus,
+      pastStatus: req.body.pastStatus,
+      interests: req.body.interests,
+    },
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.json({ status: "error", error: "Something bad happened." });
+    });
 });
 
 //ARTICLES, GUIDES, INTERVIEWS, FORUM

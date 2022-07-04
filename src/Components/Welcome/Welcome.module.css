@@ -136,3 +136,7 @@ form {
   display: flex;
   justify-content: space-between;
 }
+
+.bioInput {
+  height: 50px;
+}

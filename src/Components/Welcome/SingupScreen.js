@@ -6,6 +6,7 @@ import Logo from "../Global/Logo";
 function SignupScreen() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [bio, setBio] = useState("No bio found");
   const [passwordCfm, setPasswordCfm] = useState("");
   const [basicInfo11, setBasicInfo11] = useState("");
   const [basicInfo1, setBasicInfo1] = useState([]);
@@ -44,17 +45,16 @@ function SignupScreen() {
 
   function submitSignUp(event) {
     event.preventDefault();
-    const interests = basicInfo1.concat(basicInfo11);
     const match = password === passwordCfm;
     if (username && password && match) {
       axios
         .post("http://localhost:4000/api/register", {
           username: username,
           password: password,
-          bio: "bio",
-          interests: interests,
-          BI2: basicInfo2,
-          BI3: basicInfo3,
+          bio: bio,
+          currentStatus: basicInfo11,
+          pastStatus: basicInfo1,
+          interests: basicInfo2.concat(basicInfo3),
         })
         .then((res) => {
           if (res.data.status === "error") {
@@ -89,6 +89,17 @@ function SignupScreen() {
           }}
         >
           <div className={styles.questionContainer}>
+            <label className={styles.question} for="bio">
+              Tell us about yourself!
+            </label>
+            <input
+              type="text"
+              className={styles.bioInput}
+              placeholder="User Bio"
+              onChange={(e) => setBio(e.target.value)}
+            ></input>
+          </div>
+          <div className={styles.questionContainer}>
             <label className={styles.question} for="basic11">
               Where are you and where have you been?
             </label>
@@ -99,6 +110,7 @@ function SignupScreen() {
                 id="basic11"
                 onChange={(e) => setBasicInfo11(e.target.value)}
               >
+                <option disabled selected value></option>
                 {basic1.map((item) => (
                   <option value={item}>{item}</option>
                 ))}
@@ -156,6 +168,7 @@ function SignupScreen() {
                 className={styles.dropdown}
                 onChange={(e) => setBasicInfo3(e.target.value)}
               >
+                <option disabled selected value></option>
                 {basic3.map((item) => (
                   <option value={item}>{item}</option>
                 ))}

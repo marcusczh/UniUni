@@ -4,10 +4,11 @@ const User = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    score: { type: Number, required: true},
+    score: { type: Number, required: true },
     bio: { type: String },
-    status: {type: [String]},
-    interests: {type: [String]}
+    currentStatus: { type: String },
+    pastStatus: { type: [String] },
+    interests: { type: [String] },
   },
   { collection: "user-data" }
 );
