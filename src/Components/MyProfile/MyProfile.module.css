@@ -3,10 +3,43 @@
   justify-content: space-evenly;
 }
 
-.ProfileTabsContainer {
+.PageRight {
+  flex: 15;
+  flex-direction: column;
+  justify-content: center;
   width: 60vw;
-  height: 70vh;
+}
+
+.TopRow {
+  width: 96%;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.CustomNav {
+  display: contents;
+  padding: 0;
+  width: 80%;
+}
+
+.Credibility {
+  width: 20%;
+  float: right;
+  text-align: center;
   padding: 1%;
+  background: white;
+  border-radius: 5%;
+  border: 1px solid#ffb703;
+}
+
+.ProfileTabsContainer {
+  width: 96%;
+  height: 85vh;
+  padding: 1% 0% 1% 0%;
+  margin-left: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,6 +81,7 @@
 .userBio {
   border: 3px #080713 solid;
   border-radius: 10px;
+  margin-top: 5%;
 }
 
 .status {
@@ -78,4 +112,16 @@
 
 .editProfile:hover {
   background-color: coral;
+}
+
+.SignInMessage {
+  text-align: center;
+}
+
+.PageLeft {
+  flex: 4;
+}
+
+.Page {
+  display: flex;
 }

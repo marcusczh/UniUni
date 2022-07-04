@@ -9,6 +9,8 @@ const User = new mongoose.Schema(
     currentStatus: { type: String },
     pastStatus: { type: [String] },
     interests: { type: [String] },
+    //bookmarks - An array of strings that keeps track of the titles of bookmarked posts
+    bookmarks: { type: [String] },
   },
   { collection: "user-data" }
 );

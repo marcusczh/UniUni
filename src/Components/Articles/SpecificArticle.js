@@ -1,8 +1,11 @@
-import SearchBar from "../Global/Searchbar";
 import articleStyles from "./Articles.module.css";
+import axios from "axios";
 import { useLocation, useParams, Link } from "react-router-dom";
 import { React, useState, useEffect, useRef } from "react";
-import axios from "axios";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
+import SearchBar from "../Global/Searchbar";
+import BookmarkButton from "../Global/BookmarkButton";
 import TopContent from "../Global/TopContent";
 
 function SpecificArticle() {
@@ -10,6 +13,7 @@ function SpecificArticle() {
   // const { location } = useLocation();
   const [article, setArticle] = useState([]);
   const [loading, setLoading] = useState(true);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     axios
@@ -81,6 +85,7 @@ function SpecificArticle() {
               {article[0].title}
               <br />
               {article[0].date} | {article[0].tags}
+              <BookmarkButton user={user} title={article[0].title} />
             </div>
             <div className={articleStyles.articleContent}>
               {article[0].body.map((i, counter) => (

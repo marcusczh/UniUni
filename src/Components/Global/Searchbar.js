@@ -42,9 +42,7 @@ function SearchBar() {
     //console.log(categories);
     //Queries articles/guides/interviews with the search input
     await axios
-      .get(
-        `http://localhost:4000/api/search?title=${input}&types=${categories}&tags=${tags}`
-      )
+      .get(`/search?title=${input}&types=${categories}&tags=${tags}`)
       .then((res) => {
         console.log(res.data);
         setResults(res.data);

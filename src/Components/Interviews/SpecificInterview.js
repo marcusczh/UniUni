@@ -1,12 +1,17 @@
 import SearchBar from "../Global/Searchbar";
 import interviewStyles from "./Interviews.module.css";
+import BookmarkButton from "../Global/BookmarkButton";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import TopContent from "../Global/TopContent";
 
 function SpecificInterview() {
   const { title } = useParams();
+  const user = useSelector(selectUser);
+
   const [interview, setInterview] = useState([
     {
       title: "No Interview",
@@ -64,6 +69,7 @@ function SpecificInterview() {
               {interview[0].title}
               <br />
               {interview[0].date} | {interview[0].tags}
+              <BookmarkButton user={user} title={interview[0].title} />
             </div>
             <div className={interviewStyles.interviewContent}>
               {interview[0].body.map((i, counter) => (

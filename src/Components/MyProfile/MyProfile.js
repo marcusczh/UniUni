@@ -7,6 +7,7 @@ import styles from "./MyProfile.module.css";
 import TopContent from "../Global/TopContent";
 import UserProfile from "./UserProfile";
 import AboutMe from "./AboutMe";
+import NavBar from "../Global/Navbar";
 
 export default function MyProfile({ userDetails, setUserDetails }) {
   const [posts, setPosts] = useState(null);
@@ -25,24 +26,38 @@ export default function MyProfile({ userDetails, setUserDetails }) {
   useEffect(() => {
     if (user)
       axios
-        .get(`http://localhost:4000/api/information/?author=${user.username}`)
+        .post(`/information`, { title: { $in: user.bookmarks } })
         .then((res) => {
+          console.log(user.bookmarks);
+          console.log(res.data);
           setPosts(res.data);
         });
   }, []);
 
-  return (
+  return user ? (
     <>
-      <TopContent />
-      <div className={styles.PagePlaceholder}>
-        <div className={styles.userDetails}>
+      <div className={styles.Page}>
+        <div className={styles.PageLeft}>
           <UserProfile userDetails={userDetails} />
           <AboutMe userDetails={userDetails} />
         </div>
-        <div className={styles.ProfileTabsContainer}>
-          <ProfileTabs posts={posts} />
+        <div className={styles.PageRight}>
+          <div className={styles.TopRow}>
+            <div className={styles.CustomNav}>
+              <NavBar />
+            </div>
+            <div className={styles.Credibility}>
+              Credibility Score: {user.score} ⭐
+            </div>
+          </div>
+
+          <div className={styles.ProfileTabsContainer}>
+            <ProfileTabs posts={posts} />
+          </div>
         </div>
       </div>
     </>
+  ) : (
+    <div className={styles.SignInMessage}>Please sign in first</div>
   );
 }

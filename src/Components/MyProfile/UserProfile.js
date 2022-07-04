@@ -12,9 +12,7 @@ function UserProfile({ userDetails }) {
     <>
       <div className={styles.userProfile}>
         <img className={styles.profilePicture} src={Avatar} alt="avatar" />
-        <div className={styles.username}>
-          {user.username} ({userDetails.score})
-        </div>
+        <div className={styles.username}>{user.username}</div>
         <div className={styles.userBio}>
           {userDetails ? userDetails.bio : "Not found"}
         </div>
