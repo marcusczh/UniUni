@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { useState } from "react";
 import Posts from "../Forum/Posts";

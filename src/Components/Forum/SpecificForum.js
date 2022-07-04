@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SearchBar from "../Global/Searchbar";
 import BookmarkButton from "../Global/BookmarkButton";
 import forumStyles from "./Forum.module.css";
@@ -103,7 +104,7 @@ function SpecificForum() {
             {forum[0].image != null ? (
               <img
                 src={"image/jpeg" + forum[0].image}
-                //alt="User submitted"
+                alt="User submitted"
               ></img>
             ) : null}
             {forum[0].body[0].text}

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import articleStyles from "./Articles.module.css";
 import axios from "axios";
 import { useLocation, useParams, Link } from "react-router-dom";
