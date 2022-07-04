@@ -57,6 +57,7 @@
   border-radius: 5% 5% 0 0;
   display: grid;
   justify-content: center;
+  text-align: center;
 }
 
 .aboutMe {
@@ -71,17 +72,14 @@
 }
 
 .username {
-  margin-bottom: -10%;
   height: 50%;
-  padding: -5%;
-  width: fit-content;
+  text-align: center;
   font-size: x-large;
 }
 
 .userBio {
   border: 3px #080713 solid;
   border-radius: 10px;
-  margin-top: 5%;
 }
 
 .status {
