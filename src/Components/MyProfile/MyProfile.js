@@ -47,7 +47,7 @@ export default function MyProfile({ userDetails, setUserDetails }) {
               <NavBar />
             </div>
             <div className={styles.Credibility}>
-              Credibility Score: {user.score} ⭐
+              Credibility Score: {userDetails.score} ⭐
             </div>
           </div>
 
