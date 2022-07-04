@@ -16,6 +16,6 @@ mongoose.connect(process.env.DATABASE_ACCESS, () =>
 
 //Telling index.js to redirect all POST to /api + (each url of routeUrls)
 app.use("/api", routeUrls);
-app.listen(4000, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log("Server started");
 });
