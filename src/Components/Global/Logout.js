@@ -30,9 +30,11 @@ function LogOut() {
       </button>
     </div>
   ) : (
-    <div>
+    <div className={styles.buttonContainer}>
       <button onClick={(e) => HandleLogout(e)} className={styles.logOut}>
-        <Link to="../Login">Log In</Link>
+        <Link className={styles.logOut} to="../Login">
+          Log In
+        </Link>
       </button>
     </div>
   );

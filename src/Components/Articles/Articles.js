@@ -28,7 +28,7 @@ function Articles() {
   if (!articles) return null;
 
   return (
-    <>
+    <div className={stylesArticle.page}>
       <TopContent />
       <div>
         <SearchBar />
@@ -50,7 +50,7 @@ function Articles() {
         <RecommendedArticle article={articles[0]} />
       </Link>
       <div className={stylesArticle.otherArticles}>
-        <div>
+        <div className={stylesArticle.otherArticlesContainer}>
           <Link
             to={`/Articles/${articles[1].title}`}
             className={stylesArticle.otherArticles}
@@ -59,7 +59,7 @@ function Articles() {
           </Link>
         </div>
 
-        <div>
+        <div className={stylesArticle.otherArticlesContainer}>
           <Link
             to={`/Articles/${articles[2].title}`}
             className={stylesArticle.otherArticles}
@@ -67,7 +67,7 @@ function Articles() {
             <OtherArticles article={articles[2] || null} />
           </Link>
         </div>
-        <div>
+        <div className={stylesArticle.otherArticlesContainer}>
           <Link
             to={`/Articles/${articles[3].title}`}
             className={stylesArticle.otherArticles}
@@ -84,7 +84,7 @@ function Articles() {
             <List post={article} />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 

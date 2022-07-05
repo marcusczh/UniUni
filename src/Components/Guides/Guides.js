@@ -24,17 +24,17 @@ function Guides() {
   //Note: Unfinished error handling
   if (guides === null || guides.length < 4) {
     return (
-      <>
+      <div className={stylesGuide.page}>
         <TopContent />
         <div>
           <SearchBar />
         </div>
         No guides found.
-      </>
+      </div>
     );
   } else {
     return (
-      <>
+      <div className={stylesGuide.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -82,7 +82,7 @@ function Guides() {
               <List post={guide} />
             ))}
         </div>
-      </>
+      </div>
     );
   }
 }

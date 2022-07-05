@@ -58,8 +58,9 @@ function SignupScreen() {
         })
         .then((res) => {
           if (res.data.status === "error") {
-            alert("Username is already in use");
+            alert("Username is already in use.");
           } else {
+            alert("Successfully registered. Please log in.");
             window.location.href = "./Login";
           }
         });

@@ -80,10 +80,6 @@ function LogInScreen() {
         >
           Log In
         </button>
-        <p className={styles.ORtext}>-- OR --</p>
-        <button className={styles.googleButton}>Sign in with Google</button>
-        <br></br>
-        <button className={styles.facebookButton}>Sign in with Facebook</button>
       </div>
     </>
   );
