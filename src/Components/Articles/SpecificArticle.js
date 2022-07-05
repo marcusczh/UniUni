@@ -16,7 +16,9 @@ function SpecificArticle() {
   const [article, setArticle] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = useSelector(selectUser);
+  const [flag, setFlag] = useState(true);
 
+  // Fetch data only after view count is updated
   useEffect(() => {
     axios
       .get("/api/information", {
@@ -30,8 +32,21 @@ function SpecificArticle() {
         setLoading(false);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [flag]);
 
+  // Update view count
+  useEffect(() => {
+    axios
+      .post("/api/informationviews", {
+        params: {
+          type: "Article",
+          title: title,
+        },
+      })
+      .then(setFlag(!flag))
+      .catch((error) => console.log(error));
+  }, []);
+  
   //   useEffect(() => {
   //     const links = document.querySelectorAll(".link-con .navi-link");
 
@@ -75,6 +90,7 @@ function SpecificArticle() {
       </>
     );
   } else {
+    console.log(article[0].views)
     return (
       <>
         <TopContent />
@@ -86,7 +102,7 @@ function SpecificArticle() {
             <div className={articleStyles.articleHeader}>
               {article[0].title}
               <br />
-              {article[0].date} | {article[0].tags}
+              {article[0].date} | {article[0].tags} | views: {article[0].views}
               <BookmarkButton user={user} title={article[0].title} />
             </div>
             <div className={articleStyles.articleContent}>

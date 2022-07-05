@@ -22,6 +22,8 @@ function SpecificInterview() {
     },
   ]);
   const [loading, setLoading] = useState(true);
+  const [flag, setFlag] = useState(true);
+  // Fetch data only after view count is updated
   useEffect(() => {
     axios
       .get("/api/information", {
@@ -34,6 +36,19 @@ function SpecificInterview() {
         setInterview(res.data);
         setLoading(false);
       })
+      .catch((error) => console.log(error));
+  }, [flag]); //eslint-
+
+  // Update view count
+  useEffect(() => {
+    axios
+      .post("http://localhost:4000/api/informationviews", {
+        params: {
+          type: "Interview",
+          title: title,
+        },
+      })
+      .then(setFlag(!flag))
       .catch((error) => console.log(error));
   }, []);
 
@@ -69,7 +84,8 @@ function SpecificInterview() {
             <div className={interviewStyles.interviewHeader}>
               {interview[0].title}
               <br />
-              {interview[0].date} | {interview[0].tags}
+              {interview[0].date} | {interview[0].tags} | views:{" "}
+              {interview[0].views}
               <BookmarkButton user={user} title={interview[0].title} />
             </div>
             <div className={interviewStyles.interviewContent}>

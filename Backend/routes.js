@@ -74,7 +74,7 @@ router.post("/editprofile", async (req, res) => {
 //ARTICLES, GUIDES, INTERVIEWS, FORUM
 //Fetching information (Articles/Interviews/Guides/Forum)
 router.get("/information", async (req, res) => {
-  console.log(req.query);
+  //console.log(req.query);
   await Information.find(req.query)
     .sort({ views: -1 })
     .then((data) => {
@@ -87,7 +87,7 @@ router.get("/information", async (req, res) => {
 });
 
 router.post("/information", async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   await Information.find(req.body)
     .sort({ views: -1 })
     .then((data) => {
@@ -97,6 +97,25 @@ router.post("/information", async (req, res) => {
       console.log(err);
       return res.json({ status: "error", error: "Something bad happened." });
     });
+});
+
+//Updating view count
+router.post("/informationviews", async (req, res) => {
+  //console.log(req.body.params);
+  try {
+    await Information.findOneAndUpdate(
+      { type: req.body.params.type, title: req.body.params.title },
+      {
+        $inc: {
+          views: 1,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
 });
 
 //Creating an article: Posting

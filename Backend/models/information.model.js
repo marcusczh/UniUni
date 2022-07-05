@@ -15,6 +15,7 @@ const Information = new mongoose.Schema(
     score: { type: Number },
     image: { type: String },
     comments: [comments.schema],
+    views: { type: Number },
   },
   { collection: "information" }
 );
