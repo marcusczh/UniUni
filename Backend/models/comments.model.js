@@ -5,8 +5,8 @@ const Comments = new mongoose.Schema(
     body: { type: String, required: true },
     date: { type: Date, required: true },
     author: { type: String, required: true },
-    likes: { type: Number, required: true },
-    dislikes: { type: Number, required: true },
+    likes: { type: [String] },
+    dislikes: { type: [String] },
     score: { type: Number, required: true },
   },
   { collection: "comments" }

@@ -419,9 +419,9 @@ router.post("/createcomment/:title", async (req, res) => {
   }
 });
 
-//Liking/Disliking a POST: Post req
+//Liking a POST: Post req
 router.post("/like/:title/:user", async (req, res) => {
-  console.log(req.params.user);
+  //console.log(req.params.user);
   try {
     Information.collection.findOneAndUpdate(
       {
@@ -430,9 +430,10 @@ router.post("/like/:title/:user", async (req, res) => {
       },
       {
         $inc: {
-          likes: req.body.likes,
-          dislikes: req.body.dislikes,
-          score: req.body.likes - req.body.dislikes,
+          score: 1,
+        },
+        $push: {
+          likes: req.body.user,
         },
       }
     );
@@ -442,7 +443,7 @@ router.post("/like/:title/:user", async (req, res) => {
       },
       {
         $inc: {
-          score: req.body.likes - req.body.dislikes,
+          score: 1,
         },
       }
     );
@@ -454,23 +455,238 @@ router.post("/like/:title/:user", async (req, res) => {
   }
 });
 
-//Liking/Disliking a COMMENT: Post req
-//TODO: Add in user filter
+//Disliking a POST: Post req
+router.post("/dislike/:title/:user", async (req, res) => {
+  //console.log(req.params.user);
+  try {
+    Information.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+        type: "Forum",
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+        $push: {
+          dislikes: req.body.user,
+        },
+      }
+    );
+    User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+      }
+    );
+    //User.collection.findOne({username: "UserScore"}).then((x) => console.log(x))
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Liking a POST: Post req
+router.post("/un-like/:title/:user", async (req, res) => {
+  //console.log(req.params.user);
+  try {
+    Information.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+        type: "Forum",
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+        $pull: {
+          likes: req.body.user,
+        },
+      }
+    );
+    User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+      }
+    );
+    //User.collection.findOne({username: "UserScore"}).then((x) => console.log(x))
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Disliking a POST: Post req
+router.post("/un-dislike/:title/:user", async (req, res) => {
+  //console.log(req.params.user);
+  try {
+    Information.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+        type: "Forum",
+      },
+      {
+        $inc: {
+          score: 1,
+        },
+        $pull: {
+          dislikes: req.body.user,
+        },
+      }
+    );
+    User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: 1,
+        },
+      }
+    );
+    //User.collection.findOne({username: "UserScore"}).then((x) => console.log(x))
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Liking a COMMENT: Post req
 router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
   try {
     Information.collection.updateOne(
       {
         title: req.params.title,
         "comments.body": req.params.body,
+        "comments.author": req.params.user,
       },
       {
         $inc: {
-          "comments.$.likes": req.body.likes,
-          "comments.$.dislikes": req.body.dislikes,
-          "comments.$.score": req.body.likes - req.body.dislikes,
+          "comments.$.score": 1,
+        },
+        $push: {
+          "comments.$.likes": req.body.user,
         },
       }
     );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Disliking a COMMENT: Post req
+router.post("/dislikecomment/:title/:body/:user/:index", async (req, res) => {
+  try {
+    Information.collection.updateOne(
+      {
+        title: req.params.title,
+        "comments.body": req.params.body,
+        "comments.author": req.params.user,
+      },
+      {
+        $inc: {
+          "comments.$.score": -1,
+        },
+        $push: {
+          "comments.$.dislikes": req.body.user,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Liking a COMMENT: Post req
+router.post("/un-likecomment/:title/:body/:user/:index", async (req, res) => {
+  try {
+    Information.collection.updateOne(
+      {
+        title: req.params.title,
+        "comments.body": req.params.body,
+        "comments.author": req.params.user,
+      },
+      {
+        $inc: {
+          "comments.$.score": -1,
+        },
+        $pull: {
+          "comments.$.likes": req.body.user,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Disliking a COMMENT: Post req
+router.post(
+  "/un-dislikecomment/:title/:body/:user/:index",
+  async (req, res) => {
+    try {
+      Information.collection.updateOne(
+        {
+          title: req.params.title,
+          "comments.body": req.params.body,
+          "comments.author": req.params.user,
+        },
+        {
+          $inc: {
+            "comments.$.score": 1,
+          },
+          $pull: {
+            "comments.$.dislikes": req.body.user,
+          },
+        }
+      );
+      return res.json({ status: "ok" });
+    } catch (err) {
+      console.log(err);
+      return res.json({ status: "error", error: "Something bad happened." });
+    }
+  }
+);
+
+//Uploading an image for forum creation
+router.post("/uploadimage", async (req, res) => {
+  var image = req.body.image;
+  var encode = image.toString("base64");
+  var final = {
+    contentType: String,
+    image: Buffer.from(encode, "base64"),
+  };
+  try {
+    await Forum.create({
+      user: req.body.user,
+      title: req.body.title,
+      date: req.body.date,
+      body: req.body.body,
+      likes: req.body.likes,
+      dislikes: req.body.dislikes,
+      score: req.body.score,
+      tags: req.body.tags,
+      comments: req.body.comments,
+      image: encode,
+    });
     return res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
