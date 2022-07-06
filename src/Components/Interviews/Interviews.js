@@ -24,7 +24,7 @@ function Interviews() {
   if (!interviews) return null;
 
   return (
-    <>
+    <div className={stylesInterview.page}>
       <TopContent />
       <div>
         <SearchBar />
@@ -73,7 +73,7 @@ function Interviews() {
             <List post={interview} />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,57 +1,77 @@
 body {
-    background-color: #f4f1de;
+  background-color: #f4f1de;
 }
 
 .border {
-    background-color: #f2cc8f;
-    position: relative;
-    border: 30px #f2cc8f solid;
-    border-radius: 10%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  background-color: #f2cc8f;
+  position: relative;
+  border: 30px #f2cc8f solid;
+  border-radius: 10%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .logInButton {
-    background-color: lightblue;
-    position: relative;
-    width: 90%;
-    transform: translate(7%, 50%);
+  box-sizing: border-box;
+  background-color: lightblue;
+  position: relative;
+  width: 90%;
+  border: 1px solid gainsboro;
+  transform: translate(6%, 50%);
+  transition: all 0.4s;
 }
 
-.ORtext {
-    transform: translate(35%, 50%);
+.logInButton:hover {
+  box-sizing: border-box;
+  background-color: lightblue;
+  position: relative;
+  width: 90%;
+  border: 1px solid gainsboro;
+  box-shadow: 1px 1px 3px#eeeeee;
+  transform: translate(6%, 45%);
+  transition: all 0.4s;
+}
+
+/* .ORtext {
+  transform: translate(35%, 50%);
 }
 .googleButton {
-    background-color: #eeeeee;
-    position: relative;
-    width: 90%;
-    transform: translate(7%, 50%);
+  background-color: #eeeeee;
+  position: relative;
+  width: 90%;
+  transform: translate(7%, 50%);
 }
 
 .facebookButton {
-    background-color: #eeeeee;
-    position: relative;
-    width: 90%;
-    transform: translate(7%, 50%);
-}
+  background-color: #eeeeee;
+  position: relative;
+  width: 90%;
+  transform: translate(7%, 50%);
+} */
 
 .username {
-    position: relative;
-    font-size: small;
-    width: 90%;
+  position: relative;
+  border: none;
+  font-size: small;
+  padding: 2%;
+  width: 90%;
+  margin-top: 2%;
+  margin-bottom: 5%;
 }
 
 .password {
-    position: relative;
-    font-size: small;
-    width: 90%;
+  border: none;
+  position: relative;
+  padding: 2%;
+  font-size: small;
+  width: 90%;
 }
 
 .userInput {
-    background-color: #eeeeee;
-    position: relative;
-    padding: 10%;
-    border-radius: 10%;
+  background-color: #eeeeee;
+  position: relative;
+  padding: 10%;
+  border-radius: 10%;
 }

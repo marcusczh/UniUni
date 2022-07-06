@@ -10,10 +10,11 @@ import axios from "axios";
 import styles from "./Forum.module.css";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
+import PostActions from "./PostActions";
 
 function PostManagement() {
   const [posts, setPosts] = useState(null);
-  const [numPosts, setNumPosts] = useState(10);
+  const [numPosts, setNumPosts] = useState(4);
   const user = useSelector(selectUser);
   useEffect(() => {
     axios
@@ -22,6 +23,10 @@ function PostManagement() {
         setPosts(res.data);
       });
   }, []);
+
+  const viewMore = () => {
+    setNumPosts(numPosts * 2);
+  };
 
   const reloadPosts = () => {
     axios
@@ -32,12 +37,13 @@ function PostManagement() {
       });
   };
 
-  if (!posts || posts.length === 0) {
+  if (!user || !posts || posts.length === 0) {
     return (
       <>
         <TopContent />
         <div>
           <SearchBar />
+          <PostActions numPosts={numPosts} viewMore={viewMore} />
         </div>
         <button className={styles.button}>
           <Link to={`../Forum`}>Back</Link>
@@ -52,6 +58,7 @@ function PostManagement() {
       <TopContent />
       <div>
         <SearchBar />
+        <PostActions numPosts={numPosts} viewMore={viewMore} />
       </div>
       <button className={styles.button}>
         <Link to={`../Forum`}>Back</Link>
