@@ -15,7 +15,7 @@ function Forum() {
   }, []);
 
   const viewMore = () => {
-    setNumPosts(numPosts + 1);
+    setNumPosts(numPosts * 2);
   };
 
   if (!posts) return null;

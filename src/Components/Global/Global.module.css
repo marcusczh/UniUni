@@ -4,11 +4,11 @@ body {
 
 .logo {
   width: 50px;
+  justify-self: center;
 }
 
 .logoContainer {
-  align-content: center;
-  width: auto;
+  text-align: center;
   height: 10%;
   margin-top: 1%;
 }
@@ -43,15 +43,25 @@ body {
 
 .logOut {
   display: flex;
-  width: 100%;
+  width: max-content;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+  line-height: 295%;
 }
 
 .logOut:hover {
   background-color: #f2cc8f;
-  width: 100%;
+  display: flex;
+  width: max-content;
+  text-decoration: none;
+  color: black;
 }
 
 .buttonContainer {
+  height: 200px;
+  max-height: 45.3px;
+
   display: inline-table;
 }
 
@@ -119,7 +129,7 @@ body {
   /*display: inline;
     flex-basis: auto;*/
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
 .resultContainer {

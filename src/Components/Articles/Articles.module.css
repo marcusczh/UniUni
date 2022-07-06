@@ -1,5 +1,11 @@
+.page {
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
 .recommendedArticle {
   text-decoration: none;
+  color: black;
 }
 
 .articleHeader {
@@ -29,8 +35,9 @@
 
 .otherArticles {
   display: flex;
-  flex-basis: max-content;
   justify-content: space-around;
+  text-decoration: none;
+  color: rgb(36, 36, 36);
 }
 
 .otherArticlesHeader {
@@ -41,9 +48,10 @@
 }
 
 .otherArticlesContainer {
-  flex-grow: 1;
-  width: calc(40vh - 1px);
-  margin-top: 10%;
+  flex: 1;
+  width: inherit;
+  max-height: 600px;
+  margin: 1% 1%;
 }
 
 .otherArticlesContent {
@@ -52,7 +60,7 @@
   border-top: 0;
   border-radius: 0 0 10px 10px;
   margin: 0 1% 0 0;
-  height: calc(30vh - 1px);
+  height: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
 }
