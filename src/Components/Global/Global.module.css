@@ -41,6 +41,15 @@ body {
   padding: 10px;
 }
 
+.navBarLink {
+  color: white;
+  text-decoration: none;
+}
+
+.navBarLink:hover {
+  color: blue;
+}
+
 .logOut {
   display: flex;
   width: max-content;

@@ -7,16 +7,24 @@ function navBar() {
       <nav className={styles.navBar}>
         <ul className={styles.list}>
           <li className={styles.listItem}>
-            <Link to="/Interviews">Interviews</Link>
+            <Link to="/Interviews" className={styles.navBarLink}>
+              Interviews
+            </Link>
           </li>
           <li className={styles.listItem}>
-            <Link to="/Guides">Guides</Link>
+            <Link to="/Guides" className={styles.navBarLink}>
+              Guides
+            </Link>
           </li>
           <li className={styles.listItem}>
-            <Link to="/Articles">Articles</Link>
+            <Link to="/Articles" className={styles.navBarLink}>
+              Articles
+            </Link>
           </li>
           <li className={styles.listItem}>
-            <Link to="/Forum">Forum</Link>
+            <Link to="/Forum" className={styles.navBarLink}>
+              Forum
+            </Link>
           </li>
           <li className={styles.listItem}>Q&A</li>
           <li className={styles.listItem}>Coordinator</li>
