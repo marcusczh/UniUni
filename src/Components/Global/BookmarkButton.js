@@ -23,7 +23,7 @@ export default function BookmarkButton({ user, title }) {
             }
             setLoading(false);
           }
-          console.log(res.data.user.bookmarks);
+          //console.log(res.data.user.bookmarks);
         });
     }
   }, [bookmarked]);
