@@ -115,11 +115,14 @@ function SpecificEvent() {
             </div>
           </div>
           <div className={eventStyles.eventContent}>
-            {event[0].image != null ? (
-              <img
-                src={"image/jpeg" + event[0].image}
-                alt="User submitted"
-              ></img>
+            {event[0].image ? (
+              <div className={eventStyles.imageContainer}>
+                <img
+                  className={eventStyles.picture}
+                  src={event[0].image}
+                  alt="EventPhoto"
+                />
+              </div>
             ) : null}
             {event[0].body[0].text}
           </div>

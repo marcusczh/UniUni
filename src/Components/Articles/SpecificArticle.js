@@ -98,7 +98,7 @@ function SpecificArticle() {
           <SearchBar />
         </div>
         <div className={articleStyles.layout}>
-          <div>
+          <div className={articleStyles.article}>
             <div className={articleStyles.articleHeader}>
               {article[0].title}
               <br />
@@ -111,6 +111,7 @@ function SpecificArticle() {
                   <img
                     className={articleStyles.picture}
                     src={article[0].image}
+                    alt="ArticlePhoto"
                   />
                 </div>
               ) : null}

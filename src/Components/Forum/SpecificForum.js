@@ -118,7 +118,7 @@ function SpecificForum() {
     );
   } else {
     return (
-      <>
+      <div className={forumStyles.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -195,7 +195,7 @@ function SpecificForum() {
           //DUD button if no user, maybe send a pop-up to ask user to create an account first
           <button>Create Comment</button>
         )}
-      </>
+      </div>
     );
   }
 }

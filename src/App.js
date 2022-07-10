@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-
+import "./App.css";
 import LogIn from "./Components/Welcome/LogInScreen";
 import HomePage from "./Components/HomePage/HomePage";
 import Welcome from "./Components/Welcome/Welcome";
@@ -31,46 +31,48 @@ function App() {
   const [userDetails, setUserDetails] = React.useState([]);
 
   return (
-    <Provider store={Store}>
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="Login" element={<LogIn />} />
-        <Route path="HomePage" element={<HomePage />} />
-        <Route path="Signup" element={<SignupScreen />} />
-        <Route path="Interviews" element={<Interviews />} />
-        <Route path="Interviews/:title" element={<SpecificInterview />} />
-        <Route path="Guides" element={<Guides />} />
-        <Route path="Guides/:title" element={<SpecificGuide />} />
-        <Route path="Articles" element={<Articles />} />
-        <Route path="Articles/:title" element={<SpecificArticle />} />
-        <Route path="Articles/Create" element={<ArticleCreation />} />
-        <Route path="Forum" element={<Forum />} />
-        <Route path="Forum/:title" element={<SpecificForum />} />
-        <Route path="Forum/Create" element={<ForumCreation />} />
-        <Route path="Forum/MyPosts" element={<PostManagement />} />
-        <Route
-          path="Forum/:title/CreateComment"
-          element={<CommentCreation />}
-        />
-        <Route path="SearchResults" element={<SearchPage />} />
-        <Route
-          path="MyProfile"
-          element={
-            <MyProfile
-              userDetails={userDetails}
-              setUserDetails={setUserDetails}
-            />
-          }
-        />
-        <Route
-          path="EditProfile"
-          element={<EditProfile setUserDetails={setUserDetails} />}
-        />
-        <Route path="Coordinator" element={<Coordinator />}></Route>
-        <Route path="Coordinator/Create" element={<EventCreation />} />
-        <Route path="Coordinator/:title" element={<SpecificEvent />} />
-      </Routes>
-    </Provider>
+    <div className="page">
+      <Provider store={Store}>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="Login" element={<LogIn />} />
+          <Route path="HomePage" element={<HomePage />} />
+          <Route path="Signup" element={<SignupScreen />} />
+          <Route path="Interviews" element={<Interviews />} />
+          <Route path="Interviews/:title" element={<SpecificInterview />} />
+          <Route path="Guides" element={<Guides />} />
+          <Route path="Guides/:title" element={<SpecificGuide />} />
+          <Route path="Articles" element={<Articles />} />
+          <Route path="Articles/:title" element={<SpecificArticle />} />
+          <Route path="Articles/Create" element={<ArticleCreation />} />
+          <Route path="Forum" element={<Forum />} />
+          <Route path="Forum/:title" element={<SpecificForum />} />
+          <Route path="Forum/Create" element={<ForumCreation />} />
+          <Route path="Forum/MyPosts" element={<PostManagement />} />
+          <Route
+            path="Forum/:title/CreateComment"
+            element={<CommentCreation />}
+          />
+          <Route path="SearchResults" element={<SearchPage />} />
+          <Route
+            path="MyProfile"
+            element={
+              <MyProfile
+                userDetails={userDetails}
+                setUserDetails={setUserDetails}
+              />
+            }
+          />
+          <Route
+            path="EditProfile"
+            element={<EditProfile setUserDetails={setUserDetails} />}
+          />
+          <Route path="Coordinator" element={<Coordinator />}></Route>
+          <Route path="Coordinator/Create" element={<EventCreation />} />
+          <Route path="Coordinator/:title" element={<SpecificEvent />} />
+        </Routes>
+      </Provider>
+    </div>
   );
 }
 

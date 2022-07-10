@@ -48,7 +48,7 @@ function SpecificGuide() {
 
   if (guide.length === 0) {
     return (
-      <>
+      <div className={guideStyles.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -61,11 +61,11 @@ function SpecificGuide() {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   } else {
     return (
-      <>
+      <div className={guideStyles.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -113,7 +113,7 @@ function SpecificGuide() {
             </div>
           </nav>
         </div>
-      </>
+      </div>
     );
   }
 }
