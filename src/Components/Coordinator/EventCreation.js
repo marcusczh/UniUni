@@ -17,15 +17,21 @@ function EventCreation() {
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
   const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState("");
   const [openCalendar, setOpenCalendar] = useState(false);
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   const refOne = useRef(null);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     document.addEventListener("click", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
+
+  function toggleModal() {
+    setModal(!modal);
+  }
 
   function hideOnEscape(e) {
     if (e.key === "Escape") {
@@ -48,6 +54,7 @@ function EventCreation() {
       .post("/api/events/create", {
         author: user.username,
         title: title,
+        time: time,
         date: date,
         location: location,
         tags: [String],
@@ -79,11 +86,16 @@ function EventCreation() {
       .catch((err) => console.log(err));
       window.location.href = "./"; */
   }
+
   function handleSelect(dateSelection) {
     setDate(dateSelection);
   }
 
-  return (
+  function handleTime(timeSelection) {
+    setTime(timeSelection);
+  }
+
+  return user ? (
     <>
       <TopContent />
       <div>
@@ -102,26 +114,56 @@ function EventCreation() {
               onChange={(e) => setTitle(e.target.value)}
             ></input>
           </div>
-
-          <div className="calendarWrap">
-            <input
-              value={format(date, "MM/dd/yyyy")}
-              readOnly
-              className="inputBox"
-              onClick={() => setOpenCalendar(!openCalendar)}
-            />
-            <div ref={refOne}>
-              {openCalendar && (
-                <Calendar
-                  date={date}
-                  onChange={handleSelect}
-                  className="calendarElement"
-                />
-              )}
-            </div>
-          </div>
+          {modal && (
+            <>
+              <div className={eventStyles.overlay} onClick={toggleModal}></div>
+              <div className={eventStyles.confirmationPopup}>
+                <div className={eventStyles.calendarWrap}>
+                  Date:{" "}
+                  <input
+                    value={format(date, "MM/dd/yyyy")}
+                    readOnly
+                    className={eventStyles.calendarInput}
+                    onClick={() => setOpenCalendar(!openCalendar)}
+                  />
+                  <div ref={refOne}>
+                    <Calendar
+                      date={date}
+                      onChange={handleSelect}
+                      className="calendarElement"
+                    />
+                  </div>
+                </div>
+                <div className={eventStyles.timePicker}>
+                  Time:{" "}
+                  <input
+                    type="time"
+                    value={time}
+                    onChange={(e) => handleTime(e.target.value)}
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className={eventStyles.content}>
+            <div className={eventStyles.dateTime}>
+              Date:{" "}
+              <input
+                value={format(date, "MM/dd/yyyy")}
+                readOnly
+                className={eventStyles.calendarInput}
+              />{" "}
+              Time: <input type="time" value={time} readOnly />
+              {!modal && (
+                <button
+                  className={eventStyles.buttonCreation}
+                  onClick={toggleModal}
+                >
+                  Pick a time
+                </button>
+              )}
+            </div>
             <input
               type="text"
               placeholder="Location (Required)"
@@ -138,11 +180,14 @@ function EventCreation() {
               id="formInput"
               onChange={(e) => setContent(e.target.value)}
             ></input>
+            <img src={`${image}`} alt="Add a pic if you want!" />
             <input
-              type="file"
-              accept="image/*"
+              type="text"
+              placeholder="Image Link"
+              className={eventStyles.imageInput}
               onChange={(e) => setImage(e.target.value)}
-            ></input>
+            />
+
             <button
               className={eventStyles.buttonCreation}
               onClick={(event) => navigate("/Coordinator", { replace: true })}
@@ -158,6 +203,11 @@ function EventCreation() {
           </div>
         </form>
       </div>
+    </>
+  ) : (
+    <>
+      <TopContent />
+      <div>Please Sign in</div>
     </>
   );
 }

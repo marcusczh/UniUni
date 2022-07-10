@@ -57,7 +57,7 @@ function SpecificInterview() {
   }
   if (interview.length === 0) {
     return (
-      <>
+      <div className={interviewStyles.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -70,11 +70,11 @@ function SpecificInterview() {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   } else {
     return (
-      <>
+      <div className={interviewStyles.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -112,7 +112,7 @@ function SpecificInterview() {
             </nav>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

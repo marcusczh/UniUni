@@ -74,6 +74,15 @@
   display: flex;
 }
 
+.article {
+  flex: 6;
+  margin: 0 1% 0 10%;
+  box-sizing: border-box;
+}
+.navBar {
+  flex: 1;
+}
+
 .navigator {
   background: white;
   border: 1px black solid;
@@ -126,8 +135,11 @@
 .imageContainer {
   display: flex;
   justify-content: center;
+  background-color: rgb(203, 203, 203);
 }
 
 .picture {
-  height: 300px;
+  height: 30vh;
+  min-height: 50px;
+  max-height: 180px;
 }
