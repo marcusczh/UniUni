@@ -5,11 +5,13 @@ import axios from "axios";
 import TopContent from "../Global/TopContent";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
+import AddingTags from "../Global/AddingTags";
 
 function ArticlesCreation() {
   const [title, setTitle] = useState("");
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
+  const [tags, setTags] = useState([]);
   const user = useSelector(selectUser);
   let navigate = useNavigate();
 
@@ -23,7 +25,7 @@ function ArticlesCreation() {
         type: "Article",
         title: title,
         date: Date(),
-        tags: "",
+        tags: tags,
         body: [obj],
         views: 0,
         author: user.username,
@@ -75,6 +77,7 @@ function ArticlesCreation() {
               id="formInput"
               onChange={(e) => setContent(e.target.value)}
             ></input>
+
             <button
               className={articleStyles.button}
               onClick={(event) => navigate("/Articles", { replace: true })}
@@ -84,6 +87,9 @@ function ArticlesCreation() {
             <button className={articleStyles.button} onClick={submitArticle}>
               Create Article
             </button>
+            <div className={articleStyles.tagsContainer}>
+              <AddingTags setTags={setTags} tags={tags} />
+            </div>
           </div>
         </form>
       </div>

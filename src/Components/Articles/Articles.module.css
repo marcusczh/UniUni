@@ -8,6 +8,11 @@
   color: black;
 }
 
+.tagsContainer {
+  position: relative;
+  top: -50%;
+}
+
 .articleHeader {
   background: #eeeeee;
   border: 3px #f2cc8f solid;

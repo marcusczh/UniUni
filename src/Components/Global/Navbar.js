@@ -19,7 +19,9 @@ function navBar() {
             <Link to="/Forum">Forum</Link>
           </li>
           <li className={styles.listItem}>Q&A</li>
-          <li className={styles.listItem}>Coordinator</li>
+          <li className={styles.listItem}>
+            <Link to="/Coordinator">Coordinator</Link>
+          </li>
         </ul>
       </nav>
     </>
