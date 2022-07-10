@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("./models/user.model");
 const Information = require("./models/information.model");
+const Events = require("./models/events.model");
 // const Forum = require("./models/forum.model");
 const router = express.Router();
 
@@ -181,127 +182,213 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//Searching for an article/interview/guide
-//Checks (1): Are there tags selected? Yes: continue. No: return a search for all
-//Checks (2): Is there text provided? Yes: search for text and tags. No: return search for all
+// //Searching for an article/interview/guide
+// //Checks (1): Are there tags selected? Yes: continue. No: return a search for all
+// //Checks (2): Is there text provided? Yes: search for text and tags. No: return search for all
 
+// router.get("/search", async (req, res) => {
+//   try {
+//     console.log(req.query.title);
+//     if (req.query.title.length !== 0) {
+//       if (req.query.types.length === 0) {
+//         await Information.aggregate([
+//           {
+//             $search: {
+//               index: "default",
+//               compound: {
+//                 filter: [
+//                   {
+//                     text: {
+//                       query: req.query.title,
+//                       path: "title",
+//                       fuzzy: {
+//                         maxEdits: 2,
+//                       },
+//                     },
+//                   },
+//                 ],
+//               },
+//             },
+//           },
+//           {
+//             $limit: 20,
+//           },
+//           {
+//             $project: {
+//               type: 1,
+//               title: 1,
+//               date: 1,
+//               tags: 1,
+//               body: 1,
+//               view: 1,
+//               score: {
+//                 $meta: "searchScore",
+//               },
+//             },
+//           },
+//         ]).then((data) => {
+//           res.json(data);
+//         });
+//       } else {
+//         await Information.aggregate([
+//           {
+//             $search: {
+//               index: "default",
+//               compound: {
+//                 filter: [
+//                   {
+//                     text: {
+//                       query: req.query.title,
+//                       path: "title",
+//                       fuzzy: {
+//                         maxEdits: 2,
+//                       },
+//                     },
+//                   },
+//                   {
+//                     text: {
+//                       query: req.query.types,
+//                       path: "type",
+//                     },
+//                   },
+//                 ],
+//               },
+//             },
+//           },
+//         ]).then((data) => {
+//           res.json(data);
+//         });
+//       }
+//     } else {
+//       if (req.query.types.length === 0) {
+//         await Information.find({})
+//           .limit(20)
+//           .then((data) => {
+//             res.json(data);
+//           });
+//       } else {
+//         await Information.aggregate([
+//           {
+//             $search: {
+//               index: "default",
+//               compound: {
+//                 filter: [
+//                   {
+//                     text: {
+//                       query: req.query.types,
+//                       path: "type",
+//                     },
+//                   },
+//                 ],
+//               },
+//             },
+//           },
+//           {
+//             $limit: 20,
+//           },
+//           {
+//             $project: {
+//               type: 1,
+//               title: 1,
+//               date: 1,
+//               tags: 1,
+//               body: 1,
+//               view: 1,
+//               score: {
+//                 $meta: "searchScore",
+//               },
+//             },
+//           },
+//         ]).then((data) => {
+//           res.json(data);
+//         });
+//       }
+//     }
+//   } catch (err) {
+//     console.log(err);
+//     return res.json({ status: "error", error: "Something bad happened." });
+//   }
+// });
+
+//2nd version of search query
 router.get("/search", async (req, res) => {
   try {
+    let filterArray = [];
     console.log(req.query.title);
-    if (req.query.title.length !== 0) {
-      if (req.query.types.length === 0) {
-        await Information.aggregate([
-          {
-            $search: {
-              index: "default",
-              compound: {
-                filter: [
-                  {
-                    text: {
-                      query: req.query.title,
-                      path: "title",
-                      fuzzy: {
-                        maxEdits: 2,
-                      },
-                    },
-                  },
-                ],
-              },
-            },
+    let titleObj = {};
+    let tagsObj = {};
+    let filtersObj = {};
+    const allTitles = req.query.title ? false : req.query.title.length === 0;
+    const allTags = req.query.tags ? false : req.query.tags.length === 0;
+    const allFilters = req.query.types ? false : req.query.types.length === 0;
+    if (!allTitles) {
+      titleObj = {
+        text: {
+          query: req.query.title,
+          path: "title",
+          fuzzy: {
+            maxEdits: 2,
           },
-          {
-            $limit: 20,
-          },
-          {
-            $project: {
-              type: 1,
-              title: 1,
-              date: 1,
-              tags: 1,
-              body: 1,
-              view: 1,
-              score: {
-                $meta: "searchScore",
-              },
-            },
-          },
-        ]).then((data) => {
-          res.json(data);
-        });
-      } else {
-        await Information.aggregate([
-          {
-            $search: {
-              index: "default",
-              compound: {
-                filter: [
-                  {
-                    text: {
-                      query: req.query.title,
-                      path: "title",
-                      fuzzy: {
-                        maxEdits: 2,
-                      },
-                    },
-                  },
-                  {
-                    text: {
-                      query: req.query.types,
-                      path: "type",
-                    },
-                  },
-                ],
-              },
-            },
-          },
-        ]).then((data) => {
-          res.json(data);
-        });
-      }
+        },
+      };
+      filterArray.push(titleObj);
+    }
+
+    if (!allTags) {
+      tagsObj = {
+        text: {
+          query: req.query.tags,
+          path: "tags",
+        },
+      };
+      filterArray.push(tagsObj);
+    }
+
+    if (!allFilters) {
+      filtersObj = {
+        text: {
+          query: req.query.types,
+          path: "type",
+        },
+      };
+      filterArray.push(filtersObj);
+    }
+
+    console.log(filterArray);
+
+    if (allTitles && allFilters && allTags) {
+      await Information.find().then((data) => {
+        res.json(data);
+      });
     } else {
-      if (req.query.types.length === 0) {
-        await Information.find({})
-          .limit(20)
-          .then((data) => {
-            res.json(data);
-          });
-      } else {
-        await Information.aggregate([
-          {
-            $search: {
-              index: "default",
-              compound: {
-                filter: [
-                  {
-                    text: {
-                      query: req.query.types,
-                      path: "type",
-                    },
-                  },
-                ],
-              },
+      await Information.aggregate([
+        {
+          $search: {
+            index: "default",
+            compound: {
+              filter: filterArray,
             },
           },
-          {
-            $limit: 20,
-          },
-          {
-            $project: {
-              type: 1,
-              title: 1,
-              date: 1,
-              tags: 1,
-              body: 1,
-              view: 1,
-              score: {
-                $meta: "searchScore",
-              },
+        },
+        {
+          $limit: 400,
+        },
+        {
+          $project: {
+            type: 1,
+            title: 1,
+            date: 1,
+            tags: 1,
+            body: 1,
+            view: 1,
+            score: {
+              $meta: "searchScore",
             },
           },
-        ]).then((data) => {
-          res.json(data);
-        });
-      }
+        },
+      ]).then((data) => {
+        res.json(data);
+      });
     }
   } catch (err) {
     console.log(err);
@@ -812,6 +899,114 @@ router.delete("/bookmark", async (req, res) => {
     );
     console.log(req.body);
     console.log("deleted bookmark");
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Adding user event bookmarks
+router.put("/events/bookmark", async (req, res) => {
+  try {
+    User.collection.findOneAndUpdate(
+      {
+        username: req.body.username,
+      },
+      {
+        $push: {
+          events: req.body.title,
+        },
+      }
+    );
+    console.log("added bookmark");
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Deleting user bookmarks
+router.delete("/events/bookmark", async (req, res) => {
+  try {
+    User.collection.findOneAndUpdate(
+      {
+        username: req.body.username,
+      },
+      {
+        $pull: {
+          events: req.body.title,
+        },
+      }
+    );
+    console.log(req.body);
+    console.log("deleted bookmark");
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Coordinator API
+router.get("/events", async (req, res) => {
+  await Events.find(req.query)
+    .sort({ date: 1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.json({ status: "error", error: "Something bad happened." });
+    });
+});
+
+router.post("/events/create", async (req, res) => {
+  await Events.create(req.body)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.json({ status: "error", error: "Something bad happened." });
+    });
+});
+
+router.put("/events/join", async (req, res) => {
+  try {
+    Events.collection.findOneAndUpdate(
+      {
+        title: req.body.title,
+      },
+      {
+        $push: {
+          participants: req.body.username,
+        },
+      }
+    );
+    console.log("Joined event");
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+router.delete("/events/leave", async (req, res) => {
+  try {
+    console.log(req.body);
+    Events.collection.findOneAndUpdate(
+      {
+        title: req.body.title,
+      },
+      {
+        $pull: {
+          participants: req.body.username,
+        },
+      }
+    );
+    console.log("Left event");
     return res.json({ status: "ok" });
   } catch (err) {
     console.log(err);

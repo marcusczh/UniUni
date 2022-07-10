@@ -1,0 +1,113 @@
+.page {
+  max-width: 1420px;
+  margin: 0 auto;
+}
+.eventContainer {
+  background: white;
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 0.3%;
+  margin-top: 3%;
+  box-shadow: -3px 3px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.eventTop {
+  flex: 1;
+}
+.eventTitle {
+  float: left;
+}
+.eventSmall.details {
+  flex: 1;
+  display: flex;
+}
+.stats {
+  float: right;
+  margin-right: 1%;
+}
+.eventUser {
+  float: left;
+}
+.popup {
+  float: right;
+  border: 1px #ffb703 solid;
+  box-shadow: -1px 1px #ffb703;
+  border-radius: 1px;
+  margin-right: 0.3%;
+  margin-top: -0.1%;
+  margin-bottom: 0.6%;
+}
+
+.title {
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  margin: 2% 0% 0 0;
+  border-radius: 10px 10px 0 0;
+  padding: 1%;
+}
+
+.button {
+  float: right;
+  background-color: #ffb703;
+}
+
+/*Creation form stuff*/
+
+.titleInput {
+  width: 100%;
+}
+
+.contentInput {
+  height: 10rem;
+  width: 100%;
+}
+
+.buttonCreation {
+  float: right;
+  background-color: #ffb703;
+}
+
+/*Specific event stuff*/
+.eventHeader {
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  border-radius: 10px 10px 0 0;
+  margin: 2% 0% 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.eventContent {
+  background: white;
+  border: 3px #f2cc8f solid;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  margin: 0 0% 1% 0;
+}
+
+.comments {
+  background: white;
+  border: 3px #f2cc8f solid;
+  border-radius: 5px;
+  margin-bottom: 1%;
+}
+
+.title {
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  margin: 2% 0% 0 0;
+  border-radius: 10px 10px 0 0;
+  padding: 1%;
+}
+
+.content {
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  border-top: 0;
+  margin: 0% 0% 0 0;
+  border-radius: 0 0 10px 10px;
+  padding: 1%;
+  padding-bottom: 5%;
+}

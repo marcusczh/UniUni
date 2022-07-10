@@ -74,7 +74,7 @@ function SpecificArticle() {
 
   if (article.length === 0) {
     return (
-      <>
+      <div className={articleStyles.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -87,12 +87,12 @@ function SpecificArticle() {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   } else {
     //console.log(article[0].views);
     return (
-      <>
+      <div className={articleStyles.page}>
         <TopContent />
         <div>
           <SearchBar />
@@ -166,7 +166,7 @@ function SpecificArticle() {
             </div>
           </nav>
         </div>
-      </>
+      </div>
     );
   }
 }

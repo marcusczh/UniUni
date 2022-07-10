@@ -48,7 +48,7 @@ function AddingTags({ setTags }) {
     <>
       {!modal && (
         <button onClick={toggleModal} className={styles.searchButton}>
-          Tags
+          Add Tags
         </button>
       )}
 

@@ -1,0 +1,151 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import SearchBar from "../Global/Searchbar";
+import BookmarkButton from "../Global/BookmarkButton";
+import eventStyles from "./Coordinator.module.css";
+import Comments from "../Forum/Comments";
+import TopContent from "../Global/TopContent";
+import { useParams } from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
+import { format } from "date-fns";
+import EventActions from "./EventActions";
+
+function SpecificEvent() {
+  const { title } = useParams();
+  const [event, setEvent] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    axios
+      .get(`/api/events?title=${title}`)
+      .then((res) => {
+        setEvent(res.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  async function join(event) {
+    axios
+      .put(`/api/events/join`, {
+        title: title,
+        username: user.username,
+      })
+      .then(() =>
+        axios.get(`/api/events?title=${title}`).then((res) => {
+          setEvent(res.data);
+        })
+      );
+  }
+
+  async function leave(event) {
+    axios
+      .delete(`/api/events/leave`, {
+        data: {
+          title: title,
+          username: user.username,
+        },
+      })
+      .then(() =>
+        axios.get(`/api/events?title=${title}`).then((res) => {
+          setEvent(res.data);
+        })
+      );
+  }
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+  console.log(event.length);
+  if (event.length === 0) {
+    return (
+      <>
+        <TopContent />
+        <div>
+          <SearchBar />
+          <EventActions />
+        </div>
+        <div>
+          <div className={eventStyles.eventHeader}>No event found</div>
+          <div className={eventStyles.eventContent}>
+            <br />
+          </div>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <div className={eventStyles.page}>
+        <TopContent />
+        <div>
+          <SearchBar />
+        </div>
+        <div>
+          <div className={eventStyles.eventHeader}>
+            {event[0].title}
+            <br />
+            {"By: " + event[0].author}
+            <br />
+            {"Date: " + format(new Date(event[0].date), "MM/dd/yyyy")} ||
+            {"Participants: " + event[0].participants.length}
+            <div>
+              {event[0].participants.includes(user.username) ? (
+                <BookmarkButton
+                  user={user}
+                  title={event[0].title}
+                  join={join}
+                  leave={leave}
+                  participating={true}
+                  type="event"
+                />
+              ) : (
+                <BookmarkButton
+                  user={user}
+                  title={event[0].title}
+                  join={join}
+                  leave={leave}
+                  participating={false}
+                  type="event"
+                />
+              )}
+            </div>
+          </div>
+          <div className={eventStyles.eventContent}>
+            {event[0].image != null ? (
+              <img
+                src={"image/jpeg" + event[0].image}
+                alt="User submitted"
+              ></img>
+            ) : null}
+            {event[0].body[0].text}
+          </div>
+        </div>
+        {event[0].comments
+          .sort((a, b) => b.score - a.score)
+          .map((i, counter) => (
+            <Comments
+              comment={i || null}
+              title={event[0].title || null}
+              index={counter}
+              setEvent={setEvent}
+            />
+          ))}
+        {user ? (
+          //Re-map to event comments
+          <Link to={`./placeholder?title=${event[0].title}`}>
+            <button>Create Comment</button>
+          </Link>
+        ) : (
+          //DUD button if no user, maybe send a pop-up to ask user to create an account first
+          <button>Create Comment</button>
+        )}
+      </div>
+    );
+  }
+}
+
+export default SpecificEvent;

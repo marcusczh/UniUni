@@ -213,9 +213,11 @@ body {
 }
 
 .tagsTable {
-  position: absolute;
+  position: fixed;
   background-color: white;
   border: 3px #f2cc8f solid;
+  left: 25%;
+  top: 25%;
   width: 50vw;
   height: 30vh;
   margin-top: 2%;

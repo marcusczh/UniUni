@@ -2,3 +2,8 @@
   color: rgb(208, 61, 61);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.page {
+  max-width: 1420px;
+  margin: 0 auto;
+}

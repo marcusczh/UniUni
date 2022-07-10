@@ -8,7 +8,7 @@ const Information = new mongoose.Schema(
     type: { type: String, required: true },
     title: { type: String, required: true, unique: true },
     date: { type: Date, required: true },
-    tags: { type: String },
+    tags: { type: Array },
     body: [Section.schema],
     likes: { type: [String] },
     dislikes: { type: [String] },
