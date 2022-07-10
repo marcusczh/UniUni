@@ -142,6 +142,10 @@
   width: 100%;
 }
 
+.imageInput {
+  width: 100%;
+}
+
 .buttonCreation {
   float: right;
   background-color: #ffb703;
@@ -160,4 +164,13 @@
   bottom: 0;
   position: fixed;
   background: rgba(36, 36, 36, 0.7);
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.picture {
+  height: 300px;
 }

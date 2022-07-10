@@ -146,6 +146,20 @@ router.post("/informationviews", async (req, res) => {
 
 //Creating an article: Posting
 router.post("/create", async (req, res) => {
+  let imageLink;
+  if (req.body.image != "") {
+    const options = {
+      use_filename: true,
+      unique_filename: true,
+      overwrite: true,
+    };
+    try {
+      const result = await cloudinary.uploader.upload(req.body.image, options);
+      imageLink = result.url;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   try {
     await Information.create({
       author: req.body.author,
@@ -158,7 +172,7 @@ router.post("/create", async (req, res) => {
       likes: req.body.likes,
       dislikes: req.body.dislikes,
       score: req.body.score,
-      image: req.body.image,
+      image: imageLink,
     });
     return res.json({ status: "ok" });
   } catch (err) {

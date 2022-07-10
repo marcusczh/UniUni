@@ -46,7 +46,7 @@ function SpecificArticle() {
       .then(setFlag(!flag))
       .catch((error) => console.log(error));
   }, []);
-  
+
   //   useEffect(() => {
   //     const links = document.querySelectorAll(".link-con .navi-link");
 
@@ -90,7 +90,7 @@ function SpecificArticle() {
       </>
     );
   } else {
-    console.log(article[0].views)
+    //console.log(article[0].views);
     return (
       <>
         <TopContent />
@@ -106,6 +106,14 @@ function SpecificArticle() {
               <BookmarkButton user={user} title={article[0].title} />
             </div>
             <div className={articleStyles.articleContent}>
+              {article[0].image ? (
+                <div className={articleStyles.imageContainer}>
+                  <img
+                    className={articleStyles.picture}
+                    src={article[0].image}
+                  />
+                </div>
+              ) : null}
               {article[0].body.map((i, counter) => (
                 <>
                   <section id={counter}>

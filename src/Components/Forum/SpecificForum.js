@@ -169,11 +169,10 @@ function SpecificForum() {
             </div>
           </div>
           <div className={forumStyles.forumContent}>
-            {forum[0].image != null ? (
-              <img
-                //src={"image/jpeg" + forum[0].image}
-                alt="User submitted"
-              ></img>
+            {forum[0].image ? (
+              <div className={forumStyles.imageContainer}>
+                <img className={forumStyles.picture} src={forum[0].image} />
+              </div>
             ) : null}
             {forum[0].body[0].text}
           </div>
