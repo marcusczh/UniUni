@@ -11,6 +11,7 @@ const User = new mongoose.Schema(
     interests: { type: [String] },
     //bookmarks - An array of strings that keeps track of the titles of bookmarked posts
     bookmarks: { type: [String] },
+    profilePicture: { type: String },
   },
   { collection: "user-data" }
 );

@@ -4,6 +4,14 @@ const Information = require("./models/information.model");
 // const Forum = require("./models/forum.model");
 const router = express.Router();
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  secure: true,
+});
+
 //REGISTRATION & LOGIN
 //Logging in: Posting a username & password
 router.post("/login", async (req, res) => {
@@ -19,8 +27,25 @@ router.post("/login", async (req, res) => {
 
 //Registering an account: Posting
 router.post("/register", async (req, res) => {
-  //console.log(req.body);
+  let imageLink;
+  if (req.body.profilePicture != "") {
+    const options = {
+      use_filename: true,
+      unique_filename: true,
+      overwrite: true,
+    };
+    try {
+      const result = await cloudinary.uploader.upload(
+        req.body.profilePicture,
+        options
+      );
+      imageLink = result.url;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   try {
+    console.log(imageLink);
     await User.create({
       username: req.body.username,
       password: req.body.password,
@@ -30,6 +55,7 @@ router.post("/register", async (req, res) => {
       pastStatus: req.body.pastStatus,
       interests: req.body.interests,
       bookmarks: [],
+      profilePicture: imageLink,
     });
     return res.json({ status: "ok" });
   } catch (err) {

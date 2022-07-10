@@ -12,6 +12,7 @@ function SignupScreen() {
   const [basicInfo1, setBasicInfo1] = useState([]);
   const [basicInfo2, setBasicInfo2] = useState([]);
   const [basicInfo3, setBasicInfo3] = useState([]);
+  const [imageLink, setImageLink] = useState("");
 
   const basic1 = [
     "Junior College",
@@ -55,6 +56,7 @@ function SignupScreen() {
           currentStatus: basicInfo11,
           pastStatus: basicInfo1,
           interests: basicInfo2.concat(basicInfo3),
+          profilePicture: imageLink,
         })
         .then((res) => {
           if (res.data.status === "error") {
@@ -200,6 +202,18 @@ function SignupScreen() {
               placeholder="Type your password again"
               onChange={(e) => setPasswordCfm(e.target.value)}
             />
+          </div>
+          <div className={styles.questionContainer}>
+            <label for="profilepicture" className={styles.question}>
+              Provide a image link for your profile picture!
+            </label>
+
+            <input
+              type="text"
+              placeholder="Image Link"
+              onChange={(e) => setImageLink(e.target.value)}
+            />
+            <img src={`${imageLink}`} alt="No picture specified" />
           </div>
           <div className={styles.buttonContainer}>
             <button className={styles.button} onClick={submitSignUp}>
