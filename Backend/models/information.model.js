@@ -10,11 +10,12 @@ const Information = new mongoose.Schema(
     date: { type: Date, required: true },
     tags: { type: Array },
     body: [Section.schema],
-    likes: { type: Number },
-    dislikes: { type: Number },
+    likes: { type: [String] },
+    dislikes: { type: [String] },
     score: { type: Number },
     image: { type: String },
     comments: [comments.schema],
+    views: { type: Number },
   },
   { collection: "information" }
 );

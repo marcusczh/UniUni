@@ -14,6 +14,7 @@ function ArticlesCreation() {
   const [tags, setTags] = useState([]);
   const user = useSelector(selectUser);
   let navigate = useNavigate();
+  const [imageLink, setImageLink] = useState("");
 
   function submitArticle(event) {
     event.preventDefault();
@@ -29,6 +30,7 @@ function ArticlesCreation() {
         body: [obj],
         views: 0,
         author: user.username,
+        image: imageLink,
       })
       .then((res) => {
         if (res.data.status === "error") {
@@ -64,7 +66,7 @@ function ArticlesCreation() {
             <input
               type="text"
               placeholder="Header"
-              className={articleStyles.contentInput}
+              className={articleStyles.headerInput}
               value={header}
               id="formInput"
               onChange={(e) => setHeader(e.target.value)}
@@ -77,7 +79,14 @@ function ArticlesCreation() {
               id="formInput"
               onChange={(e) => setContent(e.target.value)}
             ></input>
-
+            <input
+              type="text"
+              placeholder="Image Link"
+              className={articleStyles.imageInput}
+              onChange={(e) => setImageLink(e.target.value)}
+            />
+            <img src={`${imageLink}`} alt="No picture specified" />
+            <br />
             <button
               className={articleStyles.button}
               onClick={(event) => navigate("/Articles", { replace: true })}

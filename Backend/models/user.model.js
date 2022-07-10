@@ -13,6 +13,7 @@ const User = new mongoose.Schema(
     bookmarks: { type: [String] },
     events: { type: [String] },
     teleHandle: { type: String },
+    profilePicture: { type: String },
   },
   { collection: "user-data" }
 );

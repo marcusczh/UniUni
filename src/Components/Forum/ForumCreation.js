@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 function ForumCreation() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState("");
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+  const [imageLink, setImageLink] = useState("");
 
   function submitForum(event) {
     event.preventDefault();
@@ -27,10 +27,10 @@ function ForumCreation() {
         body: [obj],
         views: 0,
         author: user.username,
-        likes: 0,
-        dislikes: 0,
+        likes: [],
+        dislikes: [],
         score: 0,
-        image: image,
+        image: imageLink,
       })
       .then((res) => {
         if (res.data.status === "error") {
@@ -40,20 +40,6 @@ function ForumCreation() {
         }
       })
       .catch((err) => console.log(err));
-    /* 
-    axios
-      .post("/api/uploadimage/" + title, {
-        image: image
-      })
-      .then((res) => {
-        if (res.data.status === "error") {
-          alert("error");
-        } else {
-          window.location.href = "./";
-        }
-      })
-      .catch((err) => console.log(err));
-      window.location.href = "./"; */
   }
 
   return (
@@ -85,10 +71,13 @@ function ForumCreation() {
               onChange={(e) => setContent(e.target.value)}
             ></input>
             <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setImage(e.target.value)}
-            ></input>
+              type="text"
+              placeholder="Image Link"
+              className={forumStyles.imageInput}
+              onChange={(e) => setImageLink(e.target.value)}
+            />
+            <img src={`${imageLink}`} alt="No picture specified" />
+            <br />
             <button
               className={forumStyles.buttonCreation}
               onClick={(event) => navigate("/Forum", { replace: true })}

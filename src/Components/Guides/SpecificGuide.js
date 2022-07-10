@@ -11,7 +11,9 @@ function SpecificGuide() {
   const { title } = useParams();
   const [guide, setGuide] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [flag, setFlag] = useState(true);
 
+  // Fetch data only after view count is updated
   useEffect(() => {
     axios
       .get("/api/information", {
@@ -24,6 +26,19 @@ function SpecificGuide() {
         setGuide(res.data);
         setLoading(false);
       })
+      .catch((error) => console.log(error));
+  }, [flag]);
+
+  // Update view count
+  useEffect(() => {
+    axios
+      .post("/api/informationviews", {
+        params: {
+          type: "Guide",
+          title: title,
+        },
+      })
+      .then(setFlag(!flag))
       .catch((error) => console.log(error));
   }, []);
 
@@ -60,7 +75,7 @@ function SpecificGuide() {
             <div className={guideStyles.guideHeader}>
               {guide[0].title}
               <br />
-              {guide[0].date} | {guide[0].tags}
+              {guide[0].date} | {guide[0].tags} | views: {guide[0].views}
             </div>
             <div className={guideStyles.guideContent}>
               {guide[0].body.map((i, counter) => (

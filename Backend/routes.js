@@ -5,6 +5,14 @@ const Events = require("./models/events.model");
 // const Forum = require("./models/forum.model");
 const router = express.Router();
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  secure: true,
+});
+
 //REGISTRATION & LOGIN
 //Logging in: Posting a username & password
 router.post("/login", async (req, res) => {
@@ -20,8 +28,25 @@ router.post("/login", async (req, res) => {
 
 //Registering an account: Posting
 router.post("/register", async (req, res) => {
-  //console.log(req.body);
+  let imageLink;
+  if (req.body.profilePicture != "") {
+    const options = {
+      use_filename: true,
+      unique_filename: true,
+      overwrite: true,
+    };
+    try {
+      const result = await cloudinary.uploader.upload(
+        req.body.profilePicture,
+        options
+      );
+      imageLink = result.url;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   try {
+    console.log(imageLink);
     await User.create({
       username: req.body.username,
       password: req.body.password,
@@ -31,6 +56,7 @@ router.post("/register", async (req, res) => {
       pastStatus: req.body.pastStatus,
       interests: req.body.interests,
       bookmarks: [],
+      profilePicture: imageLink,
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -75,7 +101,7 @@ router.post("/editprofile", async (req, res) => {
 //ARTICLES, GUIDES, INTERVIEWS, FORUM
 //Fetching information (Articles/Interviews/Guides/Forum)
 router.get("/information", async (req, res) => {
-  console.log(req.query);
+  //console.log(req.query);
   await Information.find(req.query)
     .sort({ views: -1 })
     .then((data) => {
@@ -88,7 +114,7 @@ router.get("/information", async (req, res) => {
 });
 
 router.post("/information", async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   await Information.find(req.body)
     .sort({ views: -1 })
     .then((data) => {
@@ -100,8 +126,41 @@ router.post("/information", async (req, res) => {
     });
 });
 
+//Updating view count
+router.post("/informationviews", async (req, res) => {
+  //console.log(req.body.params);
+  try {
+    await Information.findOneAndUpdate(
+      { type: req.body.params.type, title: req.body.params.title },
+      {
+        $inc: {
+          views: 1,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
 //Creating an article: Posting
 router.post("/create", async (req, res) => {
+  let imageLink;
+  if (req.body.image != "") {
+    const options = {
+      use_filename: true,
+      unique_filename: true,
+      overwrite: true,
+    };
+    try {
+      const result = await cloudinary.uploader.upload(req.body.image, options);
+      imageLink = result.url;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   try {
     await Information.create({
       author: req.body.author,
@@ -114,7 +173,7 @@ router.post("/create", async (req, res) => {
       likes: req.body.likes,
       dislikes: req.body.dislikes,
       score: req.body.score,
-      image: req.body.image,
+      image: imageLink,
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -487,9 +546,9 @@ router.post("/createcomment/:title", async (req, res) => {
   }
 });
 
-//Liking/Disliking a POST: Post req
+//Liking a POST: Post req
 router.post("/like/:title/:user", async (req, res) => {
-  console.log(req.params.user);
+  //console.log(req.params.user);
   try {
     Information.collection.findOneAndUpdate(
       {
@@ -498,9 +557,10 @@ router.post("/like/:title/:user", async (req, res) => {
       },
       {
         $inc: {
-          likes: req.body.likes,
-          dislikes: req.body.dislikes,
-          score: req.body.likes - req.body.dislikes,
+          score: 1,
+        },
+        $push: {
+          likes: req.body.user,
         },
       }
     );
@@ -510,7 +570,7 @@ router.post("/like/:title/:user", async (req, res) => {
       },
       {
         $inc: {
-          score: req.body.likes - req.body.dislikes,
+          score: 1,
         },
       }
     );
@@ -522,23 +582,238 @@ router.post("/like/:title/:user", async (req, res) => {
   }
 });
 
-//Liking/Disliking a COMMENT: Post req
-//TODO: Add in user filter
+//Disliking a POST: Post req
+router.post("/dislike/:title/:user", async (req, res) => {
+  //console.log(req.params.user);
+  try {
+    Information.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+        type: "Forum",
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+        $push: {
+          dislikes: req.body.user,
+        },
+      }
+    );
+    User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+      }
+    );
+    //User.collection.findOne({username: "UserScore"}).then((x) => console.log(x))
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Liking a POST: Post req
+router.post("/un-like/:title/:user", async (req, res) => {
+  //console.log(req.params.user);
+  try {
+    Information.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+        type: "Forum",
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+        $pull: {
+          likes: req.body.user,
+        },
+      }
+    );
+    User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: -1,
+        },
+      }
+    );
+    //User.collection.findOne({username: "UserScore"}).then((x) => console.log(x))
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Disliking a POST: Post req
+router.post("/un-dislike/:title/:user", async (req, res) => {
+  //console.log(req.params.user);
+  try {
+    Information.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+        type: "Forum",
+      },
+      {
+        $inc: {
+          score: 1,
+        },
+        $pull: {
+          dislikes: req.body.user,
+        },
+      }
+    );
+    User.collection.findOneAndUpdate(
+      {
+        username: req.params.user,
+      },
+      {
+        $inc: {
+          score: 1,
+        },
+      }
+    );
+    //User.collection.findOne({username: "UserScore"}).then((x) => console.log(x))
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Liking a COMMENT: Post req
 router.post("/likecomment/:title/:body/:user/:index", async (req, res) => {
   try {
     Information.collection.updateOne(
       {
         title: req.params.title,
         "comments.body": req.params.body,
+        "comments.author": req.params.user,
       },
       {
         $inc: {
-          "comments.$.likes": req.body.likes,
-          "comments.$.dislikes": req.body.dislikes,
-          "comments.$.score": req.body.likes - req.body.dislikes,
+          "comments.$.score": 1,
+        },
+        $push: {
+          "comments.$.likes": req.body.user,
         },
       }
     );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Disliking a COMMENT: Post req
+router.post("/dislikecomment/:title/:body/:user/:index", async (req, res) => {
+  try {
+    Information.collection.updateOne(
+      {
+        title: req.params.title,
+        "comments.body": req.params.body,
+        "comments.author": req.params.user,
+      },
+      {
+        $inc: {
+          "comments.$.score": -1,
+        },
+        $push: {
+          "comments.$.dislikes": req.body.user,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Liking a COMMENT: Post req
+router.post("/un-likecomment/:title/:body/:user/:index", async (req, res) => {
+  try {
+    Information.collection.updateOne(
+      {
+        title: req.params.title,
+        "comments.body": req.params.body,
+        "comments.author": req.params.user,
+      },
+      {
+        $inc: {
+          "comments.$.score": -1,
+        },
+        $pull: {
+          "comments.$.likes": req.body.user,
+        },
+      }
+    );
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+//Un-Disliking a COMMENT: Post req
+router.post(
+  "/un-dislikecomment/:title/:body/:user/:index",
+  async (req, res) => {
+    try {
+      Information.collection.updateOne(
+        {
+          title: req.params.title,
+          "comments.body": req.params.body,
+          "comments.author": req.params.user,
+        },
+        {
+          $inc: {
+            "comments.$.score": 1,
+          },
+          $pull: {
+            "comments.$.dislikes": req.body.user,
+          },
+        }
+      );
+      return res.json({ status: "ok" });
+    } catch (err) {
+      console.log(err);
+      return res.json({ status: "error", error: "Something bad happened." });
+    }
+  }
+);
+
+//Uploading an image for forum creation
+router.post("/uploadimage", async (req, res) => {
+  var image = req.body.image;
+  var encode = image.toString("base64");
+  var final = {
+    contentType: String,
+    image: Buffer.from(encode, "base64"),
+  };
+  try {
+    await Forum.create({
+      user: req.body.user,
+      title: req.body.title,
+      date: req.body.date,
+      body: req.body.body,
+      likes: req.body.likes,
+      dislikes: req.body.dislikes,
+      score: req.body.score,
+      tags: req.body.tags,
+      comments: req.body.comments,
+      image: encode,
+    });
     return res.json({ status: "ok" });
   } catch (err) {
     console.log(err);

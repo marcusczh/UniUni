@@ -33,24 +33,73 @@ function SpecificForum() {
       .catch((error) => console.log(error));
   }, []);
 
-  function increment(event, likes, dislikes) {
+  function like(event, currUser) {
     event.preventDefault();
-    axios
-      .post(`/api/like/${title}/${forum[0].author}`, {
-        likes: likes,
-        dislikes: dislikes,
-      })
-      .then(() =>
-        axios.get(`/api/information?title=${title}&type=Forum`).then((res) => {
-          setForum(res.data);
+    // user already liked the post, need to un-like
+    if (forum[0].likes.includes(currUser)) {
+      axios
+        .post(`/api/un-like/${title}/${forum[0].author}`, {
+          user: currUser,
         })
-      );
+        .then(() =>
+          axios
+            .get(`/api/information?title=${title}&type=Forum`)
+            .then((res) => {
+              setForum(res.data);
+            })
+        );
+      // like the post as per normal
+    } else {
+      axios
+        .post(`/api/like/${title}/${forum[0].author}`, {
+          user: currUser,
+        })
+        .then(() =>
+          axios
+            .get(`/api/information?title=${title}&type=Forum`)
+            .then((res) => {
+              setForum(res.data);
+            })
+        );
+    }
+  }
+
+  function dislike(event, currUser) {
+    event.preventDefault();
+    // user already disliked the post, need to un-dislike
+    if (forum[0].dislikes.includes(currUser)) {
+      //console.log(likers);
+      axios
+        .post(`/api/un-dislike/${title}/${forum[0].author}`, {
+          user: currUser,
+        })
+        .then(() =>
+          axios
+            .get(`/api/information?title=${title}&type=Forum`)
+            .then((res) => {
+              setForum(res.data);
+            })
+        );
+      // dislike the post as per normal
+    } else {
+      axios
+        .post(`/api/dislike/${title}/${forum[0].author}`, {
+          user: currUser,
+        })
+        .then(() =>
+          axios
+            .get(`/api/information?title=${title}&type=Forum`)
+            .then((res) => {
+              setForum(res.data);
+            })
+        );
+    }
   }
 
   if (loading) {
     return <div>loading...</div>;
   }
-  console.log(forum.length);
+
   if (forum.length === 0) {
     return (
       <>
@@ -81,31 +130,49 @@ function SpecificForum() {
             <br />
             {"By: " + forum[0].author}
             <br />
-            {forum[0].date} |{forum[0].tags} |{"Likes: " + forum[0].likes} |
-            {"Dislikes: " + forum[0].dislikes} |
+            {forum[0].date} |{forum[0].tags} |
+            {"Likes: " + forum[0].likes.length} |
+            {"Dislikes: " + forum[0].dislikes.length} |
             {"Comments: " + forum[0].comments.length}
             <div>
-              <button
-                className={forumStyles.moreOptions}
-                onClick={(event) => increment(event, 1, 0)}
-              >
-                like
-              </button>
-              <button
-                className={forumStyles.moreOptions}
-                onClick={(event) => increment(event, 0, 1)}
-              >
-                dislike
-              </button>
+              {forum[0].likes.includes(user.username) ? (
+                <button
+                  className={forumStyles.moreOptions}
+                  onClick={(event) => like(event, user.username)}
+                >
+                  un-like
+                </button>
+              ) : forum[0].dislikes.includes(user.username) ? null : (
+                <button
+                  className={forumStyles.moreOptions}
+                  onClick={(event) => like(event, user.username)}
+                >
+                  like
+                </button>
+              )}
+              {forum[0].dislikes.includes(user.username) ? (
+                <button
+                  className={forumStyles.moreOptions}
+                  onClick={(event) => dislike(event, user.username)}
+                >
+                  un-dislike
+                </button>
+              ) : forum[0].likes.includes(user.username) ? null : (
+                <button
+                  className={forumStyles.moreOptions}
+                  onClick={(event) => dislike(event, user.username)}
+                >
+                  dislike
+                </button>
+              )}
               <BookmarkButton user={user} title={forum[0].title} />
             </div>
           </div>
           <div className={forumStyles.forumContent}>
-            {forum[0].image != null ? (
-              <img
-                src={"image/jpeg" + forum[0].image}
-                alt="User submitted"
-              ></img>
+            {forum[0].image ? (
+              <div className={forumStyles.imageContainer}>
+                <img className={forumStyles.picture} src={forum[0].image} />
+              </div>
             ) : null}
             {forum[0].body[0].text}
           </div>

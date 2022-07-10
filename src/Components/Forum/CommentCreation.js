@@ -19,8 +19,8 @@ function CommentCreation() {
         body: body,
         date: Date(),
         author: user ? user.username : "anonymous",
-        likes: 0,
-        dislikes: 0,
+        likes: [],
+        dislikes: [],
         score: 0,
       })
       .then((res) => {

@@ -16,7 +16,9 @@ function SpecificArticle() {
   const [article, setArticle] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = useSelector(selectUser);
+  const [flag, setFlag] = useState(true);
 
+  // Fetch data only after view count is updated
   useEffect(() => {
     axios
       .get("/api/information", {
@@ -29,6 +31,19 @@ function SpecificArticle() {
         setArticle(res.data);
         setLoading(false);
       })
+      .catch((error) => console.log(error));
+  }, [flag]);
+
+  // Update view count
+  useEffect(() => {
+    axios
+      .post("/api/informationviews", {
+        params: {
+          type: "Article",
+          title: title,
+        },
+      })
+      .then(setFlag(!flag))
       .catch((error) => console.log(error));
   }, []);
 
@@ -75,6 +90,7 @@ function SpecificArticle() {
       </div>
     );
   } else {
+    //console.log(article[0].views);
     return (
       <div className={articleStyles.page}>
         <TopContent />
@@ -86,10 +102,18 @@ function SpecificArticle() {
             <div className={articleStyles.articleHeader}>
               {article[0].title}
               <br />
-              {article[0].date} | {article[0].tags}
+              {article[0].date} | {article[0].tags} | views: {article[0].views}
               <BookmarkButton user={user} title={article[0].title} />
             </div>
             <div className={articleStyles.articleContent}>
+              {article[0].image ? (
+                <div className={articleStyles.imageContainer}>
+                  <img
+                    className={articleStyles.picture}
+                    src={article[0].image}
+                  />
+                </div>
+              ) : null}
               {article[0].body.map((i, counter) => (
                 <>
                   <section id={counter}>

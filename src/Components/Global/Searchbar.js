@@ -8,7 +8,7 @@ import AddingTags from "./AddingTags";
 
 function SearchBar() {
   const [tags, setTags] = useState([]);
-  console.log(tags);
+  //console.log(tags);
   /**
    * input - of type String: Keeps track of input into search bar
    * results - of type Array: Keeps track of results returned by handleSearch
@@ -46,9 +46,9 @@ function SearchBar() {
     await axios
       .get(`/api/search?title=${input}&types=${categories}&tags=${tags}`)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setResults(res.data);
-        console.log(results);
+        //console.log(results);
         if (toggleSearch) {
           navigate(`/SearchResults/`, {
             replace: true,
