@@ -30,9 +30,14 @@ function SearchResults({ result }) {
           {result.body[0].text}
         </p>
         <div className={styles.stats}>
-          {"views: " + result.views + "  ||  "}
-          {"likes: " + result.likes + "  ||  "}
-          {"dislikes: " + result.dislikes + "  ||  "}
+          {result.type == "Forum" ? (
+            <>
+              {"likes: " + result.likes + "  ||  "}
+              {"dislikes: " + result.dislikes}
+            </>
+          ) : (
+            <>{"views: " + result.views}</>
+          )}
         </div>
       </div>
     </div>
