@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
 //Registering an account: Posting
 router.post("/register", async (req, res) => {
   let imageLink;
-  if (req.body.profilePicture != "") {
+  if (req.body.profilePicture !== "") {
     const options = {
       use_filename: true,
       unique_filename: true,
@@ -57,6 +57,7 @@ router.post("/register", async (req, res) => {
       interests: req.body.interests,
       bookmarks: [],
       profilePicture: imageLink ? imageLink : "",
+      teleHandle: req.body.teleHandle,
     });
     return res.json({ status: "ok" });
   } catch (err) {
@@ -148,7 +149,7 @@ router.post("/informationviews", async (req, res) => {
 //Creating an article: Posting
 router.post("/create", async (req, res) => {
   let imageLink;
-  if (req.body.image != "") {
+  if (req.body.image !== "") {
     const options = {
       use_filename: true,
       unique_filename: true,
@@ -794,32 +795,32 @@ router.post(
 );
 
 //Uploading an image for forum creation
-router.post("/uploadimage", async (req, res) => {
-  var image = req.body.image;
-  var encode = image.toString("base64");
-  var final = {
-    contentType: String,
-    image: Buffer.from(encode, "base64"),
-  };
-  try {
-    await Forum.create({
-      user: req.body.user,
-      title: req.body.title,
-      date: req.body.date,
-      body: req.body.body,
-      likes: req.body.likes,
-      dislikes: req.body.dislikes,
-      score: req.body.score,
-      tags: req.body.tags,
-      comments: req.body.comments,
-      image: encode,
-    });
-    return res.json({ status: "ok" });
-  } catch (err) {
-    console.log(err);
-    return res.json({ status: "error", error: "Something bad happened." });
-  }
-});
+// router.post("/uploadimage", async (req, res) => {
+//   var image = req.body.image;
+//   var encode = image.toString("base64");
+//   var final = {
+//     contentType: String,
+//     image: Buffer.from(encode, "base64"),
+//   };
+//   try {
+//     await Forum.create({
+//       user: req.body.user,
+//       title: req.body.title,
+//       date: req.body.date,
+//       body: req.body.body,
+//       likes: req.body.likes,
+//       dislikes: req.body.dislikes,
+//       score: req.body.score,
+//       tags: req.body.tags,
+//       comments: req.body.comments,
+//       image: encode,
+//     });
+//     return res.json({ status: "ok" });
+//   } catch (err) {
+//     console.log(err);
+//     return res.json({ status: "error", error: "Something bad happened." });
+//   }
+// });
 
 //Creating a forum post: Posting
 /* router.post("/createforum", async (req, res) => {

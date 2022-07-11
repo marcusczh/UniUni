@@ -13,6 +13,7 @@ function SignupScreen() {
   const [basicInfo2, setBasicInfo2] = useState([]);
   const [basicInfo3, setBasicInfo3] = useState([]);
   const [imageLink, setImageLink] = useState("");
+  const [teleHandle, setTeleHandle] = useState("@");
 
   const basic1 = [
     "Junior College",
@@ -47,7 +48,8 @@ function SignupScreen() {
   function submitSignUp(event) {
     event.preventDefault();
     const match = password === passwordCfm;
-    if (username && password && match) {
+    const tele = teleHandle !== "@" || teleHandle !== "";
+    if (username && password && match && tele) {
       axios
         .post("/api/register", {
           username: username,
@@ -57,6 +59,7 @@ function SignupScreen() {
           pastStatus: basicInfo1,
           interests: basicInfo2.concat(basicInfo3),
           profilePicture: imageLink,
+          teleHandle: teleHandle,
         })
         .then((res) => {
           if (res.data.status === "error") {
@@ -68,6 +71,8 @@ function SignupScreen() {
         });
     } else if (!match) {
       alert("Passwords do not match");
+    } else if (!tele) {
+      alert("Please input your telegram handle");
     } else {
       alert("Invalid input");
     }
@@ -202,6 +207,15 @@ function SignupScreen() {
               placeholder="Type your password again"
               onChange={(e) => setPasswordCfm(e.target.value)}
             />
+
+            <label for="teleHandle">Telegram Handle? </label>
+            <input
+              id="teleHandle"
+              type="text"
+              value={teleHandle}
+              placeholder="@"
+              onChange={(e) => setTeleHandle(e.target.value)}
+            />
           </div>
           <div className={styles.questionContainer}>
             <label for="profilepicture" className={styles.question}>
@@ -213,7 +227,7 @@ function SignupScreen() {
               placeholder="Image Link"
               onChange={(e) => setImageLink(e.target.value)}
             />
-            <img src={`${imageLink}`} alt="No picture specified" />
+            <img src={`${imageLink}`} alt="No pic specified" />
           </div>
           <div className={styles.buttonContainer}>
             <button className={styles.button} onClick={submitSignUp}>
