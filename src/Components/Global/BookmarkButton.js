@@ -30,8 +30,8 @@ export default function BookmarkButton({
               if (res.data.user.events[i] === title) {
                 setBookmarked(true);
               }
-              setLoading(false);
             }
+            setLoading(false);
             console.log(res.data.user.events);
           });
       } else {
@@ -43,8 +43,8 @@ export default function BookmarkButton({
               if (res.data.user.bookmarks[i] === title) {
                 setBookmarked(true);
               }
-              setLoading(false);
             }
+            setLoading(false);
             console.log(res.data.user.bookmarks);
           });
       }
