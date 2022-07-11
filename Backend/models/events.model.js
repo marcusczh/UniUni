@@ -4,6 +4,7 @@ const comments = require("./comments.model.js");
 const Events = new mongoose.Schema(
   {
     author: { type: String, required: true },
+    authorTele: { type: String, required: true },
     title: { type: String, required: true, unique: true },
     date: { type: Date, required: true },
     time: { type: String, requirde: true },
