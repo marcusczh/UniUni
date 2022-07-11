@@ -53,6 +53,7 @@ function EventCreation() {
     axios
       .post("/api/events/create", {
         author: user.username,
+        authorTele: user.teleHandle,
         title: title,
         time: time,
         date: date,
