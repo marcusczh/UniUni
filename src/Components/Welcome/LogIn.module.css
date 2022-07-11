@@ -21,6 +21,7 @@ body {
   border: 1px solid gainsboro;
   transform: translate(6%, 50%);
   transition: all 0.4s;
+  margin-bottom: 5%;
 }
 
 .logInButton:hover {

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { login, selectUser } from "../../features/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function LogInScreen() {
   const [username, setUsername] = useState("");
@@ -70,16 +70,28 @@ function LogInScreen() {
             ></input>
           </form>
         </div>
-        <button
-          type="submit"
-          className={styles.logInButton}
-          id="loginButton"
-          onClick={(e) => {
-            loginUser(e);
-          }}
-        >
-          Log In
-        </button>
+        <div>
+          <button
+            type="submit"
+            className={styles.logInButton}
+            id="loginButton"
+            onClick={(e) => {
+              loginUser(e);
+            }}
+          >
+            Log In
+          </button>
+          <br />
+          <button
+            className={styles.logInButton}
+            id="signUpButton"
+            onClick={(e) => {
+              navigate("../SignUp", { replace: true });
+            }}
+          >
+            Sign Up
+          </button>
+        </div>
       </div>
     </>
   );
