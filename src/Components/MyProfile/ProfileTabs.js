@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { useState } from "react";
 import Posts from "../Forum/Posts";
 import "./ProfileTabs.css";
+import List from "../Articles/List";
 
 export default function ProfileTabs({ posts }) {
   const [numPosts, setNumPosts] = useState(4);
@@ -17,7 +18,6 @@ export default function ProfileTabs({ posts }) {
             <Tab>Interviews</Tab>
             <Tab>Forums</Tab>
             <Tab disabled>Events</Tab>
-            <Tab disabled>Your chats</Tab>
           </TabList>
         </div>
       </div>
@@ -27,7 +27,7 @@ export default function ProfileTabs({ posts }) {
             {posts
               .filter((post) => post.type === "Article")
               .sort((a, b) => b.score - a.score)
-              .map((post) => <Posts post={post} />)
+              .map((post) => <List post={post} />)
               .slice(0, Math.min(numPosts, posts.length))}
           </div>
         ) : null}
@@ -38,7 +38,7 @@ export default function ProfileTabs({ posts }) {
             {posts
               .filter((post) => post.type === "Guide")
               .sort((a, b) => b.score - a.score)
-              .map((post) => <Posts post={post} />)
+              .map((post) => <List post={post} />)
               .slice(0, Math.min(numPosts, posts.length))}
           </div>
         ) : null}
@@ -50,7 +50,7 @@ export default function ProfileTabs({ posts }) {
               .filter((post) => post.type === "Interview")
               .sort((a, b) => b.score - a.score)
 
-              .map((post) => <Posts post={post} />)
+              .map((post) => <List post={post} />)
               .slice(0, Math.min(numPosts, posts.length))}
           </div>
         ) : null}
@@ -70,9 +70,6 @@ export default function ProfileTabs({ posts }) {
       <TabPanel>
         <p>temp Events</p>
       </TabPanel>
-      <TabPanel>
-        <p>temp Chats</p>
-      </TabPanel>
     </Tabs>
   ) : (
     <Tabs className="Tabs">
@@ -85,11 +82,9 @@ export default function ProfileTabs({ posts }) {
             <Tab>Interviews</Tab>
             <Tab>Forums</Tab>
             <Tab disabled>Events</Tab>
-            <Tab disabled>Your chats</Tab>
           </TabList>
         </div>
       </div>
-      <TabPanel>Please log-in first</TabPanel>
       <TabPanel>Please log-in first</TabPanel>
       <TabPanel>Please log-in first</TabPanel>
       <TabPanel>Please log-in first</TabPanel>
