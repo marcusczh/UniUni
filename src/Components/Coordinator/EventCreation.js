@@ -10,6 +10,7 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
 import { Calendar } from "react-date-range";
+import TeleInfo from "./TeleInfo";
 
 function EventCreation() {
   const [title, setTitle] = useState("");
