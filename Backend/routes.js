@@ -56,7 +56,7 @@ router.post("/register", async (req, res) => {
       pastStatus: req.body.pastStatus,
       interests: req.body.interests,
       bookmarks: [],
-      profilePicture: imageLink,
+      profilePicture: imageLink ? imageLink : "",
     });
     return res.json({ status: "ok" });
   } catch (err) {
