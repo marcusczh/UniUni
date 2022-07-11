@@ -7,13 +7,14 @@ import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 
 function EditProfile({ setUserDetails }) {
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
   const [bio, setBio] = useState("No bio found");
   const [basicInfo11, setBasicInfo11] = useState("");
   const [basicInfo1, setBasicInfo1] = useState([]);
   const [basicInfo2, setBasicInfo2] = useState([]);
   const [basicInfo3, setBasicInfo3] = useState([]);
-  const user = useSelector(selectUser);
-  const navigate = useNavigate();
+  const [teleHandle, setTeleHandle] = useState([]);
 
   const basic1 = [
     "Junior College",
@@ -53,6 +54,7 @@ function EditProfile({ setUserDetails }) {
         currentStatus: basicInfo11,
         pastStatus: basicInfo1,
         interests: basicInfo2.concat(basicInfo3),
+        teleHandle: teleHandle,
       })
       .then(() => {
         axios.get(`/api/profile?username=${user.username}`).then((res) => {
@@ -166,6 +168,19 @@ function EditProfile({ setUserDetails }) {
                 ))}
               </select>
             </p>
+          </div>
+
+          <div className={styles.questionContainer}>
+            <label className={styles.question} for="teleHandle">
+              Telegram Handle?{" "}
+            </label>
+            <input
+              id="teleHandle"
+              type="text"
+              value={teleHandle}
+              placeholder="@"
+              onChange={(e) => setTeleHandle(e.target.value)}
+            />
           </div>
 
           <div className={styles.buttonContainer}>
