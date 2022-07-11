@@ -219,7 +219,7 @@ body {
   left: 25%;
   top: 25%;
   width: 50vw;
-  height: 30vh;
+  height: 50vh;
   margin-top: 2%;
   border-radius: 10px;
   padding: 1%;
@@ -232,6 +232,7 @@ body {
 
 .checkbox {
   cursor: pointer;
+  margin-bottom: 2%;
 }
 
 .tagsLabel {
