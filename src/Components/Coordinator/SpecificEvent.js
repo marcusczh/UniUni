@@ -12,6 +12,7 @@ import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import EventActions from "./EventActions";
+import TeleInfo from "./TeleInfo";
 
 function SpecificEvent() {
   const { title } = useParams();
@@ -84,6 +85,7 @@ function SpecificEvent() {
         <div>
           <SearchBar />
         </div>
+        <TeleInfo />
         <div>
           <div className={eventStyles.eventHeader}>
             {event[0].title}

@@ -11,6 +11,7 @@ import styles from "./Coordinator.module.css";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import EventActions from "./EventActions";
+import TeleInfo from "./TeleInfo";
 
 function EventManagement() {
   const [events, setEvents] = useState(null);
@@ -54,11 +55,13 @@ function EventManagement() {
       <TopContent />
       <div>
         <SearchBar />
+        <TeleInfo />
         <EventActions numEvents={numEvents} viewMore={viewMore} />
       </div>
       <button className={styles.button}>
         <Link to={`../Coordinator`}>Back</Link>
       </button>
+
       <div>
         {events.slice(0, Math.min(numEvents, events.length)).map((event) => (
           <Events event={event}>
