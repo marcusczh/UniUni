@@ -42,8 +42,29 @@ function AddingTags({ setTags }) {
     //console.log(occupations);
   } */
 
-  const Courses = ["Healthcare", "Engineering", "Business", "Computing"];
-  const Occupations = ["Junior College", "Polytechnic", "Served NS", "Working"];
+  const Courses = [
+    "Healthcare",
+    "Engineering",
+    "Business",
+    "Computing",
+    "Arts and Humanities",
+    "Law and Policy",
+  ];
+  const Courses2 = [
+    "Social Sciences",
+    "Design and Environment",
+    "Mathematics and Science",
+  ];
+  const Occupations = [
+    "Junior College",
+    "Polytechnic",
+    "ITE",
+    "NS",
+    "Working",
+    "Overseas",
+  ];
+  const Others = ["Personal Finance", "Adulting", "Part-time Jobs", "Career"];
+
   return (
     <>
       {!modal && (
@@ -72,11 +93,42 @@ function AddingTags({ setTags }) {
                   </label>
                 </>
               ))}
+              <br />
+              {Courses2.map((i) => (
+                <>
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox}
+                    id={i}
+                    onChange={() => addTags(i)}
+                  />
+                  <label className={styles.tagsLabel} htmlFor={i}>
+                    {i}
+                  </label>
+                </>
+              ))}
             </div>
             <button className={styles.accordion}>Occupation:</button>
 
             <div className={styles.tagsList}>
               {Occupations.map((i) => (
+                <>
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox}
+                    id={i}
+                    onClick={() => addTags(i)}
+                  />
+                  <label className={styles.tagsLabel} htmlFor={i}>
+                    {i}
+                  </label>
+                </>
+              ))}
+            </div>
+            <button className={styles.accordion}>Others:</button>
+
+            <div className={styles.tagsList}>
+              {Others.map((i) => (
                 <>
                   <input
                     type="checkbox"

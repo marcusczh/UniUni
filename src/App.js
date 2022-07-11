@@ -26,6 +26,8 @@ import EditProfile from "./Components/MyProfile/EditProfile";
 import Coordinator from "./Components/Coordinator/Coordinator";
 import EventCreation from "./Components/Coordinator/EventCreation";
 import SpecificEvent from "./Components/Coordinator/SpecificEvent";
+import EventManagement from "./Components/Coordinator/EventManagement";
+import EventCommentCreation from "./Components/Coordinator/EventCommentCreation";
 
 function App() {
   const [userDetails, setUserDetails] = React.useState([]);
@@ -70,6 +72,11 @@ function App() {
           <Route path="Coordinator" element={<Coordinator />}></Route>
           <Route path="Coordinator/Create" element={<EventCreation />} />
           <Route path="Coordinator/:title" element={<SpecificEvent />} />
+          <Route path="Coordinator/MyEvents" element={<EventManagement />} />
+          <Route
+            path="Coordinator/:title/CreateComment"
+            element={<EventCommentCreation />}
+          />
         </Routes>
       </Provider>
     </div>

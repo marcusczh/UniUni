@@ -27,7 +27,9 @@ function navBar() {
             </Link>
           </li>
           <li className={styles.listItem}>
-            <Link to="/Coordinator">Coordinator</Link>
+            <Link to="/Coordinator" className={styles.navBarLink}>
+              Coordinator
+            </Link>
           </li>
         </ul>
       </nav>

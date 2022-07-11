@@ -209,3 +209,60 @@
   min-height: 50px;
   max-height: 180px;
 }
+
+/*DeleteEvent stuff*/
+.confirmationPopup {
+  position: fixed;
+  width: 50vw;
+  height: 30vh;
+  top: 25%;
+  left: 25%;
+  background: whitesmoke;
+  border: 1px black solid;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  align-items: center;
+  padding-top: 10%;
+  font-size: 1.3rem;
+}
+
+.buttonContainer {
+  display: flex;
+  flex: 1;
+  width: 90%;
+  padding: 2%;
+}
+.buttonContainer button {
+  flex: 1;
+  height: 100%;
+  margin: 0% 1%;
+  border-radius: 3%;
+  border: 0;
+  background-color: #f2cc8f;
+  box-shadow: -3px 3px #ba9869;
+}
+.buttonContainer .yes {
+  background-color: rgba(180, 60, 60);
+  color: #eeeeee;
+}
+
+.postWarning {
+  color: crimson;
+  flex: 2;
+}
+
+.toggle {
+  font-weight: 600;
+  border: none;
+  background-color: white;
+}
+
+/* Comments */
+.comments {
+  background: white;
+  border: 3px #f2cc8f solid;
+  border-radius: 5px;
+  margin-bottom: 1%;
+}
