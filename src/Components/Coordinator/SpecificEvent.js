@@ -2,7 +2,7 @@
 import SearchBar from "../Global/Searchbar";
 import BookmarkButton from "../Global/BookmarkButton";
 import eventStyles from "./Coordinator.module.css";
-import Comments from "../Forum/Comments";
+import Comments from "./Comments";
 import TopContent from "../Global/TopContent";
 import { useParams } from "react-router-dom";
 import { React, useState, useEffect } from "react";
@@ -139,7 +139,7 @@ function SpecificEvent() {
           ))}
         {user ? (
           //Re-map to event comments
-          <Link to={`./placeholder?title=${event[0].title}`}>
+          <Link to={`./CreateComment?title=${event[0].title}`}>
             <button>Create Comment</button>
           </Link>
         ) : (
