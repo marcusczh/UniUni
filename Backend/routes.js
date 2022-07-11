@@ -518,7 +518,7 @@ router.delete("/information/:title/:_id/:user", async (req, res) => {
 
 module.exports = router;
 
-//Creating a comment: Posting
+//Creating a forum comment: Posting
 router.post("/createcomment/:title", async (req, res) => {
   try {
     await Information.collection.findOneAndUpdate(
@@ -1007,6 +1007,57 @@ router.delete("/events/leave", async (req, res) => {
       }
     );
     console.log("Left event");
+    return res.json({ status: "ok" });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error", error: "Something bad happened." });
+  }
+});
+
+// Delete events
+router.delete("/events/:title/:_id/:user", async (req, res) => {
+  try {
+    const result = await Events.findOneAndDelete({
+      title: req.params.title,
+      _id: req.params._id,
+      user: req.params.user,
+    });
+    if (!result) {
+      res.json({
+        status: "error",
+        error: "Could not delete post",
+      });
+    } else {
+      console.log("Post deleted");
+      res.json({
+        status: "ok",
+      });
+    }
+  } catch (e) {
+    res.send(e);
+  }
+});
+
+//Creating an event comment: Posting
+router.post("/events/createcomment/:title", async (req, res) => {
+  try {
+    await Events.collection.findOneAndUpdate(
+      {
+        title: req.params.title,
+      },
+      {
+        $push: {
+          comments: {
+            body: req.body.body,
+            date: req.body.date,
+            author: req.body.author,
+            likes: req.body.likes,
+            dislikes: req.body.dislikes,
+            score: req.body.score,
+          },
+        },
+      }
+    );
     return res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
