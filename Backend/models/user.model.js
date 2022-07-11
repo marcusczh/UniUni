@@ -12,7 +12,7 @@ const User = new mongoose.Schema(
     //bookmarks - An array of strings that keeps track of the titles of bookmarked posts
     bookmarks: { type: [String] },
     events: { type: [String] },
-    teleHandle: { type: String },
+    teleHandle: { type: String, required: true, unique: true },
     profilePicture: { type: String },
   },
   { collection: "user-data" }
