@@ -1,31 +1,79 @@
-import styles from "./HomePage.module.css";
+import axios from "axios";
+import articleStyles from "../Articles/Articles.module.css";
+import { useState, useEffect } from "react";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
+import BookmarkButton from "../Global/BookmarkButton";
 
-function feed() {
-    return (
-        <>
-        <div className={styles.feed}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Vestibulum vel risus condimentum enim scelerisque viverra at vitae tortor. 
-        Mauris dignissim magna a ante commodo, vel blandit ante feugiat. 
-        Aenean odio turpis, finibus at congue quis, volutpat sed orci. 
-        Pellentesque enim odio, fringilla in suscipit id, iaculis vitae magna. 
-        Donec fringilla dapibus mauris eget ultricies. 
-        Nullam tellus lacus, vulputate sit amet fringilla sed, fermentum rhoncus enim. 
-        Cras arcu leo, egestas nec tincidunt a, fermentum imperdiet nulla. Vestibulum tristique lobortis egestas. 
-        In aliquam est vel ornare volutpat. Nulla posuere nisi porttitor felis scelerisque, id finibus lectus sollicitudin. 
-        Quisque laoreet vestibulum laoreet.
-        Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-        per inceptos himenaeos. Sed eget nisi augue. Nam feugiat justo non orci scelerisque venenatis. 
-        Nam volutpat mollis bibendum. Nunc ac scelerisque nunc, in porttitor nisl. Quisque finibus sit amet ante ac bibendum. 
-        Donec scelerisque nibh non sapien ullamcorper, ut condimentum eros facilisis. 
-        Nullam suscipit sapien quis nibh consequat, eu volutpat nulla ornare. Cras volutpat, justo eu fermentum feugiat, 
-        ante enim faucibus nisi, sed semper velit eros facilisis sapien. Morbi placerat dignissim turpis ut posuere. 
-        Donec vitae tortor a nunc laoreet pretium nec vel est. Nunc scelerisque nulla id elementum volutpat. 
-        Mauris dignissim egestas lobortis. Aenean ac condimentum odio, id aliquet velit. Nullam dictum dolor in ante dapibus, 
-        vitae malesuada tortor commodo.
+function Feed() {
+  const user = useSelector(selectUser);
+  const [results, setResults] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+
+  async function handleSearch() {
+    let tags = [];
+    const current = user
+      ? user.currentStatus === ""
+        ? []
+        : [user.currentStatus]
+      : [];
+    tags = user ? tags.concat(user.interests.concat(current)) : [];
+    //console.log(categories);
+    //Queries articles/guides/interviews with the search input
+    console.log(tags);
+    await axios
+      .get(`/api/search?title=${[]}&types=${[]}&tags=${[tags]}`)
+      .then((res) => {
+        //console.log(res.data);
+        setResults(res.data);
+        console.log(results);
+      });
+  }
+
+  useEffect(() => {
+    handleSearch();
+    setLoaded(true);
+  }, []);
+
+  return results.length === 0 ? null : loaded ? (
+    <div className={articleStyles.layout}>
+      <div>
+        <div className={articleStyles.articleHeader}>
+          {results[0].title}
+          <br />
+          {results[0].date} | {results[0].tags} | views: {results[0].views}
+          <BookmarkButton user={user} title={results[0].title} />
         </div>
-    </>
-    );
+        <div className={articleStyles.articleContent}>
+          {results[0].image ? (
+            <div className={articleStyles.imageContainer}>
+              <img
+                className={articleStyles.picture}
+                src={results[0].image}
+                alt="ArticlePhoto"
+              />
+            </div>
+          ) : null}
+          {results[0].body.map((i, counter) => (
+            <>
+              <section id={counter}>
+                <b>
+                  <u>{i.header}</u>
+                </b>
+              </section>
+              <br />
+              <div>{i.text}</div>
+              <br />
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className={articleStyles.layout}>
+      <div className={articleStyles.article}>loading ... </div>
+    </div>
+  );
 }
 
-export default feed;
+export default Feed;
