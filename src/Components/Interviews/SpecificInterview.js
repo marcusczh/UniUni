@@ -82,10 +82,17 @@ function SpecificInterview() {
         <div className={interviewStyles.layout}>
           <div>
             <div className={interviewStyles.interviewHeader}>
-              {interview[0].title}
-              <br />
-              {interview[0].date} | {interview[0].tags.slice(0, 3).join(" & ")}{" "}
-              | views: {interview[0].views}
+              <span>
+                {interview[0].title}
+                <br />
+                {interview[0].date} | views: {interview[0].views}
+                <br />
+                {interview[0].tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className={interviewStyles.tags}>
+                    {tag}
+                  </span>
+                ))}
+              </span>
               <BookmarkButton user={user} title={interview[0].title} />
             </div>
             <div className={interviewStyles.interviewContent}>

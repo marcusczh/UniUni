@@ -90,13 +90,20 @@ function SpecificEvent() {
         <TeleInfo />
         <div>
           <div className={eventStyles.eventHeader}>
-            {event[0].title}
-            <br />
-            {"By: " + event[0].author}
-            <br />
-            {"Date: " + format(new Date(event[0].date), "MM/dd/yyyy")} |
-            {event[0].tags.slice(0, 3).join(" & ")}|
-            {"Participants: " + event[0].participants.length}
+            <span>
+              {event[0].title}
+              <br />
+              {"By: " + event[0].author}
+              <br />
+              {"Date: " + format(new Date(event[0].date), "MM/dd/yyyy")} |
+              {"Participants: " + event[0].participants.length}
+              <br />
+              {event[0].tags.slice(0, 3).map((tag) => (
+                <span key={tag} className={eventStyles.tags}>
+                  {tag}
+                </span>
+              ))}
+            </span>
             <div>
               {event[0].participants.includes(user.username) ? (
                 <BookmarkButton

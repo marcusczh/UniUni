@@ -143,3 +143,11 @@
   min-height: 50px;
   max-height: 180px;
 }
+
+.tags {
+  background-color: #74d4ef;
+  border-radius: 5px;
+  border: 1px black solid;
+  margin-right: 1%;
+  padding: 0.5%;
+}
