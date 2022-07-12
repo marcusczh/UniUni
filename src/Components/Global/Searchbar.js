@@ -41,7 +41,9 @@ function SearchBar() {
     OPTIONS.map((i) => {
       categories = types.checkboxes[i] ? [...categories, i] : categories;
     });
-    //console.log(categories);
+    console.log("Cat" + categories);
+    console.log("input" + input);
+    console.log(tags);
     //Queries articles/guides/interviews with the search input
     await axios
       .get(`/api/search?title=${input}&types=${categories}&tags=${tags}`)
