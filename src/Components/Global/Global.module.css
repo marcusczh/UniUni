@@ -24,6 +24,7 @@ body {
   width: 100%;
   border: 5px #f2cc8f solid;
   color: white;
+  text-decoration: none;
 }
 
 .list {
@@ -36,7 +37,8 @@ body {
 
 .listItem {
   display: block;
-  text-decoration-color: white;
+  text-decoration: none;
+  color: white;
   list-style-type: none;
   padding: 10px;
 }

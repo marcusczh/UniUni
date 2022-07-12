@@ -77,8 +77,13 @@ body {
 }
 
 .feed {
-  background-color: white;
-  border: 3px #f2cc8f solid;
-  margin-top: 2%;
-  border-radius: 10px;
+  margin: 2% 5% 2% 5%;
+}
+
+.feature {
+  font-size: xx-large;
+  color: #ffb703;
+  margin-top: 3%;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
