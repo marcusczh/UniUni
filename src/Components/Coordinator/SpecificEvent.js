@@ -35,6 +35,7 @@ function SpecificEvent() {
       .put(`/api/events/join`, {
         title: title,
         username: user.username,
+        telegramHandle: user.teleHandle,
       })
       .then(() =>
         axios.get(`/api/events?title=${title}`).then((res) => {
@@ -49,6 +50,7 @@ function SpecificEvent() {
         data: {
           title: title,
           username: user.username,
+          telegramHandle: user.teleHandle,
         },
       })
       .then(() =>
@@ -92,7 +94,8 @@ function SpecificEvent() {
             <br />
             {"By: " + event[0].author}
             <br />
-            {"Date: " + format(new Date(event[0].date), "MM/dd/yyyy")} ||
+            {"Date: " + format(new Date(event[0].date), "MM/dd/yyyy")} |
+            {event[0].tags.slice(0, 3).join(" & ")}|
             {"Participants: " + event[0].participants.length}
             <div>
               {event[0].participants.includes(user.username) ? (
