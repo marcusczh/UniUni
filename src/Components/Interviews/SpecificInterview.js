@@ -84,8 +84,8 @@ function SpecificInterview() {
             <div className={interviewStyles.interviewHeader}>
               {interview[0].title}
               <br />
-              {interview[0].date} | {interview[0].tags} | views:{" "}
-              {interview[0].views}
+              {interview[0].date} | {interview[0].tags.slice(0, 3).join(" & ")}{" "}
+              | views: {interview[0].views}
               <BookmarkButton user={user} title={interview[0].title} />
             </div>
             <div className={interviewStyles.interviewContent}>

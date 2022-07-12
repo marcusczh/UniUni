@@ -90,7 +90,6 @@ function SpecificArticle() {
       </div>
     );
   } else {
-    //console.log(article[0].views);
     return (
       <div className={articleStyles.page}>
         <TopContent />
@@ -102,7 +101,8 @@ function SpecificArticle() {
             <div className={articleStyles.articleHeader}>
               {article[0].title}
               <br />
-              {article[0].date} | {article[0].tags} | views: {article[0].views}
+              {article[0].date} | {article[0].tags.slice(0, 3).join(" & ")} |
+              views: {article[0].views}
               <BookmarkButton user={user} title={article[0].title} />
             </div>
             <div className={articleStyles.articleContent}>

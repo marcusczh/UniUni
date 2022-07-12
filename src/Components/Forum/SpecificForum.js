@@ -130,7 +130,7 @@ function SpecificForum() {
             <br />
             {"By: " + forum[0].author}
             <br />
-            {forum[0].date} |{forum[0].tags} |
+            {forum[0].date} | {forum[0].tags.slice(0, 3).join(" & ")}|
             {"Likes: " + forum[0].likes.length} |
             {"Dislikes: " + forum[0].dislikes.length} |
             {"Comments: " + forum[0].comments.length}

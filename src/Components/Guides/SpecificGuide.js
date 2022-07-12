@@ -75,7 +75,8 @@ function SpecificGuide() {
             <div className={guideStyles.guideHeader}>
               {guide[0].title}
               <br />
-              {guide[0].date} | {guide[0].tags} | views: {guide[0].views}
+              {guide[0].date} | {guide[0].tags.slice(0, 3).join(" & ")} | views:{" "}
+              {guide[0].views}
             </div>
             <div className={guideStyles.guideContent}>
               {guide[0].body.map((i, counter) => (
