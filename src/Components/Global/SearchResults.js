@@ -30,7 +30,7 @@ function SearchResults({ result }) {
           {result.body[0].text}
         </p>
         <div className={styles.stats}>
-          {result.type == "Forum" ? (
+          {result.type === "Forum" ? (
             <>
               {"likes: " + result.likes + "  ||  "}
               {"dislikes: " + result.dislikes}
