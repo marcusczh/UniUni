@@ -53,7 +53,11 @@ const eventIdWizard = new Scenes.WizardScene(
             }\nDetails: ${res.data[0].body[0].text}`;
             ctx.session.handles = `These are the participants for your event👫:\n${res.data[0].participantsTele
               .map((elem) => {
-                return `@${elem}`;
+                if (elem[0] == "@") {
+                  return `${elem}`;
+                } else {
+                  return `@${elem}`;
+                }
               })
               .join("\n")}`;
             ctx.reply(`${ctx.session.handles}\n\n${ctx.session.details}`);
