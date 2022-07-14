@@ -39,9 +39,17 @@ function Feed() {
     <div className={articleStyles.layout}>
       <div>
         <div className={articleStyles.articleHeader}>
-          {results[0].title}
-          <br />
-          {results[0].date} | {results[0].tags} | views: {results[0].views}
+          <span>
+            {results[0].title}
+            <br />
+            {results[0].date} | views: {results[0].views}
+            <br />
+            {results[0].tags.slice(0, 3).map((tag) => (
+              <span key={tag} className={articleStyles.tags}>
+                {tag}
+              </span>
+            ))}
+          </span>
           <BookmarkButton user={user} title={results[0].title} />
         </div>
         <div className={articleStyles.articleContent}>
