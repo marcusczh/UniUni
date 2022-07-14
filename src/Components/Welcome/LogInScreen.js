@@ -15,22 +15,27 @@ function LogInScreen() {
 
   async function loginUser(event) {
     event.preventDefault();
+    if (username && password) {
+      axios
+        .post("/api/login", {
+          username: username,
+          password: password,
+        })
+        .then((res) => {
+          if (res.data.user) {
+            //alert("Login successful");
 
-    axios
-      .post("/api/login", {
-        username: username,
-        password: password,
-      })
-      .then((res) => {
-        if (res.data.user) {
-          alert("Login successful");
-
-          dispatch(login(res.data.user));
-          navigate("../HomePage", { replace: true });
-        } else {
-          alert("Please check your username and password");
-        }
-      });
+            dispatch(login(res.data.user));
+            navigate("../HomePage", { replace: true });
+          } else {
+            alert("Please check your username and password");
+          }
+        });
+    } else if (!username) {
+      alert("Please enter your username");
+    } else {
+      alert("Please enter your password");
+    }
   }
 
   return (
@@ -51,14 +56,15 @@ function LogInScreen() {
               value={username}
               id="formInput"
               onChange={(e) => setUsername(e.target.value)}
+              data-testid="username"
             ></input>
           </form>
           <label>Password:</label>
           <form
-            onSubmit={async (e) => {
+          /* onSubmit={async (e) => {
               e.preventDefault();
               await loginUser(e);
-            }}
+            }} */
           >
             <input
               type="password"
@@ -67,6 +73,7 @@ function LogInScreen() {
               id="formInput"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              data-testid="password"
             ></input>
           </form>
         </div>
@@ -78,6 +85,7 @@ function LogInScreen() {
             onClick={(e) => {
               loginUser(e);
             }}
+            data-testid="login"
           >
             Log In
           </button>
