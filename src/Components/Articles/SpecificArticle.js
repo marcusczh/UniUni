@@ -90,7 +90,6 @@ function SpecificArticle() {
       </div>
     );
   } else {
-    //console.log(article[0].views);
     return (
       <div className={articleStyles.page}>
         <TopContent />
@@ -100,9 +99,17 @@ function SpecificArticle() {
         <div className={articleStyles.layout}>
           <div className={articleStyles.article}>
             <div className={articleStyles.articleHeader}>
-              {article[0].title}
-              <br />
-              {article[0].date} | {article[0].tags} | views: {article[0].views}
+              <span>
+                {article[0].title}
+                <br />
+                {article[0].date} | views: {article[0].views}
+                <br />
+                {article[0].tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className={articleStyles.tags}>
+                    {tag}
+                  </span>
+                ))}
+              </span>
               <BookmarkButton user={user} title={article[0].title} />
             </div>
             <div className={articleStyles.articleContent}>

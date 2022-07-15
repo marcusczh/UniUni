@@ -13,6 +13,7 @@ const Events = new mongoose.Schema(
     tags: { type: [String] },
     image: { type: String },
     participants: { type: [String] },
+    participantsTele: { type: [String] },
     comments: [comments.schema],
   },
   { collection: "events" }

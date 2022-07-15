@@ -126,14 +126,21 @@ function SpecificForum() {
         </div>
         <div>
           <div className={forumStyles.forumHeader}>
-            {forum[0].title}
-            <br />
-            {"By: " + forum[0].author}
-            <br />
-            {forum[0].date} |{forum[0].tags} |
-            {"Likes: " + forum[0].likes.length} |
-            {"Dislikes: " + forum[0].dislikes.length} |
-            {"Comments: " + forum[0].comments.length}
+            <span>
+              {forum[0].title}
+              <br />
+              {"By: " + forum[0].author}
+              <br />
+              {forum[0].date} | {"Likes: " + forum[0].likes.length} |
+              {"Dislikes: " + forum[0].dislikes.length} |
+              {"Comments: " + forum[0].comments.length}
+              <br />
+              {forum[0].tags.slice(0, 3).map((tag) => (
+                <span key={tag} className={forumStyles.tags}>
+                  {tag}
+                </span>
+              ))}
+            </span>
             <div>
               {forum[0].likes.includes(user.username) ? (
                 <button

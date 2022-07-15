@@ -88,6 +88,7 @@ router.post("/editprofile", async (req, res) => {
       currentStatus: req.body.currentStatus,
       pastStatus: req.body.pastStatus,
       interests: req.body.interests,
+      teleHandle: req.body.teleHandle,
     },
   })
     .then((data) => {
@@ -983,6 +984,7 @@ router.put("/events/join", async (req, res) => {
       {
         $push: {
           participants: req.body.username,
+          participantsTele: req.body.telegramHandle,
         },
       }
     );
@@ -1004,6 +1006,7 @@ router.delete("/events/leave", async (req, res) => {
       {
         $pull: {
           participants: req.body.username,
+          participantsTele: req.body.telegramHandle,
         },
       }
     );

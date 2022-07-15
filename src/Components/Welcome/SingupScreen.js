@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./Welcome.module.css";
 import Logo from "../Global/Logo";
+import { useNavigate } from "react-router-dom";
 
 function SignupScreen() {
   const [username, setUsername] = useState("");
@@ -13,7 +14,8 @@ function SignupScreen() {
   const [basicInfo2, setBasicInfo2] = useState([]);
   const [basicInfo3, setBasicInfo3] = useState([]);
   const [imageLink, setImageLink] = useState("");
-  const [teleHandle, setTeleHandle] = useState("@");
+  const [teleHandle, setTeleHandle] = useState("");
+  const navigate = useNavigate();
 
   const basic1 = [
     "Junior College",
@@ -48,7 +50,7 @@ function SignupScreen() {
   function submitSignUp(event) {
     event.preventDefault();
     const match = password === passwordCfm;
-    const tele = teleHandle !== "@" || teleHandle !== "";
+    const tele = teleHandle !== "";
     if (username && password && match && tele) {
       axios
         .post("/api/register", {
@@ -66,7 +68,7 @@ function SignupScreen() {
             alert("Username is already in use.");
           } else {
             alert("Successfully registered. Please log in.");
-            window.location.href = "./Login";
+            navigate("../Login", { replace: true });
           }
         });
     } else if (!match) {
@@ -79,7 +81,7 @@ function SignupScreen() {
   }
 
   return (
-    <body>
+    <>
       <header>
         <div className={styles.logo}>
           <Logo />
@@ -97,7 +99,7 @@ function SignupScreen() {
           }}
         >
           <div className={styles.questionContainer}>
-            <label className={styles.question} for="bio">
+            <label className={styles.question} htmlFor="bio">
               Tell us about yourself!
             </label>
             <input
@@ -108,7 +110,7 @@ function SignupScreen() {
             ></input>
           </div>
           <div className={styles.questionContainer}>
-            <label className={styles.question} for="basic11">
+            <label className={styles.question} htmlFor="basic11">
               Where are you and where have you been?
             </label>
             <p>
@@ -117,10 +119,15 @@ function SignupScreen() {
                 className={styles.dropdown}
                 id="basic11"
                 onChange={(e) => setBasicInfo11(e.target.value)}
+                defaultValue=""
               >
-                <option disabled selected value></option>
+                <option key="disabled1" value="" disabled>
+                  Choose an option
+                </option>
                 {basic1.map((item) => (
-                  <option value={item}>{item}</option>
+                  <option value={item} key={`basic1:${item}`}>
+                    {item}
+                  </option>
                 ))}
               </select>
             </p>
@@ -133,19 +140,22 @@ function SignupScreen() {
                     type="checkbox"
                     name="basic1"
                     value={item}
-                    id={item}
+                    id={`id:${item}`}
+                    key={`basic1key:${item}`}
                     onChange={(e) =>
                       handleCheckboxChange(item, basicInfo1, setBasicInfo1)
                     }
                   />
-                  <label for={item}>{item}</label>
+                  <label htmlFor={item} key={`basic1label:${item}`}>
+                    {item}
+                  </label>
                 </>
               ))}
             </fieldset>
           </div>
           <div className={styles.questionContainer}>
             <fieldset>
-              <legend className={styles.question} for="basic2">
+              <legend className={styles.question} htmlFor="basic2">
                 Which courses do you want to know more about?
               </legend>
               {basic2.map((item) => (
@@ -160,13 +170,13 @@ function SignupScreen() {
                       handleCheckboxChange(item, basicInfo2, setBasicInfo2)
                     }
                   />
-                  <label for={item}>{item}</label>
+                  <label htmlFor={item}>{item}</label>
                 </>
               ))}
             </fieldset>
           </div>
           <div className={styles.questionContainer}>
-            <label className={styles.question} for="basic3">
+            <label className={styles.question} htmlFor="basic3">
               Anything else?
             </label>
             <p>
@@ -175,50 +185,59 @@ function SignupScreen() {
                 placeholder="Others"
                 className={styles.dropdown}
                 onChange={(e) => setBasicInfo3(e.target.value)}
+                defaultValue=""
               >
-                <option disabled selected value></option>
+                <option key="disabled" value="" disabled>
+                  Choose an option
+                </option>
                 {basic3.map((item) => (
-                  <option value={item}>{item}</option>
+                  <option value={item} key={`basic3:${item}`}>
+                    {item}
+                  </option>
                 ))}
               </select>
             </p>
           </div>
           <div className={styles.credentialsContainer}>
-            <label for="username">Tell us your name!</label>
+            <label htmlFor="username">Tell us your name!</label>
             <input
               id="username"
               type="text"
               value={username}
               placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
+              data-testid="username"
             />
-            <label for="password">Password </label>
+            <label htmlFor="password">Password </label>
             <input
               id="password"
               type="password"
               value={password}
               placeholder="Your Password"
               onChange={(e) => setPassword(e.target.value)}
+              data-testid="password"
             />
             <input
-              id="password"
+              id="passwordCfm"
               type="password"
               value={passwordCfm}
               placeholder="Type your password again"
               onChange={(e) => setPasswordCfm(e.target.value)}
+              data-testid="passwordCfm"
             />
 
-            <label for="teleHandle">Telegram Handle? </label>
+            <label htmlFor="teleHandle">Telegram Handle? </label>
             <input
               id="teleHandle"
               type="text"
               value={teleHandle}
-              placeholder="@"
+              placeholder="Telegram Handle"
               onChange={(e) => setTeleHandle(e.target.value)}
+              data-testid="teleHandle"
             />
           </div>
           <div className={styles.questionContainer}>
-            <label for="profilepicture" className={styles.question}>
+            <label htmlFor="profilepicture" className={styles.question}>
               Provide a image link for your profile picture!
             </label>
 
@@ -230,13 +249,17 @@ function SignupScreen() {
             <img src={`${imageLink}`} alt="No pic specified" />
           </div>
           <div className={styles.buttonContainer}>
-            <button className={styles.button} onClick={submitSignUp}>
+            <button
+              className={styles.button}
+              onClick={submitSignUp}
+              data-testid="submit"
+            >
               Submit
             </button>
           </div>
         </form>
       </div>
-    </body>
+    </>
   );
 }
 

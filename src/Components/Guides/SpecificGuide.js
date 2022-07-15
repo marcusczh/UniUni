@@ -73,9 +73,17 @@ function SpecificGuide() {
         <div className={guideStyles.layout}>
           <div>
             <div className={guideStyles.guideHeader}>
-              {guide[0].title}
-              <br />
-              {guide[0].date} | {guide[0].tags} | views: {guide[0].views}
+              <span>
+                {guide[0].title}
+                <br />
+                {guide[0].date} | views: {guide[0].views}
+                <br />
+                {guide[0].tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className={guideStyles.tags}>
+                    {tag}
+                  </span>
+                ))}
+              </span>
             </div>
             <div className={guideStyles.guideContent}>
               {guide[0].body.map((i, counter) => (
