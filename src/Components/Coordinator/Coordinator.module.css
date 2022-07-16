@@ -51,6 +51,7 @@
 .button {
   float: right;
   background-color: #ffb703;
+  cursor: pointer;
 }
 
 /*Creation form stuff*/

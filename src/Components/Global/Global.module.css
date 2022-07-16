@@ -97,17 +97,19 @@ body {
   flex: 1;
   margin-bottom: 1%;
 }
+
 .tagsContainer {
-  position: relative;
-  top: -50%;
+  float: right;
+  display: inline-flex;
 }
 
 .filterContainer {
-  width: 90%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.searchLabel {
-  display: inline-block;
+.filterCheckboxes {
+  justify-content: space-between;
 }
 
 .searchInput {
@@ -130,15 +132,11 @@ body {
 .filters {
   background-color: #eeeeee;
   border-radius: 5px;
-  margin: 2%;
-  padding: 1%;
   border: 1px black solid;
   cursor: pointer;
 }
 
 .topContent {
-  /*display: inline;
-    flex-basis: auto;*/
   display: flex;
   align-items: center;
 }

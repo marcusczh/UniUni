@@ -12,13 +12,15 @@ function otherArticles({ article }) {
     return (
       <div className={styles.otherArticlesContainer}>
         <div className={styles.otherArticlesHeader}>{article.title}</div>
+        <div className={styles.otherArticlesContent}>
         {article.body.map((i) => (
-          <div className={styles.otherArticlesContent}>
+          <>
             {i.header}
             <br />
             {i.text}
-          </div>
+          </>
         ))}
+        </div>
       </div>
     );
   }

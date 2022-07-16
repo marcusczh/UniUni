@@ -38,6 +38,30 @@
   mix-blend-mode: darken;
 }
 
+.recommendedHeader {
+  background: #eeeeee;
+  border: 3px #f2cc8f solid;
+  border-radius: 10px 10px 0 0;
+  margin: 2% 0% 0 0;
+  display: grid;
+}
+
+.recommendedContent {
+  background: white;
+  border: 3px #f2cc8f solid;
+  font-size: larger;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  margin: 0 0% 1% 0;
+  word-wrap: break-word;
+  display: flex;
+  height: 30vh;
+}
+
+.recommendedTitle {
+  margin-right: 3%;
+}
+
 .otherArticles {
   display: flex;
   justify-content: space-around;
@@ -68,6 +92,8 @@
   height: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-height: 10vh;
+  min-height: 10vh;
 }
 
 .layout {
@@ -121,6 +147,8 @@
 .contentInput {
   width: 100%;
   height: 10rem;
+  overflow: visible;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .imageInput {
@@ -130,6 +158,7 @@
 .button {
   float: right;
   background-color: #ffb703;
+  cursor: pointer;
 }
 
 .imageContainer {
@@ -149,5 +178,5 @@
   border-radius: 5px;
   border: 1px black solid;
   margin-right: 1%;
-  padding: 0.5%;
+  width: fit-content;
 }

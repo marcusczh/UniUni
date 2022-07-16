@@ -94,6 +94,7 @@
 .button {
   float: right;
   background-color: #ffb703;
+  cursor: pointer;
 }
 
 .forumHeader {
@@ -145,6 +146,7 @@
 .contentInput {
   height: 10rem;
   width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .imageInput {
@@ -174,6 +176,7 @@
 .imageContainer {
   display: flex;
   justify-content: center;
+  background-color: rgb(203, 203, 203);
 }
 
 .picture {
@@ -186,4 +189,14 @@
   border: 1px black solid;
   margin-right: 1%;
   padding: 0.5%;
+}
+
+.tagsContainer {
+  position: relative;
+  top: -50%;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
 }

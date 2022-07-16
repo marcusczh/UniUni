@@ -41,9 +41,9 @@ function SearchBar() {
     OPTIONS.map((i) => {
       categories = types.checkboxes[i] ? [...categories, i] : categories;
     });
-    console.log("Cat" + categories);
+    /* console.log("Cat" + categories);
     console.log("input" + input);
-    console.log(tags);
+    console.log(tags); */
     //Queries articles/guides/interviews with the search input
     await axios
       .get(`/api/search?title=${input}&types=${categories}&tags=${tags}`)
@@ -98,7 +98,7 @@ function SearchBar() {
             </button>
           </div>
           <div className={styles.searchBarSection}>
-            <div className={styles.filterContainer}>
+            <span className={styles.filterContainer}>
               <label className={styles.searchLabel}>Filters:</label>
               <label className={styles.filters}>
                 <input
@@ -132,10 +132,8 @@ function SearchBar() {
                 ></input>
                 Forums
               </label>
-            </div>
-            <div className={styles.tagsContainer}>
               <AddingTags setTags={setTags} tags={tags} />
-            </div>
+            </span>
           </div>
         </div>
       </div>
