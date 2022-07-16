@@ -35,7 +35,7 @@ const eventIdWizard = new Scenes.WizardScene(
   },
   (ctx) => {
     axios
-      .get("http://localhost:4000/api/events", {
+      .get("https://uni-uni-app.herokuapp.com/api/events", {
         params: {
           title: ctx.message.text,
         },
@@ -105,3 +105,4 @@ bot.command("details", (ctx) => {
 });
 
 bot.launch();
+
