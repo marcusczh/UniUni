@@ -12,6 +12,7 @@ function SearchResults({ result }) {
   } else {
     display = <div className={styles.forumType}>{result.type}</div>;
   }
+  console.log(result);
   return (
     <div className={styles.resultContainer}>
       <div className={styles.resultTop}>
@@ -32,8 +33,8 @@ function SearchResults({ result }) {
         <div className={styles.stats}>
           {result.type === "Forum" ? (
             <>
-              {"likes: " + result.likes.length + "  ||  "}
-              {"dislikes: " + result.dislikes.length}
+              {"❤️ : " + result.likes?.length + "  ||  "}
+              {"😔 : " + result.dislikes?.length}
             </>
           ) : (
             <>{"views: " + result.views}</>
