@@ -26,7 +26,7 @@ function EventActions({ viewMore }) {
 
       <div className={styles.actions}>
         <button className={styles.button} onClick={viewMore}>
-          View More Events
+          View More Events!
         </button>
         <button className={styles.button}>
           {user ? (
