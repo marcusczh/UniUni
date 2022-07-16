@@ -30,7 +30,8 @@ function EventActions({ viewMore }) {
         </button>
         <button className={styles.button}>
           {user ? (
-            user.score > 10 ? (
+            //Change back to > 10 after user testing
+            user.score ? (
               <Link to="/Coordinator/Create">Create Event</Link>
             ) : (
               <div onClick={toggleModal}> Create Event </div>
