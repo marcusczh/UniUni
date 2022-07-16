@@ -78,7 +78,7 @@ function ForumCreation() {
               className={forumStyles.imageInput}
               onChange={(e) => setImageLink(e.target.value)}
             />
-            <img src={`${imageLink}`} alt="No picture specified" />
+            <img src={`${imageLink}`} alt="No img specified" />
             <br />
             <button
               className={forumStyles.buttonCreation}

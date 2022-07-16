@@ -11,15 +11,14 @@ function otherArticles({ article }) {
   } else {
     return (
       <div className={styles.otherArticlesContainer}>
-        <div className={styles.otherArticlesHeader}>{article.title}</div>
+        <div className={styles.otherArticlesTitle}>{article.title}</div>
         <div className={styles.otherArticlesContent}>
-        {article.body.map((i) => (
-          <>
-            {i.header}
-            <br />
-            {i.text}
-          </>
-        ))}
+          {article.body.map((i) => (
+            <div id={i}>
+              <div className={styles.articleHeader}> {i.header}</div>
+              <div className={styles.articleText}>{i.text}</div>
+            </div>
+          ))}
         </div>
       </div>
     );

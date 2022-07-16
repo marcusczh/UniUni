@@ -10,6 +10,7 @@ import List from "./List";
 
 function Interviews() {
   const [interviews, setInterviews] = React.useState(null);
+  const [more, setMore] = React.useState(false);
   React.useEffect(() => {
     axios.get(`/api/information?type=Interview`).then((res) => {
       setInterviews(res.data);
@@ -19,6 +20,7 @@ function Interviews() {
   const [viewAll, setViewAll] = React.useState(4);
   const viewMore = () => {
     setViewAll(interviews.length);
+    setMore(true);
   };
 
   if (!interviews) return null;
@@ -28,44 +30,51 @@ function Interviews() {
       <TopContent />
       <div>
         <SearchBar />
+      </div>
+      <div className={stylesInterview.actions}>
         <button className={stylesInterview.button} onClick={viewMore}>
-          View more posts
+          View more Interviews
         </button>
       </div>
+      <div className={stylesInterview.interviewDisplay}>
+        <div className={stylesInterview.recommendedContainer}>
+          <Link
+            to={`/Interviews/${interviews[0].title}`}
+            className={stylesInterview.recommendedInterview}
+          >
+            <RecommendedInterview interview={interviews[0]} />
+          </Link>
+        </div>
+        <div className={stylesInterview.otherInterviews}>
+          <div className={stylesInterview.otherInterviewsContainer}>
+            <Link
+              to={`/Interviews/${interviews[1].title}`}
+              className={stylesInterview.otherInterviews}
+            >
+              <OtherInterviews interview={interviews[1] || null} />
+            </Link>
+          </div>
 
-      <Link
-        to={`/Interviews/${interviews[0].title}`}
-        className={stylesInterview.recommendedInterview}
-      >
-        <RecommendedInterview interview={interviews[0]} />
-      </Link>
-      <div className={stylesInterview.otherInterviews}>
-        <div>
-          <Link
-            to={`/Interviews/${interviews[1].title}`}
-            className={stylesInterview.otherInterviews}
-          >
-            <OtherInterviews interview={interviews[1] || null} />
-          </Link>
-        </div>
-        <div>
-          <Link
-            to={`/Interviews/${interviews[2].title}`}
-            className={stylesInterview.otherInterviews}
-          >
-            <OtherInterviews interview={interviews[2] || null} />
-          </Link>
-        </div>
-        <div>
-          <Link
-            to={`/Interviews/${interviews[3].title}`}
-            className={stylesInterview.otherInterviews}
-          >
-            <OtherInterviews interview={interviews[3] || null} />
-          </Link>
+          <div className={stylesInterview.otherInterviewsContainer}>
+            <Link
+              to={`/Interviews/${interviews[2].title}`}
+              className={stylesInterview.otherInterviews}
+            >
+              <OtherInterviews interview={interviews[2] || null} />
+            </Link>
+          </div>
+          <div className={stylesInterview.otherInterviewsContainer}>
+            <Link
+              to={`/Interviews/${interviews[3].title}`}
+              className={stylesInterview.otherInterviews}
+            >
+              <OtherInterviews interview={interviews[3] || null} />
+            </Link>
+          </div>
         </div>
       </div>
-      <div className="postContainer">
+      <div className={stylesInterview.postContainer}>
+        {more && <p>More interviews below...</p>}
         {interviews
           .slice(4, Math.min(viewAll, interviews.length))
           .sort((a, b) => b.views - a.views)

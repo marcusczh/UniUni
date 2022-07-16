@@ -3,15 +3,22 @@
 import SearchBar from "../Global/Searchbar";
 import guideStyles from "./Guides.module.css";
 import TopContent from "../Global/TopContent";
+import ArticleList from "../Articles/List";
+import ForumList from "../Forum/Posts";
+import InterviewList from "../Interviews/List";
+import GuideList from "./List";
 import { useLocation, useParams, Link } from "react-router-dom";
 import { React, useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 function SpecificGuide() {
+  const location = useLocation();
   const { title } = useParams();
-  const [guide, setGuide] = useState([]);
+  const [guide, setGuideUpdate] = useState();
   const [loading, setLoading] = useState(true);
   const [flag, setFlag] = useState(true);
+  const [posts, setPosts] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   // Fetch data only after view count is updated
   useEffect(() => {
@@ -23,8 +30,20 @@ function SpecificGuide() {
         },
       })
       .then((res) => {
-        setGuide(res.data);
+        setGuideUpdate(res.data);
         setLoading(false);
+        console.log(res.data[0].body);
+        return axios.get(`/api/information`, {
+          params: {
+            title: res.data[0].body
+              .filter((i) => i.header === "links")[0]
+              .text.split(","),
+          },
+        });
+      })
+      .then((res) => {
+        loadPosts(res.data);
+        setLoaded(true);
       })
       .catch((error) => console.log(error));
   }, [flag]);
@@ -41,6 +60,12 @@ function SpecificGuide() {
       .then(setFlag(!flag))
       .catch((error) => console.log(error));
   }, []);
+
+  function loadPosts(data) {
+    if (!loaded) {
+      setPosts(data);
+    }
+  }
 
   if (loading) {
     return <div>loading...</div>;
@@ -72,7 +97,7 @@ function SpecificGuide() {
         </div>
         <div className={guideStyles.layout}>
           <div>
-            <div className={guideStyles.guideHeader}>
+            <div className={guideStyles.guideTitle}>
               <span>
                 {guide[0].title}
                 <br />
@@ -86,40 +111,32 @@ function SpecificGuide() {
               </span>
             </div>
             <div className={guideStyles.guideContent}>
-              {guide[0].body.map((i, counter) => (
-                <>
-                  <section id={counter}>
-                    <b>
-                      <u>{i.header}</u>
-                    </b>
-                  </section>
-                  <br />
-                  <div>{i.text}</div>
-                  <br />
-                </>
-              ))}
+              {guide[0].body.map((i) => {
+                return i.header !== "links" ? (
+                  <div>
+                    <div className={guideStyles.guideHeader}> {i.header}</div>
+                    <div className={guideStyles.guideText}>{i.text}</div>
+                  </div>
+                ) : null;
+              })}
+              {posts.map((i) => {
+                console.log(i);
+                return (
+                  <div className={guideStyles.postLinks}>
+                    {i.type === "Interview" ? (
+                      <InterviewList post={i} />
+                    ) : i.type === "Article" ? (
+                      <ArticleList post={i} />
+                    ) : i.type === "Forum" ? (
+                      <ForumList post={i} />
+                    ) : (
+                      <GuideList post={i} />
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
-
-          <nav className={guideStyles.navBar}>
-            <div className={guideStyles.navigator}>
-              <nav>
-                <div className="link-con">
-                  {guide[0].body.map((i, counter) => (
-                    <>
-                      <Link
-                        to="./"
-                        className={guideStyles.list}
-                        name={i.header}
-                      >
-                        {i.header}
-                      </Link>
-                    </>
-                  ))}
-                </div>
-              </nav>
-            </div>
-          </nav>
         </div>
       </div>
     );

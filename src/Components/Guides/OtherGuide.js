@@ -12,14 +12,17 @@ function otherGuides({ guide }) {
     return (
       <>
         <div className={styles.otherGuidesContainer}>
-          <div className={styles.otherGuidesHeader}>{guide.title}</div>
-          {guide.body.map((i) => (
-            <div className={styles.otherGuidesContent}>
-              {i.header}
-              <br />
-              {i.text}
-            </div>
-          ))}
+          <div className={styles.otherGuidesTitle}>{guide.title}</div>
+          <div className={styles.otherGuidesContent}>
+            {guide.body.map((i) => {
+              return i.header !== "links" ? (
+                <div id={i}>
+                  <div className={styles.guideHeader}> {i.header}</div>
+                  <div className={styles.guideText}>{i.text}</div>
+                </div>
+              ) : null;
+            })}
+          </div>
         </div>
       </>
     );
