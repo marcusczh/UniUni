@@ -42,9 +42,7 @@ const eventIdWizard = new Scenes.WizardScene(
       })
       .then((res) => {
         if (res.data.length > 0) {
-          //console.log(ctx.from.username);
-          if (res.data[0].author == "Test") {
-            //TODO: change to use tele handle
+          if (res.data[0].author == ctx.from.username) {
             ctx.session.details = `These are the details for your event⏰:\nDate: ${res.data[0].date.slice(
               0,
               10
