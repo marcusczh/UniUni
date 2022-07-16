@@ -39,7 +39,7 @@ function Feed() {
   return results.length === 0 ? null : loaded ? (
     <div className={articleStyles.layout}>
       <div>
-        <div className={articleStyles.articleHeader}>
+        <div className={articleStyles.articleHeaderFeed}>
           <span>
             {results[0].title}
             <br />

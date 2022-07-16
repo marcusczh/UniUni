@@ -9,30 +9,6 @@ function recommendedArticle({ article }) {
       </>
     );
   } else {
-    {
-      /* <>
-        <span className={styles.recommendedHeader}>
-          <span className={styles.recommendedTitle}>{article.title}</span>
-          {article.tags.slice(0, 1).map((tag) => (
-            <>
-              <div className={styles.tags}>{tag}</div>
-            </>
-          ))}
-        </span>
-        <div className={styles.recommendedContent}>
-          <div>
-            {article.body.map((i) => (
-              <div id={i}>
-                {i.header}
-                <br />
-                {i.text}
-              </div>
-            ))}
-          </div>
-          <img src={article.image}></img>
-        </div>
-      </> */
-    }
     return (
       <>
         <div className={styles.articleTitle}>
