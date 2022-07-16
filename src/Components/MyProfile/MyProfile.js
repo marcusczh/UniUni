@@ -8,6 +8,7 @@ import axios from "axios";
 import styles from "./MyProfile.module.css";
 import UserProfile from "./UserProfile";
 import AboutMe from "./AboutMe";
+import UserBio from "./UserBio";
 import NavBar from "../Global/Navbar";
 
 export default function MyProfile({ userDetails, setUserDetails }) {
@@ -37,6 +38,7 @@ export default function MyProfile({ userDetails, setUserDetails }) {
       <div className={styles.Page}>
         <div className={styles.PageLeft}>
           <UserProfile userDetails={userDetails} />
+          <UserBio userDetails={userDetails} />
           <AboutMe userDetails={userDetails} />
         </div>
         <div className={styles.PageRight}>

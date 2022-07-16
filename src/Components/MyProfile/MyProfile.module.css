@@ -64,6 +64,8 @@
 .aboutMe {
   background-color: #f2cc8f;
   padding: 3%;
+  margin-bottom: 10%;
+  text-align: center;
 }
 
 .profilePicture {
@@ -88,16 +90,18 @@
 .status {
   background-color: #f5acac;
   border-radius: 5px;
-  border: 1px black solid;
   margin-right: 0.2%;
+  margin-bottom: 1%;
   font-size: small;
   padding: 0.4%;
+  width: fit-content;
 }
 
 .label {
-  background-color: #eccfa3;
+  display: flex;
+  justify-content: center;
+  background-color: white;
   border-radius: 5px;
-  border: 1px black solid;
   margin-right: 0.2%;
   font-size: large;
   padding: 0.4%;

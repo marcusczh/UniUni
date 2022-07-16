@@ -21,9 +21,6 @@ function UserProfile({ userDetails }) {
           alt="None specified"
         />
         <div className={styles.username}>{user.username}</div>
-        <div className={styles.userBio}>
-          {userDetails ? userDetails.bio : "Not found"}
-        </div>
         <button
           className={styles.editProfile}
           onClick={(e) => navigate("/EditProfile")}
