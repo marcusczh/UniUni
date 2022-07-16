@@ -28,6 +28,7 @@ function recommendedArticle({ article }) {
               </div>
             ))}
           </div>
+
           <img src={article.image} className={styles.image} alt="pic"></img>
         </div>
       </>
