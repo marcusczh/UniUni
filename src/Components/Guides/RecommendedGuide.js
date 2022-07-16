@@ -40,7 +40,14 @@ function RecommendedGuide({ guide }) {
   } else {
     return (
       <>
-        <div className={styles.guideTitle}>{guide.title}</div>
+        <div className={styles.guideTitle}>
+          {guide.title}
+          {guide.tags.slice(0, 1).map((tag) => (
+            <>
+              <div className={styles.tags}>{tag}</div>
+            </>
+          ))}
+        </div>
         <div className={styles.guideContent}>
           {guide.body.map((i) => {
             return i.header !== "links" ? (
