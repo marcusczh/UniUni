@@ -11,7 +11,14 @@ function otherArticles({ article }) {
   } else {
     return (
       <div className={styles.otherArticlesContainer}>
-        <div className={styles.otherArticlesTitle}>{article.title}</div>
+        <div className={styles.otherArticlesTitle}>
+          <div className={styles.otherArticlesTitleText}>{article.title}</div>
+          {article.tags.slice(0, 1).map((tag) => (
+            <>
+              <div className={styles.otherTags}>{tag}</div>
+            </>
+          ))}
+        </div>
         <div className={styles.otherArticlesContent}>
           {article.body.map((i) => (
             <div id={i}>

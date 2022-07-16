@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import SearchBar from "../Global/Searchbar";
 import BookmarkButton from "../Global/BookmarkButton";
 import TopContent from "../Global/TopContent";
+import { format } from "date-fns";
 
 function SpecificArticle() {
   const { title } = useParams();
@@ -102,8 +103,8 @@ function SpecificArticle() {
               <span>
                 {article[0].title}
                 <br />
-                {article[0].date} | views: {article[0].views}
-                <br />
+                {format(new Date(article[0].date), "do MMMM Y")} | views:{" "}
+                {article[0].views}
                 {article[0].tags.slice(0, 3).map((tag) => (
                   <span key={tag} className={articleStyles.tags}>
                     {tag}

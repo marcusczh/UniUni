@@ -20,6 +20,7 @@ function UserProfile({ userDetails }) {
           }
           alt="None specified"
         />
+
         <div className={styles.username}>{user.username}</div>
         <button
           className={styles.editProfile}

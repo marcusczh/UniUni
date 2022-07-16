@@ -10,6 +10,7 @@ import GuideList from "./List";
 import { useLocation, useParams, Link } from "react-router-dom";
 import { React, useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { format } from "date-fns";
 
 function SpecificGuide() {
   const location = useLocation();
@@ -99,15 +100,16 @@ function SpecificGuide() {
           <div>
             <div className={guideStyles.guideTitle}>
               <span>
-                {guide[0].title}
-                <br />
-                {guide[0].date} | views: {guide[0].views}
-                <br />
                 {guide[0].tags.slice(0, 3).map((tag) => (
                   <span key={tag} className={guideStyles.tags}>
                     {tag}
                   </span>
                 ))}
+                {guide[0].title}
+                <br />
+                {format(new Date(guide[0].date), "do MMMM Y")} | Views:{" "}
+                {guide[0].views}
+                <br />
               </span>
             </div>
             <div className={guideStyles.guideContent}>
