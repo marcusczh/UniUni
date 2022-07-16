@@ -16,7 +16,7 @@ function ArticlesCreation() {
   let navigate = useNavigate();
   const [imageLink, setImageLink] = useState("");
 
-  function submitArticle(event) {
+  async function submitArticle(event) {
     event.preventDefault();
     let obj = {};
     obj.header = header;
@@ -59,6 +59,7 @@ function ArticlesCreation() {
               className={articleStyles.titleInput}
               value={title}
               id="formInput"
+              data-testid="title"
               onChange={(e) => setTitle(e.target.value)}
             ></input>
           </div>
@@ -68,12 +69,14 @@ function ArticlesCreation() {
               placeholder="Header"
               className={articleStyles.headerInput}
               value={header}
+              data-testid="header"
               id="formInput"
               onChange={(e) => setHeader(e.target.value)}
             ></input>
             <input
               type="text"
               placeholder="Content"
+              data-testid="content"
               className={articleStyles.contentInput}
               value={content}
               id="formInput"
@@ -85,7 +88,7 @@ function ArticlesCreation() {
               className={articleStyles.imageInput}
               onChange={(e) => setImageLink(e.target.value)}
             />
-            <img src={`${imageLink}`} alt="No picture specified" />
+            <img src={`${imageLink}`} alt="No img specified" />
             <br />
             <button
               className={articleStyles.button}
@@ -93,7 +96,14 @@ function ArticlesCreation() {
             >
               Cancel
             </button>
-            <button className={articleStyles.button} onClick={submitArticle}>
+            <button
+              data-testid="submit"
+              className={articleStyles.button}
+              onClick={(e) => {
+                submitArticle(e);
+                alert("Successfully posted!");
+              }}
+            >
               Create Article
             </button>
             <div className={articleStyles.tagsContainer}>

@@ -33,6 +33,7 @@ function Feed() {
   useEffect(() => {
     handleSearch();
     setLoaded(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return results.length === 0 ? null : loaded ? (

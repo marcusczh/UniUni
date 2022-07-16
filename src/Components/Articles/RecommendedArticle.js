@@ -11,13 +11,13 @@ function recommendedArticle({ article }) {
   } else {
     return (
       <>
-        <div className={styles.articleHeader}>{article.title}</div>
+        <div className={styles.articleTitle}>{article.title}</div>
         <div className={styles.articleContent}>
+          {article.image}
           {article.body.map((i) => (
             <div id={i}>
-              {i.header}
-              <br />
-              {i.text}
+              <div className={styles.articleHeader}> {i.header}</div>
+              <div className={styles.articleText}>{i.text}</div>
             </div>
           ))}
         </div>

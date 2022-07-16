@@ -24,27 +24,34 @@ function EventActions({ viewMore }) {
         </>
       )}
 
-      <button className={styles.button} onClick={viewMore}>
-        View More Events
-      </button>
-      <button className={styles.button}>
-        {user ? (
-          user.score > 10 ? (
-            <Link to="/Coordinator/Create">Create Event</Link>
+      <div className={styles.actions}>
+        <button className={styles.button} onClick={viewMore}>
+          View More Events
+        </button>
+        <button className={styles.button}>
+          {user ? (
+            user.score > 10 ? (
+              <Link to="/Coordinator/Create">Create Event</Link>
+            ) : (
+              <div onClick={toggleModal}> Create Event </div>
+            )
           ) : (
-            <div onClick={toggleModal}> Create Event </div>
-          )
-        ) : (
-          <span>Create Event</span>
-        )}
-      </button>
-      <button className={styles.button}>
-        {user ? (
-          <Link to="/Coordinator/MyEvents">View My Events</Link>
-        ) : (
-          <span>View My Events</span>
-        )}
-      </button>
+            <span>Create Event</span>
+          )}
+        </button>
+        <button className={styles.button}>
+          {user ? (
+            <Link
+              className={styles.removeDecoration}
+              to="/Coordinator/MyEvents"
+            >
+              View My Events
+            </Link>
+          ) : (
+            <span>View My Events</span>
+          )}
+        </button>
+      </div>
     </>
   );
 }

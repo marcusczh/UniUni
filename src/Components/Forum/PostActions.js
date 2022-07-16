@@ -12,14 +12,18 @@ function PostActions({ viewMore }) {
       </button>
       <button className={styles.button}>
         {user ? (
-          <Link to="/Forum/Create">Create Post</Link>
+          <Link to="/Forum/Create" className={styles.link}>
+            Create Post
+          </Link>
         ) : (
           <span>Create Post</span>
         )}
       </button>
       <button className={styles.button}>
         {user ? (
-          <Link to="/Forum/MyPosts">View My Posts</Link>
+          <Link to="/Forum/MyPosts" className={styles.link}>
+            View My Posts
+          </Link>
         ) : (
           <span>View My Posts</span>
         )}

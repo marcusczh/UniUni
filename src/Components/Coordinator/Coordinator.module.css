@@ -51,6 +51,29 @@
 .button {
   float: right;
   background-color: #ffb703;
+  border: none;
+  box-shadow: 1px 1.5px rgba(188, 136, 4, 0.557),
+    -1px -1.5px rgba(188, 136, 4, 0.557);
+  margin-left: 0.3%;
+  padding: 0.3% 0.5%;
+}
+
+.button:hover {
+  transform: translate(0px, -0.5px);
+  transition: all 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  box-shadow: 0.6px 0.6px rgba(188, 136, 4, 0.557),
+    -0.6px -0.6px rgba(188, 136, 4, 0.557);
+  box-shadow: none;
+}
+.actions {
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 0%;
+}
+.removeDecoration {
+  text-decoration: none;
+  color: black;
 }
 
 /*Creation form stuff*/

@@ -81,7 +81,7 @@ function SpecificInterview() {
         </div>
         <div className={interviewStyles.layout}>
           <div>
-            <div className={interviewStyles.interviewHeader}>
+            <div className={interviewStyles.interviewTitle}>
               <span>
                 {interview[0].title}
                 <br />
@@ -98,25 +98,15 @@ function SpecificInterview() {
             <div className={interviewStyles.interviewContent}>
               {interview[0].body.map((i, counter) => (
                 <>
-                  <div id={counter}>{i.header}</div>
+                  <div id={counter} className={interviewStyles.interviewHeader}>
+                    {i.header}
+                  </div>
+
+                  <div className={interviewStyles.interviewText}>{i.text}</div>
                   <br />
-                  <div>{i.text}</div>
                 </>
               ))}
             </div>
-          </div>
-          <div className={interviewStyles.navigator}>
-            Course Info
-            <nav className={interviewStyles.navBar}>
-              <ul className={interviewStyles.list}>
-                <li className={interviewStyles.list}>Decision Making</li>
-                <li className={interviewStyles.list}>Curriculum</li>
-                <li className={interviewStyles.list}>Personal Experiences</li>
-                <li className={interviewStyles.list}>Career Prospects</li>
-                <li className={interviewStyles.list}>Student Life</li>
-                <li className={interviewStyles.list}>Others</li>
-              </ul>
-            </nav>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import SearchBar from "../Global/Searchbar";
 import Posts from "./Posts";
 import PostActions from "./PostActions";
 import TopContent from "../Global/TopContent";
+import styles from "./Forum.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -27,7 +28,10 @@ function Forum() {
         <SearchBar />
         <PostActions numPosts={numPosts} viewMore={viewMore} />
       </div>
-      <div>
+      <div className={styles.postDisplay}>
+        <div className={styles.announcement}>
+          The top {Math.min(numPosts, posts.length)} forum posts of the day :
+        </div>
         {posts
           .slice(0, Math.min(numPosts, posts.length))
           .sort((a, b) => b.score - a.score)
