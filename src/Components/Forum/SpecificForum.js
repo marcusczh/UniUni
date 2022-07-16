@@ -11,6 +11,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
+import { format } from "date-fns";
 
 function SpecificForum() {
   const { title } = useParams();
@@ -130,7 +131,8 @@ function SpecificForum() {
               <br />
               {"By: " + forum[0].author}
               <br />
-              {forum[0].date} | {"Likes: " + forum[0].likes.length} |
+              {format(new Date(forum[0].date), "do MMMM Y")} |{" "}
+              {"Likes: " + forum[0].likes.length} |
               {"Dislikes: " + forum[0].dislikes.length} |
               {"Comments: " + forum[0].comments.length}
               <br />

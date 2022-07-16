@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import BookmarkButton from "../Global/BookmarkButton";
+import { format } from "date-fns";
 
 function Feed() {
   const user = useSelector(selectUser);
@@ -39,17 +40,18 @@ function Feed() {
   return results.length === 0 ? null : loaded ? (
     <div className={articleStyles.layout}>
       <div>
-        <div className={articleStyles.articleHeaderFeed}>
+        <div className={articleStyles.articleTitle}>
           <span>
             {results[0].title}
             <br />
-            {results[0].date} | views: {results[0].views}
-            <br />
+            {format(new Date(results[0].date), "do MMMM Y")} | views:{" "}
+            {results[0].views}
             {results[0].tags.slice(0, 3).map((tag) => (
               <span key={tag} className={articleStyles.tags}>
                 {tag}
               </span>
             ))}
+            <br />
           </span>
           <BookmarkButton user={user} title={results[0].title} />
         </div>
