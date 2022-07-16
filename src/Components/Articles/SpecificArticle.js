@@ -105,6 +105,7 @@ function SpecificArticle() {
                 <br />
                 {format(new Date(article[0].date), "do MMMM Y")} | views:{" "}
                 {article[0].views}
+                <br />
                 {article[0].tags.slice(0, 3).map((tag) => (
                   <span key={tag} className={articleStyles.tags}>
                     {tag}
