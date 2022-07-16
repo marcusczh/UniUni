@@ -122,7 +122,6 @@ function SpecificForum() {
         <TopContent />
         <div>
           <SearchBar />
-          <PostActions />
         </div>
         <div>
           <div className={forumStyles.forumHeader}>
