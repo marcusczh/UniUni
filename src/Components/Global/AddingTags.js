@@ -63,7 +63,7 @@ function AddingTags({ setTags }) {
     "Working",
     "Overseas",
   ];
-  const Others = ["Personal Finance", "Adulting", "Part-time Jobs", "Career"];
+  const Others = ["Personal Finance", "Adulting", "Part-time Jobs", "Career", "Education"];
 
   return (
     <>

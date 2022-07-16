@@ -36,7 +36,7 @@ function SignupScreen() {
     "Design and Environment",
     "Mathematics and Science",
   ];
-  const basic3 = ["Personal Finance", "Adulting", "Part-time Jobs", "Career"];
+  const basic3 = ["Personal Finance", "Adulting", "Part-time Jobs", "Career", "Education"];
 
   function handleCheckboxChange(data, array, setter) {
     const isChecked = array.some((checkedCheckbox) => checkedCheckbox === data);
