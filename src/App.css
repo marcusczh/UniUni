@@ -5,6 +5,7 @@
 
 .page {
   max-width: 1420px;
+  min-width: 900px;
   margin: 0 auto;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
