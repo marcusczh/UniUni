@@ -4,7 +4,7 @@ function AboutMe({ userDetails }) {
   return (
     <>
       <div className={styles.aboutMe}>
-        <span className={styles.label}>About me:</span>
+        <span className={styles.label}>About me</span>
         <br />
         Current status:
         <br />
