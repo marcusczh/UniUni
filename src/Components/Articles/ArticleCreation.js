@@ -71,14 +71,14 @@ function ArticlesCreation() {
               id="formInput"
               onChange={(e) => setHeader(e.target.value)}
             ></input>
-            <input
+            <textarea
               type="text"
               placeholder="Content"
               className={articleStyles.contentInput}
               value={content}
               id="formInput"
               onChange={(e) => setContent(e.target.value)}
-            ></input>
+            ></textarea>
             <input
               type="text"
               placeholder="Image Link"

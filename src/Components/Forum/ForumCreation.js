@@ -5,6 +5,7 @@ import axios from "axios";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import AddingTags from "../Global/AddingTags";
 
 function ForumCreation() {
   const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ function ForumCreation() {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   const [imageLink, setImageLink] = useState("");
+  const [tags, setTags] = useState([]);
 
   function submitForum(event) {
     event.preventDefault();
@@ -62,14 +64,14 @@ function ForumCreation() {
             ></input>
           </div>
           <div className={forumStyles.content}>
-            <input
+            <textarea
               type="text"
               placeholder="Content"
               className={forumStyles.contentInput}
               value={content}
               id="formInput"
               onChange={(e) => setContent(e.target.value)}
-            ></input>
+            ></textarea>
             <input
               type="text"
               placeholder="Image Link"
@@ -90,6 +92,9 @@ function ForumCreation() {
             >
               Create forum
             </button>
+            <div className={forumStyles.tagsContainer}>
+              <AddingTags setTags={setTags} tags={tags} />
+            </div>
           </div>
         </form>
       </div>
