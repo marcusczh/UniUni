@@ -386,6 +386,8 @@ router.get("/search", async (req, res) => {
             views: 1,
             likes: 1,
             dislikes: 1,
+            comments: 1,
+            image: 1,
             score: {
               $meta: "searchScore",
             },
