@@ -32,8 +32,8 @@ function SearchResults({ result }) {
         <div className={styles.stats}>
           {result.type === "Forum" ? (
             <>
-              {"likes: " + result.likes + "  ||  "}
-              {"dislikes: " + result.dislikes}
+              {"likes: " + result.likes.length + "  ||  "}
+              {"dislikes: " + result.dislikes.length}
             </>
           ) : (
             <>{"views: " + result.views}</>

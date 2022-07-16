@@ -38,20 +38,30 @@ function Guides() {
         <TopContent />
         <div>
           <SearchBar />
-          <button className={stylesGuide.button} onClick={viewMore}>
-            View more posts
-          </button>
+          <div className={stylesGuide.actions}>
+            <button className={stylesGuide.button} onClick={viewMore}>
+              View more posts
+            </button>
+          </div>
         </div>
-        <Link
-          to={`/Guides/${guides[0].title}`}
-          className={stylesGuide.recommendedGuide}
-        >
-          <RecommendedGuide guide={guides[0]} />
-        </Link>
+        <div className={stylesGuide.recommendedContainer}>
+          <Link
+            to={{
+              pathname: `/Guides/${guides[0].title}`,
+              guide: guides[0],
+            }}
+            className={stylesGuide.recommendedGuide}
+          >
+            <RecommendedGuide guide={guides[0]} />
+          </Link>
+        </div>
         <div className={stylesGuide.otherGuides}>
           <div>
             <Link
-              to={`/Guides/${guides[1].title}`}
+              to={{
+                pathname: `/Guides/${guides[1].title}`,
+                guide: guides[0],
+              }}
               className={stylesGuide.otherGuides}
             >
               <OtherGuides guide={guides[1] || null} />
@@ -67,7 +77,10 @@ function Guides() {
           </div>
           <div>
             <Link
-              to={`/Guides/${guides[3].title}`}
+              to={{
+                pathname: `/Guides/${guides[3].title}`,
+                guide: guides[0],
+              }}
               className={stylesGuide.otherGuides}
             >
               <OtherGuides guide={guides[3] || null} />

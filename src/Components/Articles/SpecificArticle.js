@@ -81,7 +81,7 @@ function SpecificArticle() {
         </div>
         <div className={articleStyles.layout}>
           <div>
-            <div className={articleStyles.articleHeader}>No articles.</div>
+            <div className={articleStyles.articleTitle}>No articles.</div>
             <div className={articleStyles.articleContent}>
               Please try again later.
             </div>
@@ -98,7 +98,7 @@ function SpecificArticle() {
         </div>
         <div className={articleStyles.layout}>
           <div className={articleStyles.article}>
-            <div className={articleStyles.articleHeader}>
+            <div className={articleStyles.articleTitle}>
               <span>
                 {article[0].title}
                 <br />
@@ -125,54 +125,18 @@ function SpecificArticle() {
               {article[0].body.map((i, counter) => (
                 <>
                   <section id={counter}>
-                    <b>
-                      <u>{i.header}</u>
-                    </b>
+                    <div className={articleStyles.articleHeader}>
+                      {i.header}
+                    </div>
                   </section>
-                  <br />
-                  <div>{i.text}</div>
+                  <div className={articleStyles.articleText}>
+                    <div>{i.text}</div>
+                  </div>
                   <br />
                 </>
               ))}
             </div>
           </div>
-
-          <nav className={articleStyles.navBar}>
-            <div className={articleStyles.navigator}>
-              <nav>
-                <div className="link-con">
-                  {article[0].body.map((i, counter) => (
-                    <>
-                      <Link
-                        to="./"
-                        className={articleStyles.list}
-                        name={i.header}
-                        id={i}
-                      >
-                        {i.header}
-                      </Link>
-                    </>
-                  ))}
-                </div>
-              </nav>
-              {/* <ul className={articleStyles.list}>
-                {article[0].body.map((i, counter) => (
-                  <li
-                    className={articleStyles.list}
-                    /* onClick={
-                       references.current[counter]
-                        ? window.scrollTo({
-                            top: references.current[counter].offsetTop,
-                            bahavior: "smooth",
-                          })
-                        : null/
-                  >
-                    {i.header}
-                  </li>
-                ))}
-              </ul> */}
-            </div>
-          </nav>
         </div>
       </div>
     );

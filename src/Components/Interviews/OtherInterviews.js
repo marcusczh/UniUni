@@ -3,22 +3,23 @@ import styles from "./Interviews.module.css";
 function otherInterviews({ interview }) {
   if (interview == null) {
     return (
-      <div className={styles.otherInterviewsContainer}>
-        <div className={styles.otherInterviewsHeader}>No Interviews Found</div>
+      <div>
+        <div className={styles.otherInterviewsTitle}>No Interviews Found</div>
         <div className={styles.otherInterviewsContent}>Try again later</div>
       </div>
     );
   } else {
     return (
-      <div className={styles.otherInterviewsContainer}>
-        <div className={styles.otherInterviewsHeader}>{interview.title}</div>
-        {interview.body.map((i) => (
-          <div className={styles.otherInterviewsContent}>
-            {i.header}
-            <br />
-            {i.text}
-          </div>
-        ))}
+      <div>
+        <div className={styles.otherInterviewsTitle}>{interview.title}</div>
+        <div className={styles.otherInterviewsContent}>
+          {interview.body.map((i) => (
+            <div id={i}>
+              <div className={styles.otherInterviewsHeader}> {i.header}</div>
+              <div className={styles.otherInterviewsText}>{i.text}</div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
