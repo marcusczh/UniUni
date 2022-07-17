@@ -80,36 +80,40 @@ function Comments({ comment, title, index, setForum }) {
         <br />
         {"By: " + comment.author} |{"Likes: " + comment.likes.length} |
         {"Dislikes: " + comment.dislikes.length}
-        {comment.likes.includes(user.username) ? (
-          <button
-            className={styles.moreOptions}
-            onClick={(event) => like(event, user.username)}
-          >
-            un-like
-          </button>
-        ) : comment.dislikes.includes(user.username) ? null : (
-          <button
-            className={styles.moreOptions}
-            onClick={(event) => like(event, user.username)}
-          >
-            like
-          </button>
-        )}
-        {comment.dislikes.includes(user.username) ? (
-          <button
-            className={styles.moreOptions}
-            onClick={(event) => dislike(event, user.username)}
-          >
-            un-dislike
-          </button>
-        ) : comment.likes.includes(user.username) ? null : (
-          <button
-            className={styles.moreOptions}
-            onClick={(event) => dislike(event, user.username)}
-          >
-            dislike
-          </button>
-        )}
+        {user ? (
+          comment.likes.includes(user.username) ? (
+            <button
+              className={styles.moreOptions}
+              onClick={(event) => like(event, user.username)}
+            >
+              un-like
+            </button>
+          ) : comment.dislikes.includes(user.username) ? null : (
+            <button
+              className={styles.moreOptions}
+              onClick={(event) => like(event, user.username)}
+            >
+              like
+            </button>
+          )
+        ) : null}
+        {user ? (
+          comment.dislikes.includes(user.username) ? (
+            <button
+              className={styles.moreOptions}
+              onClick={(event) => dislike(event, user.username)}
+            >
+              un-dislike
+            </button>
+          ) : comment.likes.includes(user.username) ? null : (
+            <button
+              className={styles.moreOptions}
+              onClick={(event) => dislike(event, user.username)}
+            >
+              dislike
+            </button>
+          )
+        ) : null}
       </div>
     );
   }

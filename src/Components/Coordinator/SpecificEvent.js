@@ -105,25 +105,27 @@ function SpecificEvent() {
               ))}
             </span>
             <div>
-              {event[0].participants.includes(user.username) ? (
-                <BookmarkButton
-                  user={user}
-                  title={event[0].title}
-                  join={join}
-                  leave={leave}
-                  participating={true}
-                  type="event"
-                />
-              ) : (
-                <BookmarkButton
-                  user={user}
-                  title={event[0].title}
-                  join={join}
-                  leave={leave}
-                  participating={false}
-                  type="event"
-                />
-              )}
+              {user ? (
+                event[0].participants.includes(user.username) ? (
+                  <BookmarkButton
+                    user={user}
+                    title={event[0].title}
+                    join={join}
+                    leave={leave}
+                    participating={true}
+                    type="event"
+                  />
+                ) : (
+                  <BookmarkButton
+                    user={user}
+                    title={event[0].title}
+                    join={join}
+                    leave={leave}
+                    participating={false}
+                    type="event"
+                  />
+                )
+              ) : null}
             </div>
           </div>
           <div className={eventStyles.eventContent}>
@@ -156,7 +158,7 @@ function SpecificEvent() {
           </Link>
         ) : (
           //DUD button if no user, maybe send a pop-up to ask user to create an account first
-          <button>Create Comment</button>
+          <button>{null}</button>
         )}
       </div>
     );
