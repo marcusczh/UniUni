@@ -25,7 +25,7 @@ function ForumCreation() {
         type: "Forum",
         title: title,
         date: Date(),
-        tags: "",
+        tags: tags,
         body: [obj],
         views: 0,
         author: user.username,

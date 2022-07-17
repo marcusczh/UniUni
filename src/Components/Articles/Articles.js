@@ -51,7 +51,7 @@ function Articles() {
       <div className={stylesArticle.articleDisplay}>
         <div className={stylesArticle.recommendedContainer}>
           <Link
-            to={`/Articles/${articles[0].title}`}
+            to={`/Articles/${encodeURIComponent(articles[0].title)}`}
             className={stylesArticle.recommendedArticle}
           >
             <RecommendedArticle article={articles[0]} />
@@ -60,7 +60,7 @@ function Articles() {
         <div className={stylesArticle.otherArticles}>
           <div className={stylesArticle.otherArticlesContainer}>
             <Link
-              to={`/Articles/${articles[1].title}`}
+              to={`/Articles/${encodeURIComponent(articles[1].title)}`}
               className={stylesArticle.otherArticles}
             >
               <OtherArticles article={articles[1] || null} />
@@ -69,7 +69,7 @@ function Articles() {
 
           <div className={stylesArticle.otherArticlesContainer}>
             <Link
-              to={`/Articles/${articles[2].title}`}
+              to={`/Articles/${encodeURIComponent(articles[2].title)}`}
               className={stylesArticle.otherArticles}
             >
               <OtherArticles article={articles[2] || null} />
@@ -77,7 +77,7 @@ function Articles() {
           </div>
           <div className={stylesArticle.otherArticlesContainer}>
             <Link
-              to={`/Articles/${articles[3].title}`}
+              to={`/Articles/${encodeURIComponent(articles[3].title)}`}
               className={stylesArticle.otherArticles}
             >
               <OtherArticles article={articles[3] || null} />

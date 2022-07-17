@@ -14,7 +14,7 @@ function Events({ event, children }) {
       <div className={styles.eventContainer}>
         <div className={styles.eventTop}>
           <Link
-            to={`/Coordinator/${event.title}`}
+            to={`/Coordinator/${encodeURIComponent(event.title)}`}
             className={styles.eventTitle}
           >
             {event.title}

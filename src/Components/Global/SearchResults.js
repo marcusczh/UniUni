@@ -17,7 +17,11 @@ function SearchResults({ result }) {
     <div className={styles.resultContainer}>
       <div className={styles.resultTop}>
         <Link
-          to={`/${result.type}s/${result.title}`}
+          to={
+            result.type == "Forum"
+              ? `/${result.type}/${encodeURIComponent(result.title)}`
+              : `/${result.type}s/${encodeURIComponent(result.title)}`
+          }
           className={styles.resultTitle}
         >
           {result.title}
