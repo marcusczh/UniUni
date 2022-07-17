@@ -4,8 +4,9 @@ import { useState } from "react";
 import Posts from "../Forum/Posts";
 import "./ProfileTabs.css";
 import List from "../Articles/List";
+import Events from "../Coordinator/Events";
 
-export default function ProfileTabs({ posts }) {
+export default function ProfileTabs({ posts, events }) {
   const [numPosts, setNumPosts] = useState(4);
   return posts ? (
     <Tabs className="Tabs">
@@ -17,7 +18,7 @@ export default function ProfileTabs({ posts }) {
             <Tab>Guides</Tab>
             <Tab>Interviews</Tab>
             <Tab>Forums</Tab>
-            <Tab disabled>Events</Tab>
+            <Tab>Events</Tab>
           </TabList>
         </div>
       </div>
@@ -68,7 +69,16 @@ export default function ProfileTabs({ posts }) {
         ) : null}
       </TabPanel>
       <TabPanel>
-        <p>temp Events</p>
+        {events ? (
+          <div className="postContainer">
+            {events
+              .slice(0, Math.min(numPosts, events.length))
+              .sort((a, b) => b.score - a.score)
+              .map((event) => (
+                <Events event={event} id={event} />
+              ))}
+          </div>
+        ) : null}
       </TabPanel>
     </Tabs>
   ) : (

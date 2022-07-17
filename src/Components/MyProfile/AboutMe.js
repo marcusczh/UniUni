@@ -12,7 +12,8 @@ function AboutMe({ userDetails }) {
           <span className={styles.status}>{userDetails.currentStatus}</span>
         ) : null}
         <br />
-        Past:
+        <br />
+        Where I've been:
         <br />
         {userDetails.pastStatus
           ? userDetails.pastStatus.map((status) => (

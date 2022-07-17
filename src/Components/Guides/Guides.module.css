@@ -18,9 +18,10 @@
   border: 3px #f2cc8f solid;
   border-radius: 10px 10px 0 0;
   margin: 1% 0% 0 0;
+  box-sizing: border-box;
   font-size: larger;
   font-weight: bolder;
-  display: flex;
+  width: 100%;
   justify-content: space-between;
   padding: 0.8% 0% 0.4% 1%;
 }
@@ -145,5 +146,7 @@
   border-radius: 5px;
   border: 1px black solid;
   margin-right: 1%;
-  padding: 0.5%;
+  padding: 0.3%;
+  float: right;
+  margin-top: -0.6%;
 }

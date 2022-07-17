@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { selectUser } from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { format } from "date-fns";
 import TopContent from "../Global/TopContent";
 
 function SpecificInterview() {
@@ -85,8 +86,8 @@ function SpecificInterview() {
               <span>
                 {interview[0].title}
                 <br />
-                {interview[0].date} | views: {interview[0].views}
-                <br />
+                {format(new Date(interview[0].date), "do MMMM Y")} | views:{" "}
+                {interview[0].views}
                 {interview[0].tags.slice(0, 3).map((tag) => (
                   <span key={tag} className={interviewStyles.tags}>
                     {tag}

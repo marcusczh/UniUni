@@ -378,11 +378,16 @@ router.get("/search", async (req, res) => {
         {
           $project: {
             type: 1,
+            author: 1,
             title: 1,
             date: 1,
             tags: 1,
             body: 1,
-            view: 1,
+            views: 1,
+            likes: 1,
+            dislikes: 1,
+            comments: 1,
+            image: 1,
             score: {
               $meta: "searchScore",
             },

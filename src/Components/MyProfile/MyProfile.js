@@ -13,6 +13,7 @@ import NavBar from "../Global/Navbar";
 
 export default function MyProfile({ userDetails, setUserDetails }) {
   const [posts, setPosts] = useState(null);
+  const [events, setEvents] = useState(null);
   const user = useSelector(selectUser);
   // Fetch profile information
   useEffect(() => {
@@ -30,6 +31,17 @@ export default function MyProfile({ userDetails, setUserDetails }) {
           console.log(user.bookmarks);
           console.log(res.data);
           setPosts(res.data);
+        });
+  }, []);
+
+  useEffect(() => {
+    if (user)
+      axios
+        .get(`/api/events`, { params: { title: user.events[0] } })
+        .then((res) => {
+          console.log("user's events:" + user.events);
+          console.log(res.data);
+          setEvents(res.data);
         });
   }, []);
 
@@ -52,7 +64,7 @@ export default function MyProfile({ userDetails, setUserDetails }) {
           </div>
 
           <div className={styles.ProfileTabsContainer}>
-            <ProfileTabs posts={posts} />
+            <ProfileTabs posts={posts} events={events} />
           </div>
         </div>
       </div>

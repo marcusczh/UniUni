@@ -299,12 +299,15 @@ input[type="checkbox"]:checked + .tagsLabel {
 
 .BookmarkButton {
   float: right;
-  margin: 5% 5% 2% 0%;
+  margin: 2% 15% 2% 0%;
+  padding: 2% 6%;
+  border-radius: 9%;
   border: rgb(166, 169, 213) solid 1px;
   background-color: #81b29a;
   color: white;
   border-radius: 3%;
   width: max-content;
+  font-size: medium;
 }
 
 .bookmarked {
