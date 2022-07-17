@@ -32,7 +32,12 @@ function EventActions({ viewMore }) {
           {user ? (
             //Change back to > 10 after user testing
             user.score > -1 ? (
-              <Link to="/Coordinator/Create">Create Event</Link>
+              <Link
+                to="/Coordinator/Create"
+                className={styles.removeDecoration}
+              >
+                Create Event
+              </Link>
             ) : (
               <div onClick={toggleModal}> Create Event </div>
             )
