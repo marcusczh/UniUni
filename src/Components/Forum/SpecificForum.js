@@ -29,6 +29,7 @@ function SpecificForum() {
       })
       .then((res) => {
         setForum(res.data);
+        console.log(title);
         setLoading(false);
       })
       .catch((error) => console.log(error));
@@ -143,36 +144,40 @@ function SpecificForum() {
               ))}
             </span>
             <div>
-              {forum[0].likes.includes(user.username) ? (
-                <button
-                  className={forumStyles.moreOptions}
-                  onClick={(event) => like(event, user.username)}
-                >
-                  un-like
-                </button>
-              ) : forum[0].dislikes.includes(user.username) ? null : (
-                <button
-                  className={forumStyles.moreOptions}
-                  onClick={(event) => like(event, user.username)}
-                >
-                  like
-                </button>
-              )}
-              {forum[0].dislikes.includes(user.username) ? (
-                <button
-                  className={forumStyles.moreOptions}
-                  onClick={(event) => dislike(event, user.username)}
-                >
-                  un-dislike
-                </button>
-              ) : forum[0].likes.includes(user.username) ? null : (
-                <button
-                  className={forumStyles.moreOptions}
-                  onClick={(event) => dislike(event, user.username)}
-                >
-                  dislike
-                </button>
-              )}
+              {user ? (
+                forum[0].likes.includes(user.username) ? (
+                  <button
+                    className={forumStyles.moreOptions}
+                    onClick={(event) => like(event, user.username)}
+                  >
+                    un-like
+                  </button>
+                ) : forum[0].dislikes.includes(user.username) ? null : (
+                  <button
+                    className={forumStyles.moreOptions}
+                    onClick={(event) => like(event, user.username)}
+                  >
+                    like
+                  </button>
+                )
+              ) : null}
+              {user ? (
+                forum[0].dislikes.includes(user.username) ? (
+                  <button
+                    className={forumStyles.moreOptions}
+                    onClick={(event) => dislike(event, user.username)}
+                  >
+                    un-dislike
+                  </button>
+                ) : forum[0].likes.includes(user.username) ? null : (
+                  <button
+                    className={forumStyles.moreOptions}
+                    onClick={(event) => dislike(event, user.username)}
+                  >
+                    dislike
+                  </button>
+                )
+              ) : null}
               <BookmarkButton user={user} title={forum[0].title} />
             </div>
           </div>
