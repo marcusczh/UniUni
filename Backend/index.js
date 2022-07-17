@@ -42,7 +42,13 @@ const eventIdWizard = new Scenes.WizardScene(
       })
       .then((res) => {
         if (res.data.length > 0) {
-          if (res.data[0].author == ctx.from.username) {
+          let telegramHandle
+          if (res.data[0].authorTele[0] == "@") {
+            telegramHandle = res.data[0].authorTele.slice(1,)
+          } else {
+            telegramHandle = res.data[0].authorTele
+          }
+          if (telegramHandle == ctx.from.username) {
             ctx.session.details = `These are the details for your event⏰:\nDate: ${res.data[0].date.slice(
               0,
               10
