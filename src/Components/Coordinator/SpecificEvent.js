@@ -138,7 +138,7 @@ function SpecificEvent() {
                 />
               </div>
             ) : null}
-            {event[0].body[0].text}
+            <span className={eventStyles.text}>{event[0].body[0].text}</span>
           </div>
         </div>
         {event[0].comments

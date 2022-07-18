@@ -217,6 +217,10 @@
   height: 300px;
 }
 
+.forumText {
+  white-space: pre-wrap;
+}
+
 .tags {
   background-color: #8ecae6;
   border-radius: 5px;

@@ -88,6 +88,7 @@ function SpecificInterview() {
                 <br />
                 {format(new Date(interview[0].date), "do MMMM Y")} | views:{" "}
                 {interview[0].views}
+                <br />
                 {interview[0].tags.slice(0, 3).map((tag) => (
                   <span key={tag} className={interviewStyles.tags}>
                     {tag}

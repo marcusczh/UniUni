@@ -49,6 +49,7 @@
   margin-left: 1.4%;
   margin-bottom: 1rem;
   font-size: medium;
+  white-space: pre-wrap;
 }
 
 .line {

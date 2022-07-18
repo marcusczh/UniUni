@@ -6,7 +6,9 @@ function UserBio({ userDetails }) {
       <div className={styles.aboutMe}>
         <span className={styles.label}>Bio</span>
         <br />
-        {userDetails ? userDetails.bio : "Not found"}
+        <span className={styles.bio}>
+          {userDetails ? userDetails.bio : "Not found"}
+        </span>
       </div>
     </>
   );

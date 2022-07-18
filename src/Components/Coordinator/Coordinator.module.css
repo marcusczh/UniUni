@@ -349,3 +349,7 @@
   margin-right: 1%;
   padding: 0.5%;
 }
+
+.text {
+  white-space: pre-wrap;
+}
