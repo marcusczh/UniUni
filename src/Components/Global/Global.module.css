@@ -80,6 +80,36 @@ body {
   margin-top: 3%;
 }
 
+.logIn {
+  display: inline;
+  width: max-content;
+  text-decoration: none;
+  flex: 3;
+  font-size: small;
+  border: none;
+  box-shadow: -1px 1px #84988e;
+  background-color: #ced2d0;
+  border-radius: 10%;
+  margin-right: 5%;
+  margin-top: 50%;
+}
+.logIn:hover {
+  text-decoration: none;
+  flex: 3;
+  font-size: small;
+  border: none;
+  border-radius: 10%;
+  margin-right: 5%;
+  margin-top: 50%;
+  background-color: #92c9ae;
+  display: inline;
+  width: max-content;
+  text-decoration: none;
+  box-shadow: none;
+  transform: translate(-1px, 1px);
+  color: black;
+}
+
 .username {
   white-space: nowrap;
 }
@@ -370,4 +400,9 @@ input[type="checkbox"]:checked + .tagsLabel {
 .bookmarked:hover {
   box-shadow: -1px 1px#8ecae6;
   transform: translate(1px, 0px);
+}
+
+.removeDecoration {
+  text-decoration: none;
+  color: black;
 }
