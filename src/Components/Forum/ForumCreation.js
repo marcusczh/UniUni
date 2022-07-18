@@ -60,6 +60,7 @@ function ForumCreation() {
               className={forumStyles.titleInput}
               value={title}
               id="formInput"
+              data-testid="title"
               onChange={(e) => setTitle(e.target.value)}
             ></input>
           </div>
@@ -70,6 +71,7 @@ function ForumCreation() {
               className={forumStyles.contentInput}
               value={content}
               id="formInput"
+              data-testid="content"
               onChange={(e) => setContent(e.target.value)}
             ></textarea>
             <input
@@ -88,7 +90,13 @@ function ForumCreation() {
             </button>
             <button
               className={forumStyles.buttonCreation}
-              onClick={submitForum}
+              onClick={(e) => {
+                submitForum(e);
+                if (title.length !== 0) {
+                  alert("Successfully created!");
+                }
+              }}
+              data-testid="submit"
             >
               Create forum
             </button>
