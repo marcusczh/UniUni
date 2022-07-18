@@ -37,8 +37,8 @@ function LogOut() {
     </div>
   ) : (
     <div className={styles.buttonContainer}>
-      <button onClick={(e) => HandleLogout(e)} className={styles.logOut}>
-        <Link className={styles.logOut} to="../Login">
+      <button onClick={(e) => HandleLogout(e)} className={styles.logIn}>
+        <Link className={styles.removeDecoration} to="../Login">
           Log In
         </Link>
       </button>
