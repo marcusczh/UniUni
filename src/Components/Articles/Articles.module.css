@@ -5,7 +5,7 @@
 
 .recommendedContainer {
   padding: 0 1%;
-  flex: 1;
+  flex: 3;
 }
 
 .recommendedArticle {
@@ -21,6 +21,7 @@
 .articleDisplay {
   display: flex;
   flex-direction: column;
+  height: 70vh;
 }
 
 .articleTitle {
@@ -74,21 +75,22 @@
   border-radius: 0 0 10px 10px;
   padding-top: 1%;
   margin: 0 0% 1% 0;
+  height: 45vh;
+  min-height: 200px;
   word-wrap: break-word;
+  overflow: hidden;
   display: flex;
-  align-items: center;
 }
 
 .otherArticles {
   display: flex;
-  flex: 5;
+  flex: 1;
   justify-content: space-around;
   text-decoration: none;
   color: rgb(36, 36, 36);
 }
 
 .otherArticlesTitle {
-  display: block;
   background: #eeeeee;
   border: 3px #f2cc8f solid;
   border-radius: 10px 10px 0 0;
@@ -101,6 +103,7 @@
 }
 
 .otherArticlesTitleText {
+  display: inline;
   width: 50%;
 }
 .otherArticlesTitleContainer {
@@ -110,7 +113,6 @@
 .otherArticlesContainer {
   flex: 1;
   width: inherit;
-
   margin: 1% 1.3%;
 }
 
@@ -119,11 +121,10 @@
   border: 3px #f2cc8f solid;
   border-top: 0;
   border-radius: 0 0 10px 10px;
-  height: 400px;
+  height: 15vh;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 10vh;
-  min-height: 10vh;
+  min-height: 100px;
   padding: 2% 1%;
 }
 
@@ -224,12 +225,14 @@
 }
 
 .otherTags {
+  display: inline;
   background-color: #8ecae6;
   border-radius: 5px;
   border: 1px black solid;
   margin-right: 1%;
   margin-left: auto;
   width: fit-content;
+  float: right;
 }
 .tags {
   background-color: #8ecae6;
