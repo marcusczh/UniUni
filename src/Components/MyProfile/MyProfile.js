@@ -35,14 +35,19 @@ export default function MyProfile({ userDetails, setUserDetails }) {
   }, []);
 
   useEffect(() => {
-    if (user)
-      axios
-        .get(`/api/events`, { params: { title: user.events[0] } })
-        .then((res) => {
-          console.log("user's events:" + user.events);
-          console.log(res.data);
-          setEvents(res.data);
-        });
+    if (user) {
+      if (user.events.length !== 0) {
+        axios
+          .get(`/api/events`, { params: { title: user.events } })
+          .then((res) => {
+            console.log(user.events);
+            console.log(res.data);
+            setEvents(res.data);
+          });
+      } else {
+        setEvents([]);
+      }
+    }
   }, []);
 
   return user ? (
