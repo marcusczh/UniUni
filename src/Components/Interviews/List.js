@@ -12,7 +12,7 @@ function Posts({ post, children }) {
     return (
       <div className={styles.postContainer}>
         <div className={styles.postTop}>
-          <Link to={`/Interviews/${post.title}`} className={styles.postTitle}>
+          <Link to={`/Interviews/${encodeURIComponent(post.title)}`} className={styles.postTitle}>
             {post.title}
           </Link>
           {children && <div className={styles.popup}>{children}</div>}

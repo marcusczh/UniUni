@@ -14,7 +14,7 @@ function EditProfile({ setUserDetails }) {
   const [basicInfo1, setBasicInfo1] = useState([]);
   const [basicInfo2, setBasicInfo2] = useState([]);
   const [basicInfo3, setBasicInfo3] = useState([]);
-  const [teleHandle, setTeleHandle] = useState([]);
+  const [teleHandle, setTeleHandle] = useState("");
 
   const basic1 = [
     "Junior College",

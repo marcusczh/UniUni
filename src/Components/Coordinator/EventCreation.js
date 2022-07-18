@@ -58,7 +58,7 @@ function EventCreation() {
         time: time,
         date: date,
         location: location,
-        tags: [String],
+        tags: [],
         body: [obj],
         image: image,
       })

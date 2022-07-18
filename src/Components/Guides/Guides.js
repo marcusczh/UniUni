@@ -47,7 +47,7 @@ function Guides() {
         <div className={stylesGuide.recommendedContainer}>
           <Link
             to={{
-              pathname: `/Guides/${guides[0].title}`,
+              pathname: `/Guides/${encodeURIComponent(guides[0].title)}`,
               guide: guides[0],
             }}
             className={stylesGuide.recommendedGuide}
@@ -59,7 +59,7 @@ function Guides() {
           <div>
             <Link
               to={{
-                pathname: `/Guides/${guides[1].title}`,
+                pathname: `/Guides/${encodeURIComponent(guides[1].title)}`,
                 guide: guides[0],
               }}
               className={stylesGuide.otherGuides}
@@ -69,7 +69,7 @@ function Guides() {
           </div>
           <div>
             <Link
-              to={`/Guides/${guides[2].title}`}
+              to={`/Guides/${encodeURIComponent(guides[2].title)}`}
               className={stylesGuide.otherGuides}
             >
               <OtherGuides guide={guides[2] || null} />
@@ -78,7 +78,7 @@ function Guides() {
           <div>
             <Link
               to={{
-                pathname: `/Guides/${guides[3].title}`,
+                pathname: `/Guides/${encodeURIComponent(guides[3].title)}`,
                 guide: guides[0],
               }}
               className={stylesGuide.otherGuides}
