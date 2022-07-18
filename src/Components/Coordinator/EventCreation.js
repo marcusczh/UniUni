@@ -45,8 +45,8 @@ function EventCreation() {
     }
   }
 
-  function submitEvent(event) {
-    event.preventDefault();
+  function submitEvent(e) {
+    e.preventDefault();
     let obj = {};
     obj.header = null;
     obj.text = content;
@@ -67,7 +67,6 @@ function EventCreation() {
         if (res.data.status === "error") {
           alert("Error: Duplicate title or missing input");
         } else {
-          alert("Success!");
           navigate("../Coordinator");
         }
       })
@@ -102,7 +101,7 @@ function EventCreation() {
       <div>
         <form
           onSubmit={(e) => {
-            submitEvent();
+            submitEvent(e);
           }}
         >
           <div className={eventStyles.title}>
@@ -112,12 +111,17 @@ function EventCreation() {
               className={eventStyles.titleInput}
               value={title}
               id="formInput"
+              data-testid="title"
               onChange={(e) => setTitle(e.target.value)}
             ></input>
           </div>
           {modal && (
             <>
-              <div className={eventStyles.overlay} onClick={toggleModal}></div>
+              <div
+                className={eventStyles.overlay}
+                onClick={toggleModal}
+                data-testid="close"
+              ></div>
               <div className={eventStyles.confirmationPopup}>
                 <div className={eventStyles.calendarWrap}>
                   Date:{" "}
@@ -141,6 +145,7 @@ function EventCreation() {
                     type="time"
                     value={time}
                     onChange={(e) => handleTime(e.target.value)}
+                    data-testid="time"
                   />
                 </div>
               </div>
@@ -160,6 +165,7 @@ function EventCreation() {
                 <button
                   className={eventStyles.buttonCreation}
                   onClick={toggleModal}
+                  data-testid="timepicker"
                 >
                   Pick a time
                 </button>
@@ -171,6 +177,7 @@ function EventCreation() {
               className={eventStyles.titleInput}
               value={location}
               id="formInput"
+              data-testid="location"
               onChange={(e) => setLocation(e.target.value)}
             ></input>
             <input
@@ -179,6 +186,7 @@ function EventCreation() {
               className={eventStyles.contentInput}
               value={content}
               id="formInput"
+              data-testid="content"
               onChange={(e) => setContent(e.target.value)}
             ></input>
             <img src={`${image}`} alt="Add a pic if you want!" />
@@ -197,7 +205,20 @@ function EventCreation() {
             </button>
             <button
               className={eventStyles.buttonCreation}
-              onClick={submitEvent}
+              data-testid="submit"
+              onClick={(e) => {
+                submitEvent(e);
+                if (
+                  title.length *
+                    date.length *
+                    time.length *
+                    location.length *
+                    content.length !==
+                  0
+                ) {
+                  alert("Success!");
+                }
+              }}
             >
               Create event
             </button>

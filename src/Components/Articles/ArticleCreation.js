@@ -34,7 +34,7 @@ function ArticlesCreation() {
       })
       .then((res) => {
         if (res.data.status === "error") {
-          alert("error");
+          alert("Duplicate title, try again");
         } else {
           navigate("/Articles", { replace: true });
           //window.location.href = "./";
@@ -101,7 +101,9 @@ function ArticlesCreation() {
               className={articleStyles.button}
               onClick={(e) => {
                 submitArticle(e);
-                alert("Successfully posted!");
+                if (title.length !== 0) {
+                  alert("Successfully posted!");
+                }
               }}
             >
               Create Article

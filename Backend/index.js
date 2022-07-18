@@ -20,7 +20,7 @@ app.listen(process.env.PORT || 4000, () => {
   console.log("Server started");
 });
 
-// Telegram Bot
+//Telegram Bot
 // const { Telegraf, Scenes, session } = require("telegraf");
 // const bot = new Telegraf(process.env.TELEGRAMBOT_TOKEN);
 // const axios = require("axios");
