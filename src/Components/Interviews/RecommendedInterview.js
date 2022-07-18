@@ -19,13 +19,20 @@ function recommendedInterview({ interview }) {
             </>
           ))}
         </div>
-        <div className={styles.interviewContent} id>
-          {interview.body.map((i) => (
-            <div id={i}>
-              <div className={styles.interviewHeader}> {i.header}</div>
-              <div className={styles.interviewText}>{i.text}</div>
-            </div>
-          ))}
+        <div className={styles.recommendedInterviewContent}>
+          <div>
+            {interview.body.map((i) => (
+              <div id={i}>
+                <div className={styles.interviewHeader}> {i.header}</div>
+                <div className={styles.interviewText}>{i.text}</div>
+              </div>
+            ))}
+          </div>
+          <img
+            className={styles.recommendedInterviewPicture}
+            src={interview.image}
+            alt="Portrait"
+          />
         </div>
       </>
     );

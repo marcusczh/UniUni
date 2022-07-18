@@ -10,15 +10,22 @@ function otherInterviews({ interview }) {
     );
   } else {
     return (
-      <div>
-        <div className={styles.otherInterviewsTitle}>{interview.title}</div>
-        <div className={styles.otherInterviewsContent}>
-          {interview.body.map((i) => (
-            <div id={i}>
-              <div className={styles.otherInterviewsHeader}> {i.header}</div>
-              <div className={styles.otherInterviewsText}>{i.text}</div>
-            </div>
-          ))}
+      <div /* className={styles.otherInterviewsBox} */>
+        {/* <img
+          className={styles.otherInterviewsPicture}
+          src={interview.image}
+          alt="Portrait"
+        /> */}
+        <div>
+          <div className={styles.otherInterviewsTitle}>{interview.title}</div>
+          <div className={styles.otherInterviewsContent}>
+            {interview.body.map((i) => (
+              <div id={i}>
+                <div className={styles.otherInterviewsHeader}> {i.header}</div>
+                <div className={styles.otherInterviewsText}>{i.text}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
