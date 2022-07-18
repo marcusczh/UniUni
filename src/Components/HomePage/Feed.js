@@ -73,7 +73,7 @@ function Feed() {
                 </b>
               </section>
               <br />
-              <div>{i.text}</div>
+              <div className={articleStyles.articleText}>{i.text}</div>
               <br />
             </>
           ))}

@@ -299,6 +299,10 @@
   height: 300px;
 }
 
+.forumText {
+  white-space: pre-wrap;
+}
+
 .tags {
   display: block;
   width: fit-content;

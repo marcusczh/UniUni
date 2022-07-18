@@ -95,10 +95,20 @@ function SpecificInterview() {
                       </span>
                     ))
                   : null}
+
               </span>
               <BookmarkButton user={user} title={interview[0].title} />
             </div>
             <div className={interviewStyles.interviewContent}>
+              {interview[0].image ? (
+                <div className={interviewStyles.imageContainer}>
+                  <img
+                    className={interviewStyles.picture}
+                    src={interview[0].image}
+                    alt="Portrait"
+                  />
+                </div>
+              ) : null}
               {interview[0].body.map((i, counter) => (
                 <>
                   <div id={counter} className={interviewStyles.interviewHeader}>

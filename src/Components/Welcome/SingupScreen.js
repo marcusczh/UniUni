@@ -18,12 +18,13 @@ function SignupScreen() {
   const navigate = useNavigate();
 
   const basic1 = [
+    "University",
     "Junior College",
     "Polytechnic",
     "ITE",
     "NS",
     "Working",
-    "Overseas",
+    "Others",
   ];
   const basic2 = [
     "Healthcare",
@@ -36,7 +37,13 @@ function SignupScreen() {
     "Design and Environment",
     "Mathematics and Science",
   ];
-  const basic3 = ["Personal Finance", "Adulting", "Part-time Jobs", "Career", "Education"];
+  const basic3 = [
+    "Personal Finance",
+    "Adulting",
+    "Part-time Jobs",
+    "Career",
+    "Education",
+  ];
 
   function handleCheckboxChange(data, array, setter) {
     const isChecked = array.some((checkedCheckbox) => checkedCheckbox === data);
@@ -102,12 +109,12 @@ function SignupScreen() {
             <label className={styles.question} htmlFor="bio">
               Tell us about yourself!
             </label>
-            <input
+            <textarea
               type="text"
               className={styles.bioInput}
               placeholder="User Bio"
               onChange={(e) => setBio(e.target.value)}
-            ></input>
+            ></textarea>
           </div>
           <div className={styles.questionContainer}>
             <label className={styles.question} htmlFor="basic11">

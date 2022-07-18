@@ -199,7 +199,9 @@ function SpecificForum() {
                 <br />
               </>
             ) : null}
-            {forum[0].body[0].text}
+            <span className={forumStyles.forumText}>
+              {forum[0].body[0].text}
+            </span>
           </div>
         </div>
         {forum[0].comments

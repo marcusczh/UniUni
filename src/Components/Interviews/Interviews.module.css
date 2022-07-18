@@ -40,7 +40,9 @@
   margin-left: 1.4%;
   margin-bottom: 1rem;
   font-size: medium;
+
   line-height: 1.5rem;
+  white-space: pre-wrap;
 }
 
 .interviewContent {
@@ -61,6 +63,18 @@
   background-color: #f2cc8f;
   height: 3px;
   mix-blend-mode: darken;
+}
+
+.recommendedInterviewContent {
+  display: flex;
+  background: white;
+  border: 3px #f2cc8f solid;
+  font-size: large;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  padding: 1% 0.2%;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
 .otherInterviews {
@@ -90,7 +104,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  height: 5%;
+  height: 15%;
 }
 .otherInterviewsContent {
   background: white;
@@ -174,3 +188,33 @@
   margin-top: 1%;
   padding-top: 1%;
 }
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(203, 203, 203);
+  margin: -1% -0.3% 1% -0.3%;
+}
+
+.picture {
+  height: 30vh;
+  min-height: 50px;
+  max-height: 300px;
+}
+
+.recommendedInterviewPicture {
+  height: 50vh;
+  border-radius: 10px;
+  border: 5px #ffb703 solid;
+}
+
+/* .otherInterviewsBox {
+  display: flex;
+} */
+
+/* .otherInterviewsPicture {
+  width: 100px;
+  border-radius: 10px;
+  border: 5px #ffb703 solid;
+}
+ */

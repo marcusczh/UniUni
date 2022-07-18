@@ -95,6 +95,10 @@
   margin: 0 auto;
 }
 
+.bio {
+  white-space: pre-wrap;
+}
+
 .status {
   background-color: #f5acac;
   border-radius: 5px;
