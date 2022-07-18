@@ -17,12 +17,13 @@ function EditProfile({ setUserDetails }) {
   const [teleHandle, setTeleHandle] = useState("");
 
   const basic1 = [
+    "University",
     "Junior College",
     "Polytechnic",
     "ITE",
     "NS",
     "Working",
-    "Overseas",
+    "Others",
   ];
   const basic2 = [
     "Healthcare",

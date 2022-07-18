@@ -18,12 +18,13 @@ function SignupScreen() {
   const navigate = useNavigate();
 
   const basic1 = [
+    "University",
     "Junior College",
     "Polytechnic",
     "ITE",
     "NS",
     "Working",
-    "Overseas",
+    "Others",
   ];
   const basic2 = [
     "Healthcare",
