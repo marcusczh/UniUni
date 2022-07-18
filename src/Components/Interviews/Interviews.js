@@ -39,7 +39,7 @@ function Interviews() {
       <div className={stylesInterview.interviewDisplay}>
         <div className={stylesInterview.recommendedContainer}>
           <Link
-            to={`/Interviews/${interviews[0].title}`}
+            to={`/Interviews/${encodeURIComponent(interviews[0].title)}`}
             className={stylesInterview.recommendedInterview}
           >
             <RecommendedInterview interview={interviews[0]} />
@@ -48,7 +48,7 @@ function Interviews() {
         <div className={stylesInterview.otherInterviews}>
           <div className={stylesInterview.otherInterviewsContainer}>
             <Link
-              to={`/Interviews/${interviews[1].title}`}
+              to={`/Interviews/${encodeURIComponent(interviews[1].title)}`}
               className={stylesInterview.otherInterviews}
             >
               <OtherInterviews interview={interviews[1] || null} />
@@ -57,7 +57,7 @@ function Interviews() {
 
           <div className={stylesInterview.otherInterviewsContainer}>
             <Link
-              to={`/Interviews/${interviews[2].title}`}
+              to={`/Interviews/${encodeURIComponent(interviews[2].title)}`}
               className={stylesInterview.otherInterviews}
             >
               <OtherInterviews interview={interviews[2] || null} />
@@ -65,7 +65,7 @@ function Interviews() {
           </div>
           <div className={stylesInterview.otherInterviewsContainer}>
             <Link
-              to={`/Interviews/${interviews[3].title}`}
+              to={`/Interviews/${encodeURIComponent(interviews[3].title)}`}
               className={stylesInterview.otherInterviews}
             >
               <OtherInterviews interview={interviews[3] || null} />
