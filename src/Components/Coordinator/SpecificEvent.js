@@ -96,13 +96,15 @@ function SpecificEvent() {
               {"By: " + event[0].author}
               <br />
               {"Date: " + format(new Date(event[0].date), "MM/dd/yyyy")} |
-              {"Participants: " + event[0].participants.length}
+              {" 👥: " + event[0].participants.length}
               <br />
-              {event[0].tags.slice(0, 3).map((tag) => (
-                <span key={tag} className={eventStyles.tags}>
-                  {tag}
-                </span>
-              ))}
+              {event[0].tags.length !== 0
+                ? event[0].tags.slice(0, 3).map((tag) => (
+                    <span key={tag} className={eventStyles.tags}>
+                      {tag}
+                    </span>
+                  ))
+                : null}
             </span>
             <div>
               {user ? (
@@ -138,6 +140,7 @@ function SpecificEvent() {
                 />
               </div>
             ) : null}
+
             <span className={eventStyles.text}>{event[0].body[0].text}</span>
           </div>
         </div>
@@ -154,7 +157,7 @@ function SpecificEvent() {
         {user ? (
           //Re-map to event comments
           <Link to={`./CreateComment?title=${event[0].title}`}>
-            <button>Create Comment</button>
+            <button className={eventStyles.button}>Create Comment</button>
           </Link>
         ) : (
           //DUD button if no user, maybe send a pop-up to ask user to create an account first

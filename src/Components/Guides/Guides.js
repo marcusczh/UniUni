@@ -40,51 +40,58 @@ function Guides() {
           <SearchBar />
           <div className={stylesGuide.actions}>
             <button className={stylesGuide.button} onClick={viewMore}>
-              View more posts
+              View more guides
             </button>
           </div>
         </div>
-        <div className={stylesGuide.recommendedContainer}>
-          <Link
-            to={{
-              pathname: `/Guides/${encodeURIComponent(guides[0].title)}`,
-              guide: guides[0],
-            }}
-            className={stylesGuide.recommendedGuide}
-          >
-            <RecommendedGuide guide={guides[0]} />
-          </Link>
-        </div>
-        <div className={stylesGuide.otherGuides}>
-          <div>
-            <Link
-              to={{
-                pathname: `/Guides/${encodeURIComponent(guides[1].title)}`,
-                guide: guides[0],
-              }}
-              className={stylesGuide.otherGuides}
-            >
-              <OtherGuides guide={guides[1] || null} />
-            </Link>
+        <div className={stylesGuide.pageContent}>
+          <div className={stylesGuide.recommendedContainer}>
+            <div className={stylesGuide.announcement}>
+              Your Recommended guide!
+            </div>
+            <div>
+              <Link
+                to={{
+                  pathname: `/Guides/${encodeURIComponent(guides[0].title)}`,
+                  guide: guides[0],
+                }}
+                className={stylesGuide.recommendedGuide}
+              >
+                <RecommendedGuide guide={guides[0]} />
+              </Link>
+            </div>
           </div>
-          <div>
-            <Link
-              to={`/Guides/${encodeURIComponent(guides[2].title)}`}
-              className={stylesGuide.otherGuides}
-            >
-              <OtherGuides guide={guides[2] || null} />
-            </Link>
-          </div>
-          <div>
-            <Link
-              to={{
-                pathname: `/Guides/${encodeURIComponent(guides[3].title)}`,
-                guide: guides[0],
-              }}
-              className={stylesGuide.otherGuides}
-            >
-              <OtherGuides guide={guides[3] || null} />
-            </Link>
+          <div className={stylesGuide.otherGuides}>
+            <div>
+              <Link
+                to={{
+                  pathname: `/Guides/${encodeURIComponent(guides[1].title)}`,
+                  guide: guides[0],
+                }}
+                className={stylesGuide.otherGuides}
+              >
+                <OtherGuides guide={guides[1] || null} />
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={`/Guides/${encodeURIComponent(guides[2].title)}`}
+                className={stylesGuide.otherGuides}
+              >
+                <OtherGuides guide={guides[2] || null} />
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={{
+                  pathname: `/Guides/${encodeURIComponent(guides[3].title)}`,
+                  guide: guides[0],
+                }}
+                className={stylesGuide.otherGuides}
+              >
+                <OtherGuides guide={guides[3] || null} />
+              </Link>
+            </div>
           </div>
         </div>
         <div className="postContainer">

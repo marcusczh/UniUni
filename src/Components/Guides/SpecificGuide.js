@@ -113,6 +113,15 @@ function SpecificGuide() {
               </span>
             </div>
             <div className={guideStyles.guideContent}>
+              {guide[0].image ? (
+                <div className={guideStyles.imageContainer}>
+                  <img
+                    className={guideStyles.picture}
+                    src={guide[0].image}
+                    alt="GuidePhoto"
+                  />
+                </div>
+              ) : null}
               {guide[0].body.map((i) => {
                 return i.header !== "links" ? (
                   <div>

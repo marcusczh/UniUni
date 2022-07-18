@@ -40,6 +40,8 @@
   margin-left: 1.4%;
   margin-bottom: 1rem;
   font-size: medium;
+
+  line-height: 1.5rem;
   white-space: pre-wrap;
 }
 
@@ -50,6 +52,9 @@
   border-top: 0;
   border-radius: 0 0 10px 10px;
   padding: 1% 0.2%;
+  height: auto;
+  max-height: 700px;
+  overflow: hidden;
   word-wrap: break-word;
   text-overflow: ellipsis;
 }
@@ -118,6 +123,7 @@
   font-weight: 500;
   padding-bottom: 0.4%;
   margin-bottom: 0.7%;
+  font-size: 1rem;
   width: fit-content;
   border-bottom: 2px solid #9c9c9c3d;
 }
@@ -125,7 +131,8 @@
 .otherInterviewsText {
   margin-left: 0%;
   margin-bottom: 1rem;
-  font-size: medium;
+  font-size: 0.85rem;
+  line-height: 1.3rem;
   white-space: normal;
 }
 

@@ -49,6 +49,15 @@ function RecommendedGuide({ guide }) {
           ))}
         </div>
         <div className={styles.guideContent}>
+          {guide.image ? (
+            <div className={styles.imageContainer}>
+              <img
+                className={styles.picture}
+                src={guide.image}
+                alt="GuidePhoto"
+              />
+            </div>
+          ) : null}
           {guide.body.map((i) => {
             return i.header !== "links" ? (
               <div>

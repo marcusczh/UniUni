@@ -29,7 +29,11 @@ export default function Coordinator() {
         <SearchBar />
         <EventActions numEvents={numEvents} viewMore={viewMore} />
       </div>
-      <div>
+      <div className={styles.eventBackground}>
+        <div className={styles.announcement}>
+          Join an event or create your very own! <br />
+          Viewing {Math.min(numEvents, events.length)} events:
+        </div>
         {events
           .slice(0, Math.min(numEvents, events.length))
           .sort((a, b) => b.score - a.score)

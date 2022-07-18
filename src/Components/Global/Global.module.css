@@ -49,31 +49,72 @@ body {
 }
 
 .navBarLink:hover {
-  color: blue;
+  color: rgb(0, 0, 0);
 }
 
 .logOut {
-  display: flex;
-  width: max-content;
-  height: 100%;
+  display: inline;
+  width: fit-content;
   text-decoration: none;
-  color: black;
-  line-height: 295%;
+  flex: 3;
+  font-size: small;
+  border: none;
+  box-shadow: -1px 1px #84988e;
+  background-color: #ced2d0;
+  border-radius: 10%;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+
+.profile {
+  display: inline;
+  width: fit-content;
+  text-decoration: none;
+  flex: 1;
+  font-size: large;
+  border: none;
+  box-shadow: -1px 1px #84988e;
+  background-color: #92c9ae;
+  border-radius: 10%;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+
+.username {
+  white-space: nowrap;
 }
 
 .logOut:hover {
-  background-color: #f2cc8f;
-  display: flex;
+  background-color: #f2a68f;
+  display: inline;
   width: max-content;
   text-decoration: none;
+  box-shadow: none;
+  transform: translate(-1px, 1px);
+  color: black;
+}
+
+.profile:hover {
+  background-color: #84988e;
+  display: inline;
+  width: max-content;
+  text-decoration: none;
+  box-shadow: none;
+  transform: translate(-1px, 1px);
   color: black;
 }
 
 .buttonContainer {
   height: 200px;
   max-height: 45.3px;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+}
 
-  display: inline-table;
+.buttonContainer2 {
+  display: flex;
+  flex-direction: row;
 }
 
 .searchBar {
@@ -140,7 +181,7 @@ body {
 
 .topContent {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .resultContainer {
@@ -316,6 +357,7 @@ input[type="checkbox"]:checked + .tagsLabel {
   border: #81b29a solid 1px;
   border-radius: 3%;
   width: max-content;
+  font-size: medium;
   color: #81b29a;
   background-color: white;
 }

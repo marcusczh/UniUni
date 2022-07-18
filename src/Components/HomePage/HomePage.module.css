@@ -85,5 +85,7 @@ body {
   color: #ffb703;
   margin-top: 3%;
   text-align: center;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+  font-size: xx-large;
+  font-weight: 500;
 }
