@@ -6,7 +6,6 @@ function Comments({ comment }) {
       <div className={styles.comments}>
         {comment.body}
         <br />
-        <br />
         {"By: " + comment.author}
       </div>
     );

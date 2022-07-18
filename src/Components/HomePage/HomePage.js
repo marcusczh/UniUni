@@ -10,7 +10,7 @@ function HomePage() {
       <div>
         <SearchBar />
       </div>
-      <div className={styles.feature}>Your featured post of the day!</div>
+      <div className={styles.feature}>Here's a post you might like...</div>
       <div className={styles.feed}>
         <Feed />
       </div>

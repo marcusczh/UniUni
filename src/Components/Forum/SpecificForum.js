@@ -102,6 +102,7 @@ function SpecificForum() {
     return <div>loading...</div>;
   }
 
+  console.log(forum.tags);
   if (forum.length === 0) {
     return (
       <>
@@ -128,68 +129,75 @@ function SpecificForum() {
         <div>
           <div className={forumStyles.forumHeader}>
             <span>
-              {forum[0].title}
+              <div className={forumStyles.forumTitle}>{forum[0].title}</div>
+              {"By: " + forum[0].author}, {"  "}
+              {format(new Date(forum[0].date), "do MMMM Y")} <br />
+              <span className={forumStyles.grayline}>||</span>
+              {"❤️ " + forum[0].likes.length}{" "}
+              <span className={forumStyles.grayline}>| </span>
+              {" 😔 " + forum[0].dislikes.length}{" "}
+              <span className={forumStyles.grayline}> | </span>
+              {" 💬 " + forum[0].comments.length + " "}{" "}
+              <span className={forumStyles.grayline}>||</span>
               <br />
-              {"By: " + forum[0].author}
-              <br />
-              {format(new Date(forum[0].date), "do MMMM Y")} |{" "}
-              {"Likes: " + forum[0].likes.length} |
-              {"Dislikes: " + forum[0].dislikes.length} |
-              {"Comments: " + forum[0].comments.length}
-              <br />
-              {forum[0].tags.slice(0, 3).map((tag) => (
-                <span key={tag} className={forumStyles.tags}>
-                  {tag}
-                </span>
-              ))}
+              {forum[0].tags[0] !== ""
+                ? forum[0].tags.slice(0, 3).map((tag) => (
+                    <span key={tag} className={forumStyles.tags}>
+                      {tag}
+                    </span>
+                  ))
+                : null}
             </span>
-            <div>
+            <div className={forumStyles.optionsContainer}>
+              <BookmarkButton user={user} title={forum[0].title} />
               {user ? (
                 forum[0].likes.includes(user.username) ? (
                   <button
-                    className={forumStyles.moreOptions}
+                    className={forumStyles.moreOptionsSelectedLike}
                     onClick={(event) => like(event, user.username)}
                   >
-                    un-like
+                    ❤️
                   </button>
                 ) : forum[0].dislikes.includes(user.username) ? null : (
                   <button
-                    className={forumStyles.moreOptions}
+                    className={forumStyles.moreOptionsLike}
                     onClick={(event) => like(event, user.username)}
                   >
-                    like
+                    🤍
                   </button>
                 )
               ) : null}
               {user ? (
                 forum[0].dislikes.includes(user.username) ? (
                   <button
-                    className={forumStyles.moreOptions}
+                    className={forumStyles.moreOptionsSelectedDislike}
                     onClick={(event) => dislike(event, user.username)}
                   >
-                    un-dislike
+                    😞
                   </button>
                 ) : forum[0].likes.includes(user.username) ? null : (
                   <button
-                    className={forumStyles.moreOptions}
+                    className={forumStyles.moreOptionsDislike}
                     onClick={(event) => dislike(event, user.username)}
                   >
-                    dislike
+                    😑
                   </button>
                 )
               ) : null}
-              <BookmarkButton user={user} title={forum[0].title} />
             </div>
           </div>
           <div className={forumStyles.forumContent}>
             {forum[0].image ? (
-              <div className={forumStyles.imageContainer}>
-                <img
-                  className={forumStyles.picture}
-                  src={forum[0].image}
-                  alt="Forum post"
-                />
-              </div>
+              <>
+                <div className={forumStyles.imageContainer}>
+                  <img
+                    className={forumStyles.picture}
+                    src={forum[0].image}
+                    alt="Forum post"
+                  />
+                </div>
+                <br />
+              </>
             ) : null}
             {forum[0].body[0].text}
           </div>
@@ -206,11 +214,11 @@ function SpecificForum() {
           ))}
         {user ? (
           <Link to={`./CreateComment?title=${forum[0].title}`}>
-            <button>Create Comment</button>
+            <button className={forumStyles.button}>Create Comment</button>
           </Link>
         ) : (
           //DUD button if no user, maybe send a pop-up to ask user to create an account first
-          <button>Create Comment</button>
+          <button className={forumStyles.button}>Create Comment</button>
         )}
       </div>
     );

@@ -21,13 +21,19 @@ function LogOut() {
 
   return user ? (
     <div className={styles.buttonContainer}>
-      Welcome, {user ? user.username : null}
-      <button className={styles.logOut} onClick={(e) => HandleViewMyProfile(e)}>
-        View my profile
-      </button>
-      <button onClick={(e) => HandleLogout(e)} className={styles.logOut}>
-        Log out
-      </button>
+      <span>Welcome,</span>
+      <div className={styles.username}>{user ? user.username : null}</div>
+      <div className={styles.buttonContainer2}>
+        <button
+          className={styles.profile}
+          onClick={(e) => HandleViewMyProfile(e)}
+        >
+          👤
+        </button>
+        <button onClick={(e) => HandleLogout(e)} className={styles.logOut}>
+          Logout
+        </button>
+      </div>
     </div>
   ) : (
     <div className={styles.buttonContainer}>

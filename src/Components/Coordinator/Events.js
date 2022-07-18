@@ -25,9 +25,9 @@ function Events({ event, children }) {
         <div className={styles.details}>
           <div className={styles.eventUser}>{"By: " + event.author}</div>
           <div className={styles.stats}>
-            {"date: " + format(new Date(event.date), "MM/dd/yyyy") + "  ||  "}
-            {"location: " + event.location + "  ||  "}
-            {"participants: " + event.participants.length}
+            {"Date: " + format(new Date(event.date), "MM/dd/yyyy") + "  ||  "}
+            {"Location: " + event.location + "  ||  "}
+            {"👥: " + event.participants.length}
           </div>
         </div>
       </div>

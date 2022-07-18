@@ -58,7 +58,6 @@ function EventCreation() {
         time: time,
         date: date,
         location: location,
-        tags: [],
         body: [obj],
         image: image,
       })
