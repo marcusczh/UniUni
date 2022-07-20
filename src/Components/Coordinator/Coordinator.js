@@ -24,7 +24,7 @@ export default function Coordinator() {
 
   if (!events) return null;
 
-  console.log(events.filter((e) => new Date(e.date) > today));
+  //console.log(events.filter((e) => new Date(e.date) > today));
 
   return (
     <div className={styles.page}>
