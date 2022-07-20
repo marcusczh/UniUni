@@ -25,7 +25,7 @@ export default function TimePicker(
               date={date}
               onChange={(e) => {
                 handleSelect(e.target.value);
-                console.log(e.target.value);
+                //console.log(e.target.value);
               }}
               className="calendarElement"
             />

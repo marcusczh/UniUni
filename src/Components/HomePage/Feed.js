@@ -21,13 +21,13 @@ function Feed() {
     tags = user ? tags.concat(user.interests.concat(current)) : [];
     //console.log(categories);
     //Queries articles/guides/interviews with the search input
-    console.log(tags);
+    //console.log(tags);
     await axios
       .get(`/api/search?title=${[]}&types=${[]}&tags=${[tags]}`)
       .then((res) => {
         //console.log(res.data);
         setResults(res.data);
-        console.log(results);
+        //console.log(results);
       });
   }
 

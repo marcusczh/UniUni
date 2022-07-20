@@ -13,7 +13,7 @@ export default function Coordinator() {
 
   useEffect(() => {
     axios.get(`/api/events`).then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       setEvents(res.data);
     });
   }, []);

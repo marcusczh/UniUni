@@ -67,7 +67,7 @@ function RecommendedGuide({ guide }) {
             ) : null;
           })}
           {posts.map((i) => {
-            console.log(i);
+            //console.log(i);
             return (
               <div className={styles.postLinks}>
                 {i.type === "Interview" ? (

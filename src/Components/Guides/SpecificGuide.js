@@ -33,7 +33,7 @@ function SpecificGuide() {
       .then((res) => {
         setGuideUpdate(res.data);
         setLoading(false);
-        console.log(res.data[0].body);
+        //console.log(res.data[0].body);
         return axios.get(`/api/information`, {
           params: {
             title: res.data[0].body
@@ -131,7 +131,7 @@ function SpecificGuide() {
                 ) : null;
               })}
               {posts.map((i) => {
-                console.log(i);
+                //console.log(i);
                 return (
                   <div className={guideStyles.postLinks}>
                     {i.type === "Interview" ? (
