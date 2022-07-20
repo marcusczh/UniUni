@@ -56,11 +56,15 @@ function EventManagement() {
       <div>
         <SearchBar />
         <TeleInfo />
-        <EventActions numEvents={numEvents} viewMore={viewMore} />
+        <div className={styles.actionsContainer}>
+          <EventActions numEvents={numEvents} viewMore={viewMore} />
+          <button className={styles.button}>
+            <Link className={styles.removeDecoration} to={`../Coordinator`}>
+              Back
+            </Link>
+          </button>
+        </div>
       </div>
-      <button className={styles.button}>
-        <Link to={`../Coordinator`}>Back</Link>
-      </button>
 
       <div>
         {events.slice(0, Math.min(numEvents, events.length)).map((event) => (

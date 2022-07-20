@@ -71,8 +71,9 @@
 .actions {
   display: block;
   width: 100%;
-  height: 20px;
-  margin-bottom: 0%;
+  height: auto;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 .removeDecoration {
   text-decoration: none;
@@ -371,4 +372,14 @@
 
 .text {
   white-space: pre-wrap;
+}
+
+.removeDecoration {
+  text-decoration: none;
+  color: black;
+}
+
+.actionsContainer {
+  height: 1px;
+  margin-bottom: 3%;
 }

@@ -27,7 +27,9 @@ export default function Coordinator() {
       <TopContent />
       <div>
         <SearchBar />
-        <EventActions numEvents={numEvents} viewMore={viewMore} />
+        <div className={styles.actionsContainer}>
+          <EventActions numEvents={numEvents} viewMore={viewMore} />
+        </div>
       </div>
       <div className={styles.eventBackground}>
         <div className={styles.announcement}>
