@@ -96,6 +96,7 @@ function SpecificEvent() {
               {"By: " + event[0].author}
               <br />
               {"Date: " + format(new Date(event[0].date), "MM/dd/yyyy")} |
+              {" Location: " + event[0].location} |
               {" 👥: " + event[0].participants.length}
               <br />
               {event[0].tags.length !== 0
