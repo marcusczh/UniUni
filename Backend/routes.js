@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
     }
   }
   try {
-    console.log(imageLink);
+    //console.log(imageLink);
     await User.create({
       username: req.body.username,
       password: req.body.password,
@@ -316,7 +316,7 @@ router.post("/create", async (req, res) => {
 router.get("/search", async (req, res) => {
   try {
     let filterArray = [];
-    console.log(req.query.title);
+    //console.log(req.query.title);
     let titleObj = {};
     let tagsObj = {};
     let filtersObj = {};
@@ -356,7 +356,7 @@ router.get("/search", async (req, res) => {
       filterArray.push(filtersObj);
     }
 
-    console.log(filterArray);
+    //console.log(filterArray);
 
     if (allTitles && allFilters && allTags) {
       await Information.find().then((data) => {
@@ -859,7 +859,7 @@ router.post(
 //Implementing bookmarks
 //Fetching user
 router.get("/fetchUser", async (req, res) => {
-  console.log(req.query);
+  //console.log(req.query);
   const { username } = req.query;
 
   const user = await User.findOne({ username: username });
@@ -904,7 +904,7 @@ router.delete("/bookmark", async (req, res) => {
         },
       }
     );
-    console.log(req.body);
+    //console.log(req.body);
     console.log("deleted bookmark");
     return res.json({ status: "ok" });
   } catch (err) {
@@ -947,7 +947,7 @@ router.delete("/events/bookmark", async (req, res) => {
         },
       }
     );
-    console.log(req.body);
+    //console.log(req.body);
     console.log("deleted bookmark");
     return res.json({ status: "ok" });
   } catch (err) {
@@ -1003,7 +1003,7 @@ router.put("/events/join", async (req, res) => {
 
 router.delete("/events/leave", async (req, res) => {
   try {
-    console.log(req.body);
+    //console.log(req.body);
     Events.collection.findOneAndUpdate(
       {
         title: req.body.title,

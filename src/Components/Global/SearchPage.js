@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 function SearchPage() {
   const { state } = useLocation();
   const results = state.results;
-  console.log(results);
+  //console.log(results);
   return (
     <>
       <TopContent />

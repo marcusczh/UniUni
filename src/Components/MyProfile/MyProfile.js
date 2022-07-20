@@ -28,8 +28,8 @@ export default function MyProfile({ userDetails, setUserDetails }) {
       axios
         .post(`/api/information`, { title: { $in: user.bookmarks } })
         .then((res) => {
-          console.log(user.bookmarks);
-          console.log(res.data);
+          //console.log(user.bookmarks);
+          //console.log(res.data);
           setPosts(res.data);
         });
   }, []);
@@ -40,8 +40,8 @@ export default function MyProfile({ userDetails, setUserDetails }) {
         axios
           .get(`/api/events`, { params: { title: user.events } })
           .then((res) => {
-            console.log(user.events);
-            console.log(res.data);
+            //console.log(user.events);
+            //console.log(res.data);
             setEvents(res.data);
           });
       } else {

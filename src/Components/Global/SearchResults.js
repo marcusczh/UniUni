@@ -12,7 +12,7 @@ function SearchResults({ result }) {
   } else {
     display = <div className={styles.forumType}>{result.type}</div>;
   }
-  console.log(result);
+  //console.log(result);
   return (
     <div className={styles.resultContainer}>
       <div className={styles.resultTop}>

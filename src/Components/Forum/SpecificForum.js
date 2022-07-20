@@ -29,7 +29,7 @@ function SpecificForum() {
       })
       .then((res) => {
         setForum(res.data);
-        console.log(title);
+        //console.log(title);
         setLoading(false);
       })
       .catch((error) => console.log(error));
@@ -102,7 +102,7 @@ function SpecificForum() {
     return <div>loading...</div>;
   }
 
-  console.log(forum.tags);
+  //console.log(forum.tags);
   if (forum.length === 0) {
     return (
       <>

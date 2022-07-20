@@ -63,7 +63,7 @@ function SpecificEvent() {
   if (loading) {
     return <div>loading...</div>;
   }
-  console.log(event.length);
+  //console.log(event.length);
   if (event.length === 0) {
     return (
       <>

@@ -62,7 +62,7 @@ function EventCreation() {
         image: image,
       })
       .then((res) => {
-        console.log(res.data.status);
+        //console.log(res.data.status);
         if (res.data.status === "error") {
           alert("Error: Duplicate title or missing input");
         } else {

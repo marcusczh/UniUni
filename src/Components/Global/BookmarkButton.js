@@ -32,7 +32,7 @@ export default function BookmarkButton({
               }
             }
             setLoading(false);
-            console.log(res.data.user.events);
+            //console.log(res.data.user.events);
           });
       } else {
         axios
@@ -45,7 +45,7 @@ export default function BookmarkButton({
               }
             }
             setLoading(false);
-            console.log(res.data.user.bookmarks);
+            //console.log(res.data.user.bookmarks);
           });
       }
     }
