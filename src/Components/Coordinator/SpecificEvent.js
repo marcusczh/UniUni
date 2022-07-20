@@ -159,10 +159,8 @@ function SpecificEvent() {
           <Link to={`./CreateComment?title=${event[0].title}`}>
             <button className={eventStyles.button}>Create Comment</button>
           </Link>
-        ) : (
-          //DUD button if no user, maybe send a pop-up to ask user to create an account first
-          <button>{null}</button>
-        )}
+        ) : //DUD button if no user, maybe send a pop-up to ask user to create an account first
+        null}
       </div>
     );
   }
