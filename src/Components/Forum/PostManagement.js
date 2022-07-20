@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import SearchBar from "../Global/Searchbar";
-import Posts from "./Posts";
+import Posts from "./MyPosts";
 import TopContent from "../Global/TopContent";
 import DeletePost from "./DeletePost";
 import { useState, useEffect } from "react";
@@ -46,7 +46,9 @@ function PostManagement() {
           <PostActions numPosts={numPosts} viewMore={viewMore} />
         </div>
         <button className={styles.button}>
-          <Link to={`../Forum`}>Back</Link>
+          <Link className={styles.link} to={`../Forum`}>
+            <span className={styles.link}>Back</span>
+          </Link>
         </button>
         <Posts post={null} />
       </>

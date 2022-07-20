@@ -21,6 +21,19 @@
   transform: translate(-1px, 1px);
   box-shadow: none;
 }
+
+.postContainer2 {
+  background: white;
+  border: 2px rgb(53, 53, 53) solid;
+  border-radius: 5px;
+  padding: 0.3%;
+  margin-top: 3%;
+  box-shadow: -3px 3px rgb(84, 84, 84);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .postTop {
   flex: 1;
 }
@@ -290,6 +303,17 @@
   background: rgba(36, 36, 36, 0.7);
 }
 
+.overlay:hover {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(36, 36, 36, 0.7);
+}
+
 .imageContainer {
   display: flex;
   justify-content: center;
@@ -359,4 +383,34 @@
   transform: translate(-1px, 1px);
   box-shadow: none;
   transition: all 0.3s;
+}
+
+.modal {
+  background-color: #fb8500;
+}
+
+.deleteButton {
+  background-color: rgb(234, 234, 234);
+  color: #d24b3f;
+  margin-bottom: 2%;
+  border: 1px solid #fb8500;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.deleteButton:hover {
+  background-color: #d4756c;
+  color: white;
+}
+
+.closeButton {
+  background-color: rgb(234, 234, 234);
+  color: #cd908a;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border: 1px solid #fb8500;
+}
+
+.closeButton:hover {
+  color: #d24b3f;
 }
