@@ -37,15 +37,19 @@ function EventManagement() {
   if (!user || !events || events.length === 0) {
     return (
       <>
-        <TopContent />
         <div>
-          <SearchBar />
-          <EventActions numEvents={numEvents} viewMore={viewMore} />
+          <TopContent />
+          <div>
+            <SearchBar />
+            <EventActions numEvents={numEvents} viewMore={viewMore} />
+          </div>
+          <button className={styles.button}>
+            <Link to={`../Coordinator`}>Back</Link>
+          </button>
         </div>
-        <button className={styles.button}>
-          <Link to={`../Coordinator`}>Back</Link>
-        </button>
-        <Events event={null} />
+        <div className={styles.emptyEvents}>
+          <Events event={null} />
+        </div>
       </>
     );
   }
