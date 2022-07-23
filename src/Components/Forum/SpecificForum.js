@@ -120,110 +120,183 @@ function SpecificForum() {
       </>
     );
   } else {
-    return (
-      <div className={forumStyles.page}>
-        <TopContent />
-        <div>
-          <SearchBar />
-        </div>
-        <div>
-          <div className={forumStyles.forumHeader}>
-            <span>
-              <div className={forumStyles.forumTitle}>{forum[0].title}</div>
-              {"By: " + forum[0].author}, {"  "}
-              {format(new Date(forum[0].date), "do MMMM Y")} <br />
-              <span className={forumStyles.grayline}>||</span>
-              {"❤️ " + forum[0].likes.length}{" "}
-              <span className={forumStyles.grayline}>| </span>
-              {" 😔 " + forum[0].dislikes.length}{" "}
-              <span className={forumStyles.grayline}> | </span>
-              {" 💬 " + forum[0].comments.length + " "}{" "}
-              <span className={forumStyles.grayline}>||</span>
-              <br />
-              {forum[0].tags[0] !== ""
-                ? forum[0].tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className={forumStyles.tags}>
-                      {tag}
-                    </span>
-                  ))
-                : null}
-            </span>
-            <div className={forumStyles.optionsContainer}>
-              <BookmarkButton user={user} title={forum[0].title} />
-              {user ? (
-                forum[0].likes.includes(user.username) ? (
-                  <button
-                    className={forumStyles.moreOptionsSelectedLike}
-                    onClick={(event) => like(event, user.username)}
-                  >
-                    ❤️
-                  </button>
-                ) : forum[0].dislikes.includes(user.username) ? null : (
-                  <button
-                    className={forumStyles.moreOptionsLike}
-                    onClick={(event) => like(event, user.username)}
-                  >
-                    🤍
-                  </button>
-                )
+    if (user.username === forum[0].author) {
+      return (
+        <div className={forumStyles.page}>
+          <TopContent />
+          <div>
+            <SearchBar />
+          </div>
+          <div>
+            <div className={forumStyles.forumHeader}>
+              <span>
+                <div className={forumStyles.forumTitle}>{forum[0].title}</div>
+                {"By: " + forum[0].author}, {"  "}
+                {format(new Date(forum[0].date), "do MMMM Y")} <br />
+                <span className={forumStyles.grayline}>||</span>
+                {"❤️ " + forum[0].likes.length}{" "}
+                <span className={forumStyles.grayline}>| </span>
+                {" 😔 " + forum[0].dislikes.length}{" "}
+                <span className={forumStyles.grayline}> | </span>
+                {" 💬 " + forum[0].comments.length + " "}{" "}
+                <span className={forumStyles.grayline}>||</span>
+                <br />
+                {forum[0].tags[0] !== ""
+                  ? forum[0].tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className={forumStyles.tags}>
+                        {tag}
+                      </span>
+                    ))
+                  : null}
+              </span>
+              <div className={forumStyles.optionsContainer}>
+                <BookmarkButton user={user} title={forum[0].title} />
+              </div>
+            </div>
+            <div className={forumStyles.forumContent}>
+              {forum[0].image ? (
+                <>
+                  <div className={forumStyles.imageContainer}>
+                    <img
+                      className={forumStyles.picture}
+                      src={forum[0].image}
+                      alt="Forum post"
+                    />
+                  </div>
+                  <br />
+                </>
               ) : null}
-              {user ? (
-                forum[0].dislikes.includes(user.username) ? (
-                  <button
-                    className={forumStyles.moreOptionsSelectedDislike}
-                    onClick={(event) => dislike(event, user.username)}
-                  >
-                    😞
-                  </button>
-                ) : forum[0].likes.includes(user.username) ? null : (
-                  <button
-                    className={forumStyles.moreOptionsDislike}
-                    onClick={(event) => dislike(event, user.username)}
-                  >
-                    😑
-                  </button>
-                )
-              ) : null}
+              <span className={forumStyles.forumText}>
+                {forum[0].body[0].text}
+              </span>
             </div>
           </div>
-          <div className={forumStyles.forumContent}>
-            {forum[0].image ? (
-              <>
-                <div className={forumStyles.imageContainer}>
-                  <img
-                    className={forumStyles.picture}
-                    src={forum[0].image}
-                    alt="Forum post"
-                  />
-                </div>
-                <br />
-              </>
-            ) : null}
-            <span className={forumStyles.forumText}>
-              {forum[0].body[0].text}
-            </span>
-          </div>
-        </div>
-        {forum[0].comments
-          .sort((a, b) => b.score - a.score)
-          .map((i, counter) => (
-            <Comments
-              comment={i || null}
-              title={forum[0].title || null}
-              index={counter}
-              setForum={setForum}
-            />
-          ))}
-        {user ? (
-          <Link to={`./CreateComment?title=${forum[0].title}`}>
+          {forum[0].comments
+            .sort((a, b) => b.score - a.score)
+            .map((i, counter) => (
+              <Comments
+                comment={i || null}
+                title={forum[0].title || null}
+                index={counter}
+                setForum={setForum}
+              />
+            ))}
+          {user ? (
+            <Link to={`./CreateComment?title=${forum[0].title}`}>
+              <button className={forumStyles.button}>Create Comment</button>
+            </Link>
+          ) : (
+            //DUD button if no user, maybe send a pop-up to ask user to create an account first
             <button className={forumStyles.button}>Create Comment</button>
-          </Link>
-        ) : (
-          //DUD button if no user, maybe send a pop-up to ask user to create an account first
-          <button className={forumStyles.button}>Create Comment</button>
-        )}
-      </div>
-    );
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div className={forumStyles.page}>
+          <TopContent />
+          <div>
+            <SearchBar />
+          </div>
+          <div>
+            <div className={forumStyles.forumHeader}>
+              <span>
+                <div className={forumStyles.forumTitle}>{forum[0].title}</div>
+                {"By: " + forum[0].author}, {"  "}
+                {format(new Date(forum[0].date), "do MMMM Y")} <br />
+                <span className={forumStyles.grayline}>||</span>
+                {"❤️ " + forum[0].likes.length}{" "}
+                <span className={forumStyles.grayline}>| </span>
+                {" 😔 " + forum[0].dislikes.length}{" "}
+                <span className={forumStyles.grayline}> | </span>
+                {" 💬 " + forum[0].comments.length + " "}{" "}
+                <span className={forumStyles.grayline}>||</span>
+                <br />
+                {forum[0].tags[0] !== ""
+                  ? forum[0].tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className={forumStyles.tags}>
+                        {tag}
+                      </span>
+                    ))
+                  : null}
+              </span>
+              <div className={forumStyles.optionsContainer}>
+                <BookmarkButton user={user} title={forum[0].title} />
+                {user ? (
+                  forum[0].likes.includes(user.username) ? (
+                    <button
+                      className={forumStyles.moreOptionsSelectedLike}
+                      onClick={(event) => like(event, user.username)}
+                    >
+                      ❤️
+                    </button>
+                  ) : forum[0].dislikes.includes(user.username) ? null : (
+                    <button
+                      className={forumStyles.moreOptionsLike}
+                      onClick={(event) => like(event, user.username)}
+                    >
+                      🤍
+                    </button>
+                  )
+                ) : null}
+                {user ? (
+                  forum[0].dislikes.includes(user.username) ? (
+                    <button
+                      className={forumStyles.moreOptionsSelectedDislike}
+                      onClick={(event) => dislike(event, user.username)}
+                    >
+                      😞
+                    </button>
+                  ) : forum[0].likes.includes(user.username) ? null : (
+                    <button
+                      className={forumStyles.moreOptionsDislike}
+                      onClick={(event) => dislike(event, user.username)}
+                    >
+                      😑
+                    </button>
+                  )
+                ) : null}
+              </div>
+            </div>
+            <div className={forumStyles.forumContent}>
+              {forum[0].image ? (
+                <>
+                  <div className={forumStyles.imageContainer}>
+                    <img
+                      className={forumStyles.picture}
+                      src={forum[0].image}
+                      alt="Forum post"
+                    />
+                  </div>
+                  <br />
+                </>
+              ) : null}
+              <span className={forumStyles.forumText}>
+                {forum[0].body[0].text}
+              </span>
+            </div>
+          </div>
+          {forum[0].comments
+            .sort((a, b) => b.score - a.score)
+            .map((i, counter) => (
+              <Comments
+                comment={i || null}
+                title={forum[0].title || null}
+                index={counter}
+                setForum={setForum}
+              />
+            ))}
+          {user ? (
+            <Link to={`./CreateComment?title=${forum[0].title}`}>
+              <button className={forumStyles.button}>Create Comment</button>
+            </Link>
+          ) : (
+            //DUD button if no user, maybe send a pop-up to ask user to create an account first
+            <button className={forumStyles.button}>Create Comment</button>
+          )}
+        </div>
+      );
+    }
   }
 }
 
