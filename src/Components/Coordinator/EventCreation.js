@@ -139,13 +139,15 @@ function EventCreation() {
                   </div>
                 </div>
                 <div className={eventStyles.timePicker}>
-                  Time:{" "}
+                  Time :{" "}
                   <input
                     type="time"
                     value={time}
                     onChange={(e) => handleTime(e.target.value)}
                     data-testid="time"
                   />
+                  <br />
+                  <span>{"(Click the clock)"}</span>
                 </div>
               </div>
             </>
